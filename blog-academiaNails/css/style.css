@@ -117,6 +117,7 @@ img{
     text-decoration: none;
     text-shadow: 2px 0px 2px rgba(0,0,0,0.67);
 }
+
 .logo__nombre{
     font-weight: 400;
 }
@@ -130,6 +131,7 @@ img{
     font-size: 1.8rem;
     color: var(--blanco);
     text-decoration: none;
+    text-shadow: 4px 4px 16px rgba(75,0,130,1);
 }
 @media (min-width: 768px) {
     .contenido-principal{
@@ -137,6 +139,11 @@ img{
         grid-template-columns: 2fr 1fr;
         column-gap: 4rem;
     } 
+}
+.navegacion__enlace:hover{
+    color: var(--primario);
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 
@@ -155,7 +162,7 @@ img{
     color: var(--blanco);
     text-align: center;
     padding: 1rem 3rem;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     text-transform: uppercase;
     font-weight: 700;
     text-decoration: none;
@@ -182,6 +189,11 @@ img{
 }
 .boton--secundario{
     background-color: var(--primario);
+    font-size: 1.3rem;
+}
+.boton--secundario:hover{
+    background-color: var(--negro);
+
 }
 
 .cursos{
