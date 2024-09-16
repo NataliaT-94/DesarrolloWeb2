@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--  Prefetch  //sirve para cargar la siguiente pagina al que usuario iria mas rapido-->
+
+    <link rel="prefetch" href="nosotros.html" as="document">
+
+    <!--  Preload  //sirve para descargar mas rapido lo q necesitas-->
+
+<link rel="preload" href="css/normalize.css" as="style">
+<link rel="stylesheet" href="css/normalize.css">
+
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Rubik:ital,wght@0,300..900;1,300..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"  crossorigin="crossorigin" as="font">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Rubik:ital,wght@0,300..900;1,300..900&family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+<link rel="proload" href="css/style.css" as="style">
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="preload" href="img/imagen2.jpg" as="imagen">
+
+    <title>Academia Nails</title>
+</head>
+<body>
+    <header class="header">
+        <div class="contenedor">
+            <div class="barra">
+                <a href="index.html" class="logo">
+                    <h1 class="logo__nombre no-margin centrar-texto">Blog <span class="logo__bold">Academia Nails</span></h1>
+                </a>
+
+                <nav class="navegacion">
+                    <a href="nosotros.html" class="navegacion__enlace">Nosotros</a>
+                    <a href="cursos.html" class="navegacion__enlace">Cursos</a>
+                    <a href="contacto.html" class="navegacion__enlace">Contacto</a>
+                </nav>
+            </div>
+        </div>
+        <div class="header__texto">
+            <h2 class="no-margin">Cursos de Uñas</h2>
+            <p class="no-margin">Los mejores cursos de uñas que necesitas</p>
+        </div>
+
+    </header>
+
+    <div class="contenedor contenido-principal">
+        <main class="blog">
+            <h3>Nuestro Blog</h3>
+
+            <article class="entrada">
+                <div class="entrada__imagen">
+                    <picture>
+                        <!--<source loading="lazy" srcset="img/imagen2.webp" type="image/webp">**no tengo imagenes en formato webp-->
+                        <img src="img/imagen2.jpg" width="500" height="230" alt="imagen blog" loading="lazy"><!--lazy: sirve para descargar las imagenes segun lo necesites-->
+                    </picture>
+
+                </div>
+                <div class="entrada__contenido">
+                    <h4 class="no-margin">Tipos de uñas</h4>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus veritatis maiores cum! Dolor assumenda eligendi amet nobis nesciunt veritatis laboriosam, sit ratione vel labore, quis tempore totam praesentium aut vitae.</p>
+                    <a href="entrada.html" class="boton boton--primario">Mas Informacion</a>
+                </div>
+            </article>
+            <article class="entrada">
+                <div class="entrada__imagen">
+                    <img src="img/imagen4.jpg" width="500" height="230" alt="imagen blog" loading="lazy">
+                </div>
+                <div class="entrada__contenido">
+                    <h4 class="no-margin">Curso Decoracion</h4>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus veritatis maiores cum! Dolor assumenda eligendi amet nobis nesciunt veritatis laboriosam, sit ratione vel labore, quis tempore totam praesentium aut vitae.</p>
+                    <a href="entrada.html" class="boton boton--primario">Mas Informacion</a>
+                </div>
+            </article>
+            <article class="entrada">
+                <div class="entrada__imagen">
+                    <img src="img/imagen1.jpg" width="500" height="230"  alt="imagen blog" loading="lazy">
+                </div>
+                <div class="entrada__contenido">
+                    <h4 class="no-margin">Curso Poli-Gel</h4>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus veritatis maiores cum! Dolor assumenda eligendi amet nobis nesciunt veritatis laboriosam, sit ratione vel labore, quis tempore totam praesentium aut vitae.</p>
+                    <a href="entrada.html" class="boton boton--primario">Mas Informacion</a>
+                </div>
+            </article>
+        </main>      <!--  .blog  -->
+        <aside class="sidebar">
+            <h3>Nuestras Cursos y Talleres</h3>
+            <ul class="cursos no-padding">
+                <li class="widget-curso">
+                    <h4 class="no-margin">Tecnicas de liners</h4>
+                    <p class="widget-curso__label">Precio: 
+                        <span class="widget-curso__info">Gratis</span>
+                    </p>
+                    <p class="widget-curso__label">Cupos: 
+                        <span class="widget-curso__info">20</span>
+                    </p>
+                    <a href="entrada.html" class="boton boton--secundario">Leer Entrada</a>
+                </li>
+                <li class="widget-curso">
+                    <h4 class="no-margin">Curso Basico</h4>
+                    <p class="widget-curso__label">Precio: 
+                        <span class="widget-curso__info">Gratis</span>
+                    </p>
+                    <p class="widget-curso__label">Cupos: 
+                        <span class="widget-curso__info">20</span>
+                    </p>
+                    <a href="entrada.html" class="boton boton--secundario">Leer Entrada</a>
+                </li>
+            </ul>
+        </aside>  <!--  .sidebar  -->
+    </div>
+
+    <footer class="footer">
+        <div class="contenedor">
+            <div class="barra">
+                <a href="index.html" class="logo">
+                    <h1 class="logo__nombre no-margin centrar-texto">Blog<span class="logo__bold">AcademiaNails</span></h1>
+                </a>
+                <nav class="navegacion">
+                    <a href="nosotros.html" class="navegacion__enlace">Nosotros</a>
+                    <a href="cursos.html" class="navegacion__enlace">Cursos</a>
+                    <a href="contacto.html" class="navegacion__enlace">Contacto</a>
+                </nav>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/modernizr.js"></script>
+    
+</body>
+</html>
