@@ -1,0 +1,28 @@
+/*
+Mixins: permiten escribir codigo que pueda ser reutilizada en tus hojas de estilo
+-- De esta forma la cantidad de clases o codigo repetido puede ser considerablemente menor
+-- @mixin nombre-mixin: crea los mixin
+-- @include nombre-mixin: te permite agregarlo a tus clases de css
+*/
+@use 'variables' as v;
+
+@mixin telefono{
+    @media (min-width: v.$telefono){
+        @content;
+    }
+}
+@mixin tablet{
+    @media (min-width: v.$tablet){
+        @content;
+    }
+}
+@mixin desktop{
+    @media (min-width: v.$desktop){
+        @content;
+    }
+}
+@mixin desktopXL{
+    @media (min-width: v.$desktopXL){
+        @content;
+    }
+}

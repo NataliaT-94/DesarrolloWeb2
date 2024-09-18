@@ -1,0 +1,5 @@
+// @use 'base/variables' as v;//con esto podemos utilizar las variables que creamos en _variables.scss
+// @forward 'base/normalize';// se utiliza Froward cuando las variable no necesitan un namespace, extrae el contenido de una hoja de stilos//es para compilar directamente
+
+@forward 'base';
+@forward 'layout';
