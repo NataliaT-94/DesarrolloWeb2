@@ -1,0 +1,28 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.sobre-festival{
+    @include m.contenedor;
+
+    @include m.tablet{
+        @include m.grid(2, 5rem);//cantidad de columnas y espaciado
+    }
+}
+
+.contenido-festival{
+    margin-top: 3rem;
+
+    h2{
+        margin-bottom: 2rem;
+      
+    }
+
+    .fecha{
+        color: v.$rojo;
+        font-weight: 700;
+    }
+    p{
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 150%;
+    }
+}
