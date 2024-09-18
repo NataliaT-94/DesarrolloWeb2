@@ -11,8 +11,8 @@
         position: absolute;
         background: linear-gradient(
             270deg,
-            rgba(v.$rosa, 60%),
-            rgba(darken(v.$rosa, 20%), 90%)
+            rgba(v.$verde, 60%),
+            rgba(darken(v.$verde, 20%), 90%)
         );
         inset: 0;
         display: flex;
@@ -39,7 +39,7 @@
     }
 
     p{
-        background-color: v.$verde;
+        background-color: v.$rojo;
         display: inline-block;//se le puede colocar margin// inline no puede usar margin
         padding: 1rem 2rem;
         color: v.$blanco;
