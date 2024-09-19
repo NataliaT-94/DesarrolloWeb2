@@ -1,6 +1,23 @@
 document.addEventListener('DOMContentLoaded', function(){
+    navegacionFija();
     crearGaleria();
+    resaltarEnlace();
+    scrollNav();
 })
+
+function navegacionFija(){
+    const header = document.querySelector('.header');
+    const sobreFestival = document.querySelector('.sobre-festival');
+
+    document.addEventListener('scroll', function(){
+        if(sobreFestival.getBoundingClientRect().bottom < 1){//cuando se muestre sobrefestival en pantalla
+            header.classList.add('fixed')//agregar la clase fixed
+        } else{ 
+            header.classList.remove('fixed')
+        }
+    })
+
+}
 
 function crearGaleria(){
 
@@ -61,4 +78,44 @@ function cerrarModal(){
         const body = document.querySelector('body')
         body.classList.remove('overflow-hidden')
     }, 500);
+}
+
+function resaltarEnlace(){
+    document.addEventListener('scroll', function(){
+        const sections = document.querySelectorAll('section')
+        const navLinks = document.querySelectorAll('.navegacion-principal a')
+
+        let actual = '';
+
+        sections.forEach( section => {
+            const sectionTop = section.offsetTop//mide la distancia que hay entre los section y el elemento padre (body)
+            const sectionHeight = section.clientHeight//mide la altura en px de cada section
+
+            if(window.scrollY >= (sectionTop - sectionHeight / 3)){//detectamos que secion ocupa mas espacio en pantalla
+                actual = section.id
+            }
+        })
+
+        navLinks.forEach( link => {
+            link.classList.remove('active');
+            if(link.getAttribute('href') === '#' + actual){
+                link.classList.add('active');
+            }
+        })
+    })
+}
+
+function scrollNav(){
+    const navLinks = document.querySelectorAll('.navegacion-principal a')
+
+    navLinks.forEach ( link => {
+        link.addEventListener('click', e => {
+            e.preventDefault()
+            const sectionScroll = e.target.getAttribute('href')
+            const section = document.querySelector(sectionScroll)
+
+            section.scrollIntoView({behavior: 'smooth'})
+
+        })
+    })
 }
