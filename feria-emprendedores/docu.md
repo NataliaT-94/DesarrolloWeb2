@@ -35,3 +35,32 @@ import * as dartSass from 'sass'
 import gulpSass from 'gulp-sass'
 
 const sass = gulSass(dartSass)
+
+# Minificar js
+-En la terminal ejecutar - npm i --save-dev gulp-terser  -
+-En gulpfile import terser from 'gulp-terser'
+    src('src/js/app.js')
+        .pipe(terser())//minificarjs
+        .pipe(dest('build/js'))
+
+    done()
+}
+
+# Crear una carpeta en la galeria de imagenes con las mismas imagenes pero mas chicas 
+ 
+gulpfile: import path from 'path'
+          import fs from 'fs'
+
+          import sharp from 'sharp'
+
+terminal - npm i --save-dev sharp -
+
+# generamos imagenes webp
+-Es un formato de imagenes para la web
+- usa una dependencia llamada glob
+- en la terminal - npm i --save-dev glob-
+luego la importamos en gulpfile - import {glob} from 'glob' -
+
+# generamos imagenes avif
+-Ofrece una comprecion de imagenes muy eficiente, lo que resulta en archivos mucho mas mequeños en comparacin con otros formatos como jpeg,png y webp
+-Mantiene una calidad de imagen superior
