@@ -25,9 +25,13 @@ function crearGaleria(){
     const galeria = document.querySelector('.galeria-imagenes');
 
     for(let i = 1; i <= CANTIDAD_IMAGENES; i++){
-      const imagen = document.createElement('IMG')
-      imagen.src = `src/img/galeria/imagen${i}.jpg`
-      imagen.alt = 'Imagen Galeria'
+      const imagen = document.createElement('PICTURE')
+      imagen.innerHTML= `
+        <source srcset="build/img/galeria/thumb/imagen${i}.avif" type="image/avif">
+        <source srcset="build/img/galeria/thumb/imagen${i}.webp" type="image/webp">
+        <img loading="lazy" width="300" height="200" src="build/img/galeria/thumb/imagen${i}.jpg" alt="imagen galeria">
+      `;
+      
 
       // Event Handler
 
@@ -41,9 +45,15 @@ function crearGaleria(){
 }
 
 function mostrarImagen(i){
-    const imagen = document.createElement('IMG')
-    imagen.src = `src/img/galeria/imagen${i}.jpg`
-    imagen.alt = 'Imagen Galeria'
+    const imagen = document.createElement('PICTURE')
+    // imagen.src = `src/img/galeria/imagen${i}.jpg`
+    // imagen.alt = 'Imagen Galeria'
+    imagen.innerHTML= `
+        <source srcset="build/img/galeria/full/imagen${i}.avif" type="image/avif">
+        <source srcset="build/img/galeria/full/imagen${i}.webp" type="image/webp">
+        <img loading="lazy" width="200" height="300" src="build/img/galeria/full/imagen${i}.jpg" alt="imagen galeria">
+    `;
+    
 
     // Generar Modal
 
