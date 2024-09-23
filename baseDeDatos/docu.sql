@@ -190,3 +190,60 @@ CREATE TABLE clientes(
     email VARCHAR(30) NOT NULL UNIQUE,--no puede haver dos email iguales
     PRIMARY KEY (id)
 );
+
+
+CREATE TABLE citas(
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    fecha DATE NOT NULL,
+    hora TIME NOT NULL,
+    clienteId INT(11) NOT NULL,-- tiene q teneter INT(11) igual que el id de la tabla de clientes ya que estan relacionado
+    PRIMARY KEY (id),
+    KEY clienteId (clienteId),--seleccionamos la columna clienteId
+    CONSTRAINT cliente_FK --tiene un limite 
+    FOREIGN KEY (clienteId) --le decimos que es una llave foranea
+    REFERENCES clientes(id) --le decimos que esta relacionadacon la tabla clientes columna id
+);
+
+--UNIMOS 2 TABLAS
+
+SELECT * FROM citas
+    INNER JOIN clientes ON clientes.id = citas.clienteId;--sirve para unir las tablas desde donde estan relacionadas
+
+    --INNER JOIN / LEFT JOIN: trae todos los registros de la primer tabla que tengas en esta caso citas y despues trae lo que esta en comun con la tabla clientes
+    --RIGHT JOIN: trae todos los registros de la tabla de clientes y despues trae lo que esta relacionado de la tabla de citas
+
+CREATE TABLE citasServicios(
+    id INT(11) AUTO_INCREMENT,
+    citaId INT(11) NOT NULL,
+    servicioId INT(11) NOT NULL,
+    PRIMARY KEY(id),
+    KEY citaId (citaId),
+    CONSTRAINT citas_FK
+    FOREIGN KEY (citaId)
+    REFERENCES citas (id), 
+    KEY servicioId (servicioId),
+    CONSTRAINT servicios_FK
+    FOREIGN KEY (servicioId)
+    REFERENCES servicios (id)
+);
+
+--UNIMOS VARIAS TABLAS
+
+SELECT * FROM citasServicios
+    LEFT JOIN citas ON citas.id = citasServicios.citaId
+    LEFT JOIN servicios ON servicios.id = citasServicios.servicioId;
+
+
+-- MULTIPLES JOIN
+
+SELECT * FROM citasServicios
+    LEFT JOIN citas ON citas.id = citasServicios.citaId
+    LEFT JOIN clientes ON citas.clienteId = clientes.id--para que muestre la info del cliente
+    LEFT JOIN servicios ON servicios.id = citasServicios.servicioId;
+
+
+--------------
+Base de DAtos:
+-MongoDB sirve para transacciones bancarias y BIG Data.
+-MySQL y SQL Server sirve para sitios y aplicaciones web.
+-SQLite sirve para aplicaciones moviles.
