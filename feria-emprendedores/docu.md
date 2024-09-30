@@ -2,6 +2,16 @@
 
 
 npm init
+-name:enter
+-version:enter
+-descripcion:enter
+-entry point:enter
+-test command:enter
+-git repository:enter
+-keywords: SASS, NPM, Gulp,
+-author: Techeira Natt
+-licensia: enter
+
 
 # o su vercion rapida, se instala automaticamnete
 
@@ -9,7 +19,7 @@ npm init -y
 
 # instalar las dependencias de sass
 npm i sass
-
+npm i --save-dev sass
 # instalar gulp
  npm i --save-dev gulp
 
@@ -18,7 +28,7 @@ npm i sass
 npm i
 
 # comandos para compilar el sass
--En el package.json en la seccion de script- "sass": "sass --watch src/scss:dist/css";  // src/scss es donde vamos a acrear la hora de estilo, --watch es para que se ejecute automaticamente cada vez que realizamos un cambio en sass, dist/css es donde vamos a almacenar una vez que se compile.
+-En el package.json en la seccion de script- "sass": "sass --watch src/scss:build/css";  // src/scss es donde vamos a acrear la hora de estilo, --watch es para que se ejecute automaticamente cada vez que realizamos un cambio en sass, build/css es donde vamos a almacenar una vez que se compile.
 -hacer click con el boton derecho en la carpeta feria de emprendedores y apretar en - Open in integrated terminal - 
 y ejecutar el siguiente comando
 - npm run sass -
@@ -64,3 +74,8 @@ luego la importamos en gulpfile - import {glob} from 'glob' -
 # generamos imagenes avif
 -Ofrece una comprecion de imagenes muy eficiente, lo que resulta en archivos mucho mas mequeños en comparacin con otros formatos como jpeg,png y webp
 -Mantiene una calidad de imagen superior
+
+# dependecies
+son necesarias para que funcione la aplicacion, es necesario compilarla
+# devDependecies
+NO son necesarias para que funcione la aplicacion, NO  es necesario compilarla
