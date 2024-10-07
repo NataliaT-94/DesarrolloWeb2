@@ -15,7 +15,7 @@
   ],
   "author": "Techeira Natalia A.",
   "license": "ISC",
-  "devDependencies": {
+  "devDependencies": { 
     "glob": "^11.0.0",
     "gulp": "^5.0.0",
     "gulp-sass": "^5.1.0",

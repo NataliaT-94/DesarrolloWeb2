@@ -1,3 +1,6 @@
+import path from 'path'
+import fs from 'fs'
+
 import { src, dest, watch, parallel } from 'gulp';
 import * as dartSass from 'sass';
 import gulpSass from 'gulp-sass';
@@ -11,6 +14,8 @@ import imagemin from 'gulp-imagemin';
 import notify from 'gulp-notify';
 import cache from 'gulp-cache';
 import webp from 'gulp-webp';
+import sharp from 'sharp'
+import { glob } from 'glob';
 
 
 const sass = gulpSass(dartSass);
@@ -52,7 +57,7 @@ export function javascript(done) {
     done()
 }
 
-export function imagenes(done) {
+ export function imagenes(done) {
     src('src/img/**/*')
         .pipe(cache(imagemin({ optimizationLevel: 3 })))
         .pipe(dest('build/img'))
@@ -60,6 +65,7 @@ export function imagenes(done) {
 
     done()
 }
+
 
 export function versionWebp(done) {
     src('src/img/**/*')
