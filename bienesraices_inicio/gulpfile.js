@@ -14,6 +14,8 @@ import imagemin from 'gulp-imagemin';
 import notify from 'gulp-notify';
 import cache from 'gulp-cache';
 import webp from 'gulp-webp';
+import sourcemaps from 'gulp-sourcemaps'
+import log from 'fancy-log';
 import sharp from 'sharp'
 import { glob } from 'glob';
 
@@ -40,17 +42,17 @@ export function css(done) {
     src('src/scss/app.scss', {sourcemaps: true})
         .pipe(sass())
         .pipe(postcss([autoprefixer(), cssnano()]))
-        // .pipe(postcss([autoprefixer()]))
+        .pipe(postcss([autoprefixer()]))
         .pipe(dest('build/css'), {sourcemaps: '.'});
 
     done()
 }
 
 export function javascript(done) {
-    src('src/js/modernizr.js', 'src/js/app.js')
+    src(['src/js/modernizr.js', 'src/js/app.js'])
       .pipe(concat('bundle.js'))
       .pipe(terser())
-    //   .pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write('.'))
       .pipe(rename({ suffix: '.min' }))
       .pipe(dest('build/js'))
 
