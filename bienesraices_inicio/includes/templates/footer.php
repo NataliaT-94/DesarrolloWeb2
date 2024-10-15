@@ -11,6 +11,6 @@
         <p class="copyright">Todos los derechos Reservados <?php echo date('Y'); ?> &copy;</p>
     </footer>
 
-    <script src="build/js/bundle.min.js"></script>
+    <script src="http://localhost/GitHub/DesarrolloWeb2/bienesraices_inicio/build/js/bundle.min.js"></script>
 </body>
 </html>
