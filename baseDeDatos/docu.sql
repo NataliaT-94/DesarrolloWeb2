@@ -201,7 +201,7 @@ CREATE TABLE citas(
     KEY clienteId (clienteId),--seleccionamos la columna clienteId
     CONSTRAINT cliente_FK --tiene un limite 
     FOREIGN KEY (clienteId) --le decimos que es una llave foranea
-    REFERENCES clientes(id) --le decimos que esta relacionadacon la tabla clientes columna id
+    REFERENCES clientes(id) --le decimos que esta relacionada con la tabla clientes columna id
 );
 
 --UNIMOS 2 TABLAS
