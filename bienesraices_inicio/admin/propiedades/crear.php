@@ -122,10 +122,9 @@
             move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
 
             
-            exit;
             // insertar base de datos
             $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, banio, estacionamiento, creado, vendedorId) 
-            VALUES ('$titulo', '$precio', $nombreImagen, '$descripcion', '$habitaciones', '$banio', '$estacionamiento', $creado, '$vendedorId')";
+            VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$banio', '$estacionamiento', $creado, '$vendedorId')";
             
 
             //echo $query;
@@ -134,7 +133,7 @@
 
             if($resultado){
                 //Redireccionar al usuario
-                header('Location: http://localhost/GitHub/DesarrolloWeb2/bienesraices_inicio/admin/');
+                header('Location: http://localhost/GitHub/DesarrolloWeb2/bienesraices_inicio/admin?mensaje=1');
 
             } else{
                 echo "Error: " . mysqli_error($db);
