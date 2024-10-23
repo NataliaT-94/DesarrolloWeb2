@@ -54,3 +54,7 @@ INSERT INTO `vendedores` (`nombre`, `apellido`, `telefono`) VALUES
 
 ALTER TABLE `propiedades` ADD `creado` DATE NULL AFTER `estacionamiento`;
 ALTER TABLE `propiedades` ADD `imagen` VARCHAR(200) NOT NULL AFTER `precio`;
+
+CREATE TABLE `bienesraices_crud`.`usuarios` (`id` INT NOT NULL AUTO_INCREMENT ,
+ `email` VARCHAR(50) NOT NULL , `password` CHAR(60) NOT NULL , 
+ PRIMARY KEY (`id`)) ENGINE = InnoDB;

@@ -1,5 +1,11 @@
 <?php 
 
+    require '../../includes/funciones.php';
+    $auth = estaAutenticado();
+
+    if(!$auth){
+        header('Location:http://localhost/GitHub/DesarrolloWeb2/bienesraices_inicio/index.php');
+    }
 
     // Validar la URL por ID valido
     $id = $_GET['id'];
@@ -170,7 +176,7 @@
 
 
 
-    require '../../includes/funciones.php';
+
     incluirTemplate('header');
 ?>
     
