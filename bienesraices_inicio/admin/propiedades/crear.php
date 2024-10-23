@@ -1,5 +1,12 @@
 <?php 
 
+    require '../../includes/funciones.php';
+    $auth = estaAutenticado();
+
+    if(!$auth){
+        header('Location:http://localhost/GitHub/DesarrolloWeb2/bienesraices_inicio/index.php');
+    }
+
     //Base de datos
     require '../../includes/config/database.php';
     $db = conectarDB();
@@ -142,8 +149,6 @@
     }
 
 
-
-    require '../../includes/funciones.php';
     incluirTemplate('header');
 ?>
     
