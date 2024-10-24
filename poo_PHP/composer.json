@@ -1,0 +1,16 @@
+{
+    "name": "natt1/poo_php",
+    "description": "Aprendiendo Namespaces y Autoload",
+    "authors": [
+        {
+            "name": "Natt",
+            "email": "correo@correo.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./clases"
+        }
+    }
+}
