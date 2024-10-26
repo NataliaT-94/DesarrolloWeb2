@@ -1,7 +1,8 @@
 <?php
 function conectarDB() : mysqli {
     // Intenta establecer la conexión con la base de datos
-    $db = mysqli_connect('localhost', 'root', '', 'bienesraices_crud');
+    // $db = mysqli_connect('localhost', 'root', '', 'bienesraices_crud');
+    $db = new mysqli('localhost', 'root', '', 'bienesraices_crud');
 
     // Verifica si la conexión fue exitosa
     if(!$db){
