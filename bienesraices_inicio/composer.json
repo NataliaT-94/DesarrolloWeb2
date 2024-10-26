@@ -1,0 +1,19 @@
+{
+    "name": "natt1/bienesraices_inicio",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "authors": [
+        {
+            "name": "NataliaT-94",
+            "email": "nattecheira@gmail.com"
+        }
+    ],
+    "require": {
+        "intervention/image": "^3.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./clases"
+        }
+    }
+}
