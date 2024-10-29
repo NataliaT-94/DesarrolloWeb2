@@ -2,11 +2,6 @@
 
  require 'includes/app.php';
 
-
-
-    //$inicio = true; 
-    //include './includes/templates/header.php';
-
     incluirTemplate('header', $inicio = true );
     
 

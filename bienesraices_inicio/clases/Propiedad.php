@@ -39,10 +39,21 @@ class Propiedad{
         $this -> banio = $args['banio'] ?? '';
         $this -> estacionamiento = $args['estacionamiento'] ?? '';
         $this -> creado = date('Y/m/d');
-        $this -> vendedorId = $args['vendedorId'] ?? '';
+        $this -> vendedorId = $args['vendedorId'] ?? 1;
     }
 
-    public function guardar() {
+    public function guardar(){
+        if(isset($this -> id)){
+            //Actualiza
+            $this -> actualizar();
+
+        } else {
+            //Creando un nuevo registro
+            $this -> crear();
+        }
+    }
+
+    public function crear() {
 
         //Sanitizar los datos
         $atributos = $this -> sanitizarAtributos();
@@ -67,6 +78,31 @@ class Propiedad{
 
         $resultado = self::$db -> query($query);
 
+        return $resultado;
+
+    }
+
+    public function actualizar(){
+        //Sanitizar los datos
+        $atributos = $this -> sanitizarAtributos();
+
+        $valores = [];
+        foreach($atributos as $key => $value){
+            $valores[] = "{$key}='{$value}'";
+        }
+
+        $query = "UPDATE propiedades SET ";
+        $query .= join(', ', $valores);
+        $query .= " WHERE id = '" . self::$db -> escape_string($this -> id) . "' ";
+        $query .= " LIMIT 1 ";
+
+        $resultado = self::$db -> query($query);
+
+        if($resultado){
+            //Redireccionar al usuario
+            header('Location: http://localhost/GitHub/DesarrolloWeb2/bienesraices_inicio/admin?mensaje=2');
+
+        }
     }
     
     //Identificar y unir los atributos de la BD
@@ -96,6 +132,14 @@ class Propiedad{
 
     //Subida de archivos
     public function setImagen($imagen){
+        //Elimina la imagen previa
+        if(isset($this -> id)){
+            //Comprobar si existe el archivo
+            $existeArchivo = file_exists(CARPETA_IMAGENES . $this -> imagen);
+            if($existeArchivo){
+                unlink(CARPETA_IMAGENES . $this -> imagen);
+            }
+        }
         //Asignar al atributo imagen el nombre de la imagen
         if($imagen){
             $this -> imagen = $imagen;
@@ -136,17 +180,72 @@ class Propiedad{
             self::$errores[] = "Elije un vendedor";
         }
 
-        // if(!$this -> imagen['name'] || $this -> imagen['error']){
-        //         self::$errores[] = "La imagen es obligatoria";
-        // }
-
-        // //Validar por tamaño (1mb maximo)
-        // $medida = 1000 * 1000;
-
-        // if($this -> imagen['size'] > $medida){
-        //         self::$errores[] = "La imagen es muuy pesada";
-        // }
+        if(!$this -> imagen){
+                self::$errores[] = "La imagen es obligatoria";
+        }
+        
         return self::$errores;
+    }
+
+    //Lista todos los registros
+    public static function all(){
+        $query = "SELECT * FROM propiedades";
+
+        $resultado = self::consultarSQL($query);
+
+        return $resultado;
+    }
+
+    //Busca un registro por su id
+    public static function find($id){
+        $query = "SELECT * FROM propiedades WHERE id = ${id}";
+
+        $resultado = self::consultarSQL($query);
+
+        return array_shift($resultado);//retorna la primera posicion
+
+    }
+
+    public static function consultarSQL($query){
+        //Consultar la base de datos
+        $resultado = self::$db -> query($query);
+
+        //Iterar los resultados
+        $array = [];
+        while($registro = $resultado -> fetch_assoc()){
+            $array[] = self::crearObjeto($registro);
+        }
+
+        // debuguear($array);
+
+        //Liberar la memoria
+        $resultado -> free();
+
+
+        //Retornar los resultados
+        return $array;
+    }
+
+    protected static function crearObjeto($registro){//transforma el array en objeto
+        $objeto = new self;
+
+        foreach($registro as $key => $value){
+            if(property_exists($objeto, $key)){//property_exists: verifica que la propiedad exista
+                $objeto -> $key = $value;//una vez que verifique que exista el objeto le asigna el valor
+
+            }
+        }
+                    
+        return $objeto;
+    }
+
+    //Sincroniza el objeto en memoria con los cambios realizados por el usuario
+    public function sincronizar( $args = []){
+        foreach($args as $key => $value){
+            if(property_exists($this, $key) && !is_null($value)){//this hace referencia al obejto actual
+                $this -> $key = $value;
+            }
+        }
     }
 
 }
