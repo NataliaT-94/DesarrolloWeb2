@@ -20,23 +20,12 @@
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
         if($id){
+                    
+            //Obtener los datos de la propiedad
+            $propiedad = Propiedad::find($id);
 
-            //Eliminar el archivo
-            $query = "SELECT imagen FROM propiedades WHERE id = ${id}";
+            $propiedad -> eliminar();
 
-            $resultado = mysqli_query($db, $query);
-            $propiedad = mysqli_fetch_assoc($resultado);
-
-            unlink('../imagenes/' . $propiedad['imagen']);
-
-            //Elimminar la propiedad
-            $query = "DELETE FROM propiedades WHERE id = ${id}";
-
-            $resultado = mysqli_query($db, $query);
-
-            if($resultado){
-                header('Location: http://localhost/GitHub/DesarrolloWeb2/bienesraices_inicio/admin?mensaje=3');
-            }
         }
     }
 
