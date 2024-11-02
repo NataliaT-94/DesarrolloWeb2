@@ -35,3 +35,30 @@ function s($html) : string{
     return $s;
 }
 
+//Validar tipo de contenido
+function validarTipoContenido($tipo){
+    $tipos = ['vendedor', 'propiedad'];
+    return in_array($tipo, $tipos);//busca un strin o valor dentro de un array, primer valor es lo que vamos a buscar, segundo valor es el array donde lo va a buscar
+}
+
+//Muestra los mensajes
+function mostrarNotificacion($codigo){
+    $mensaje = '';
+
+    switch($codigo){
+        case 1:
+            $mensaje = 'Creado Correctamente';
+            break;   
+        case 2:
+            $mensaje = 'Actualizado Correctamente';
+            break;      
+        case 3:
+            $mensaje = 'Eliminado Correctamente';
+            break;
+        default:
+            $mensaje = false;
+            break;
+    }
+
+    return $mensaje;
+}

@@ -5,23 +5,17 @@
 
 
     use App\Propiedad;
-
+    use App\Vendedor;
     use Intervention\Image\ImageManagerStatic as Image;
 
-
-
-    
-
-
     estaAutenticado();
- 
-    $db = conectarDB();
+
 
     $propiedad = new Propiedad;
 
-    //Consultar para obtener los vendedores
-    $consulta = "SELECT * FROM vendedores";
-    $resultado = mysqli_query($db, $consulta);
+    //Consultar para obtener todos los vendedores
+    $vendedores = Vendedor::all();
+    // debuguear($vendedores);
 
  
     //Array con mensajes de errores
@@ -67,16 +61,8 @@
             
 
             //Guardar en la base de datos
-            $resultado = $propiedad -> guardar();
+            $propiedad -> guardar();
 
-            //Mensaje de exito
-            if($resultado){
-                //Redireccionar al usuario
-                header('Location: http://localhost/GitHub/DesarrolloWeb2/bienesraices_inicio/admin?mensaje=1');
-
-            } else{
-                echo "Error: " . mysqli_error($db);
-            }
         }
     }
 
