@@ -2,6 +2,7 @@
 
     require '../../includes/app.php';
 
+    require '../../kint.phar';
 
 
     use App\Propiedad;
@@ -35,13 +36,26 @@
         //Generar un nombre unico
         $nombreImagen = md5(uniqid(rand(),true)) . ".jpg";
 
-        //Setear la imagen
 
-        // if($_FILES['propiedad']['tmp_name']['imagen']){ --NO FUNCIONA
-        //     //Realiza un resize a la imagen con intervention
-        //     $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800, 600);
-        //     $propiedad -> setImagen($nombreImagen);
-        // }
+        // Kint::dump($_FILES);
+//Setear la imagen
+
+         if($_FILES['propiedad']['tmp_name']['imagen']){ 
+             //Realiza un resize a la imagen con intervention
+
+             if(!is_dir(CARPETA_IMAGENES)){//verifica que la carpeta este creada o no- --NO FUNCIONA
+                mkdir(CARPETA_IMAGENES);//crea galeria
+             }
+             
+             if (move_uploaded_file($_FILES['propiedad']['tmp_name']['imagen'], CARPETA_IMAGENES . $nombreImagen)) {
+
+                // echo 'OK';
+             }else{
+                // echo 'FALLO';
+             }
+            //  $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800, 600);
+             $propiedad -> setImagen($nombreImagen);
+         }
 
         //Validar
         $errores = $propiedad -> validar();
@@ -52,18 +66,15 @@
 
             //Crear carpeta
 
-            // if(!is_dir(CARPETA_IMAGENES)){//verifica que la carpeta este creada o no- --NO FUNCIONA
-            //     mkdir(CARPETA_IMAGENES);//crea galeria
-            // }
-
-            //Guarda la imagen en el servidor
-            $image -> save(CARPETA_IMAGENES . $nombreImagen);
             
 
-            //Guardar en la base de datos
+            //Guarda la imagen en el servidor
+            // $image -> save(CARPETA_IMAGENES . $nombreImagen);
+            
             $propiedad -> guardar();
 
         }
+
     }
 
 
