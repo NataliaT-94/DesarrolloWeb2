@@ -14,9 +14,15 @@ class Router{
     public function comprobarRutas(){//valida que las rutas existan
       $urlActual = $_SERVER['PATH_INFO'] ?? '/'; //lee la url actual
       $metodo = $_SERVER['REQUEST_METHOD'];
+      echo "<h1>urlActual: {$urlActual}</h1>";
+      echo "<h1>metodo: {$metodo}</h1>";
 
       if($metodo === 'GET'){
         $fn = $this -> rutasGET[$urlActual] ?? NULL;//asociamos a que url se refiere la funcion, si no existe asignar null
+        echo "<pre>";
+        var_dump($this -> rutasGET);
+        echo "</pre>";
+        echo "<h1>fn: ". json_encode($fn) . "</h1>";
       }
       if($fn){
         //La URL existe y hay una funcion
