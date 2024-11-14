@@ -7,7 +7,7 @@ use Controllers\AutomotorController;
 
 $router = new Router();
 
-$router -> get('admin', [AutomotorController::class, 'index']);
+$router -> get('/', [AutomotorController::class, 'index']);
 // $router -> get('./vehiculos/crear', [AutomotorController::class, 'crear']);
 // $router -> get('./vehiculos/actualizar', [AutomotorController::class, 'actualizar']);
 
