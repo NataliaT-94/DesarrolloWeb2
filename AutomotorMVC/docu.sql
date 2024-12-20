@@ -27,3 +27,5 @@ CREATE TABLE vehiculos(
 CREATE TABLE `automotormvc`.`usuarios` (`id` INT NOT NULL AUTO_INCREMENT ,
  `email` VARCHAR(50) NOT NULL , `password` CHAR(60) NOT NULL , 
  PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ INSERT INTO `vehiculos`(`titulo`, `precio`, `descripcion`, `modelo`, `puertas`, `motor`, `vendedorId`) VALUES ('Cronos ','1300000','El mejor vehiculoEl mejor vehiculoEl mejor vehiculoEl mejor vehiculoEl mejor vehiculo','2023','4','1','1')

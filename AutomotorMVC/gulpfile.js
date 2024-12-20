@@ -1,5 +1,5 @@
-import path from 'path';
-import fs from 'fs';
+import path from 'path'
+import fs from 'fs'
 
 import { src, dest, watch, parallel } from 'gulp';
 import * as dartSass from 'sass';
@@ -14,13 +14,28 @@ import imagemin from 'gulp-imagemin';
 import notify from 'gulp-notify';
 import cache from 'gulp-cache';
 import webp from 'gulp-webp';
-import sourcemaps from 'gulp-sourcemaps';
+import sourcemaps from 'gulp-sourcemaps'
 import log from 'fancy-log';
-import sharp from 'sharp';
+import sharp from 'sharp'
 import { glob } from 'glob';
 
 
 const sass = gulpSass(dartSass);
+
+// const { src, dest, watch, series, parallel } = require('gulp');
+// const sass = require('gulp-sass')(require('sass'));
+// const autoprefixer = require('autoprefixer');
+// const postcss = require('gulp-postcss')
+// const sourcemaps = require('gulp-sourcemaps')
+// const cssnano = require('cssnano');
+// const concat = require('gulp-concat');
+// const terser = require('gulp-terser-js');
+// const rename = require('gulp-rename');
+// const imagemin = require('gulp-imagemin'); // Minificar imagenes 
+// const notify = require('gulp-notify');
+// const cache = require('gulp-cache');
+// const clean = require('gulp-clean');
+// const webp = require('gulp-webp');
 
 
 export function css(done) {
@@ -33,15 +48,16 @@ export function css(done) {
     done()
 }
 
-    export function javascript(done) {
-        src(['src/js/modernizr.js', 'src/js/app.js'], { sourcemaps: true })
-            .pipe(concat('bundle.js'))
-            .pipe(terser())
-            .pipe(rename({ suffix: '.min' }))
-            .pipe(dest('./public/build/js', { sourcemaps: '.' }));
-        done();
-    }
-    
+export function javascript(done) {
+    src(['src/js/modernizr.js', 'src/js/app.js'])
+      .pipe(concat('bundle.js'))
+      .pipe(terser())
+        .pipe(sourcemaps.write('.'))
+      .pipe(rename({ suffix: '.min' }))
+      .pipe(dest('./public/build/js'))
+
+    done()
+}
 
  export function imagenes(done) {
     src('src/img/**/*')

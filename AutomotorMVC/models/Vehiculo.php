@@ -61,6 +61,7 @@ class Vehiculo extends ActiveRecord{
                 self::$errores[] = "La imagen es obligatoria";
         }
 
+        
         return self::$errores;
     }
 }

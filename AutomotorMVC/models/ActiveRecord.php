@@ -5,8 +5,8 @@ class ActiveRecord{
     
     //BASE DE DATOS
     protected static $db;
-    protected static $columnasDB = [];
     protected static $tabla = '';
+    protected static $columnasDB = [];
 
 
     //Errores
@@ -18,18 +18,62 @@ class ActiveRecord{
         self::$db = $database;
     }
 
+    //Validacion
+    public static function getErrores(){
 
+        return static::$errores;
+    }
+
+    public function validar(){
+
+        static::$errores = [];
+        return static::$errores;
+    }
+
+    // Registros - CRUD
     public function guardar(){
         if(!is_null($this -> id)){//no tiene que eswtar en null para actualizar
             //Actualiza
             $this -> actualizar();
-
+        
         } else {//si esta en null crea
             //Creando un nuevo registro
             $this -> crear();
         }
     }
 
+    //Lista todos los registros
+    public static function all(){
+        $query = "SELECT * FROM " . static::$tabla;//hereda el metodo y busca el atibuto en la clase que se esta heredando
+        // debuguear($query);
+
+        $resultado = self::consultarSQL($query);
+
+        return $resultado;
+    }
+
+
+
+    //Busca un registro por su id
+    public static function find($id){
+        $query = "SELECT * FROM " . static::$tabla . " WHERE id = ${id}";
+
+        $resultado = self::consultarSQL($query);
+
+        return array_shift($resultado);//retorna la primera posicion
+
+    }
+
+    //Obtiene determinado numero de registros
+    public static function get($cantidad){
+        $query = "SELECT * FROM " . static::$tabla . " LIMIT  ${cantidad}";//static:hereda el metodo y busca el atibuto en la clase que se esta heredando
+        //  debuguear($query);
+    
+        $resultado = self::consultarSQL($query);
+    
+        return $resultado;
+    }
+    
     public function crear() {
 
         //Sanitizar los datos
@@ -55,11 +99,7 @@ class ActiveRecord{
 
         $resultado = self::$db -> query($query);
 
-        //Mensaje de exito
-        if($resultado){
-            //Redireccionar al usuario
-            header('Location: http://localhost/GitHub/DesarrolloWeb2/AutomotorMVC/admin?mensaje=1');
-        }
+        return $resultado;
     }
 
     public function actualizar(){
@@ -78,11 +118,8 @@ class ActiveRecord{
 
         $resultado = self::$db -> query($query);
 
-        if($resultado){
-            //Redireccionar al usuario
-            header('Location: http://localhost/GitHub/DesarrolloWeb2/AutomotorMVC/admin?mensaje=2');
-
-        }
+        return $resultado;
+        
     }
 
     //Eliminar un registro
@@ -94,98 +131,7 @@ class ActiveRecord{
         
         if($resultado){
             $this -> borrarImagen();
-            header('Location: http://localhost/GitHub/DesarrolloWeb2/AutomotorMVC/admin?mensaje=3');
         }
-    }
-
-    
-    //Identificar y unir los atributos de la BD
-    public function atributos(){
-        $atributos = [];
-
-        foreach(static::$columnasDB as $columna){
-
-            if($columna === 'id') continue;//ignora al id
-
-            $atributos[$columna] = $this -> $columna;
-        }
-        return $atributos;
-    }
-
-
-    public function sanitizarAtributos(){
-        $atributos = $this -> atributos();
-        $sanitizado = [];
-
-        foreach($atributos as $key => $value){
-            $sanitizado[$key] = self::$db -> escape_string($value);
-        }
-        
-        return $sanitizado;
-    }
-
-    //Subida de archivos
-    public function setImagen($imagen){
-        //Elimina la imagen previa
-        if(!is_null($this -> id)){
-            $this -> borrarImagen();
-        }
-        //Asignar al atributo imagen el nombre de la imagen
-        if($imagen){
-            $this -> imagen = $imagen;
-        }
-    }
-
-    //Eliminar el archivo
-    public function borrarImagen(){
-        //Comprobar si existe el archivo
-        $existeArchivo = file_exists(CARPETA_IMAGENES . $this -> imagen);
-        if($existeArchivo){
-            unlink(CARPETA_IMAGENES . $this -> imagen);
-        }
-        
-    }
-
-    //Validacion
-    public static function getErrores(){
-
-        return static::$errores;
-    }
-
-    public function validar(){
-
-        static::$errores = [];
-        return static::$errores;
-    }
-
-    //Lista todos los registros
-    public static function all(){
-        $query = "SELECT * FROM " . static::$tabla;//hereda el metodo y busca el atibuto en la clase que se esta heredando
-        // debuguear($query);
-
-        $resultado = self::consultarSQL($query);
-
-        return $resultado;
-    }
-
-    //Obtiene determinado numero de registros
-    public static function get($cantidad){
-        $query = "SELECT * FROM " . static::$tabla . " LIMIT " . $cantidad;//static:hereda el metodo y busca el atibuto en la clase que se esta heredando
-        //  debuguear($query);
-
-        $resultado = self::consultarSQL($query);
-
-        return $resultado;
-    }
-
-    //Busca un registro por su id
-    public static function find($id){
-        $query = "SELECT * FROM " . static::$tabla . " WHERE id = ${id}";
-
-        $resultado = self::consultarSQL($query);
-
-        return array_shift($resultado);//retorna la primera posicion
-
     }
 
     public static function consultarSQL($query){
@@ -214,12 +160,36 @@ class ActiveRecord{
         foreach($registro as $key => $value){
             if(property_exists($objeto, $key)){//property_exists: verifica que la propiedad exista
                 $objeto -> $key = $value;//una vez que verifique que exista el objeto le asigna el valor
-
             }
         }
                     
         return $objeto;
     }
+
+    //Identificar y unir los atributos de la BD
+    public function atributos(){
+        $atributos = [];
+
+        foreach(static::$columnasDB as $columna){
+
+            if($columna === 'id') continue;//ignora al id
+
+            $atributos[$columna] = $this -> $columna;
+        }
+        return $atributos;
+    }
+    
+    public function sanitizarAtributos(){
+        $atributos = $this -> atributos();
+        $sanitizado = [];
+    
+        foreach($atributos as $key => $value){
+            $sanitizado[$key] = self::$db -> escape_string($value);
+        }
+        
+        return $sanitizado;
+    }
+    
 
     //Sincroniza el objeto en memoria con los cambios realizados por el usuario
     public function sincronizar( $args = []){
@@ -228,6 +198,29 @@ class ActiveRecord{
                 $this -> $key = $value;
             }
         }
+    }
+
+    
+    //Subida de archivos
+    public function setImagen($imagen){
+        //Elimina la imagen previa
+        if(!is_null($this -> id)){
+            $this -> borrarImagen();
+        }
+        //Asignar al atributo imagen el nombre de la imagen
+        if($imagen){
+            $this -> imagen = $imagen;
+        }
+    }
+
+    //Eliminar el archivo
+    public function borrarImagen(){
+        //Comprobar si existe el archivo
+        $existeArchivo = file_exists(CARPETA_IMAGENES . $this -> imagen);
+        if($existeArchivo){
+            unlink(CARPETA_IMAGENES . $this -> imagen);
+        }
+        
     }
 }
 

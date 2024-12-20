@@ -11,10 +11,11 @@
     @include boton($verde, block);
 }
 
-.boto-amarillo-block{
+.boton-amarillo-block{
     @include boton($amarillo, block);
+    width: 100%;
 }
 
-.boto-amarillo{
+.boton-amarillo{
     @include boton($amarillo, inline-block);
 }
