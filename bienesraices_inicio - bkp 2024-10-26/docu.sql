@@ -58,3 +58,11 @@ ALTER TABLE `propiedades` ADD `imagen` VARCHAR(200) NOT NULL AFTER `precio`;
 CREATE TABLE `bienesraices_crud`.`usuarios` (`id` INT NOT NULL AUTO_INCREMENT ,
  `email` VARCHAR(50) NOT NULL , `password` CHAR(60) NOT NULL , 
  PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+INSERT INTO `vendedores`(`nombre`, `apellido`, `telefono`) VALUES ('Natalia','Techeira','1128117562')
+
+INSERT INTO `vendedores`(`nombre`, `apellido`, `telefono`) VALUES ('Braian','Zamudio','1138117563');
+
+
+ INSERT INTO `vehiculos`(`titulo`, `precio`, `descripcion`, `modelo`, `puertas`, `motor`, `vendedorId`) 
+ VALUES ('cronos drive','300000','El mejor vehiculo nacional','2024','4','2','1')

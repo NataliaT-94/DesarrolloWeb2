@@ -58,3 +58,6 @@ ALTER TABLE `propiedades` ADD `imagen` VARCHAR(200) NOT NULL AFTER `precio`;
 CREATE TABLE `bienesraices_crud`.`usuarios` (`id` INT NOT NULL AUTO_INCREMENT ,
  `email` VARCHAR(50) NOT NULL , `password` CHAR(60) NOT NULL , 
  PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+ INSERT INTO `usuarios`(`id`, `email`, `password`) VALUES 
+ ('1','correo@correo.com','12345678')

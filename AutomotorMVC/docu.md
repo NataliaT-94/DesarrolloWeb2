@@ -46,5 +46,15 @@ terminal: nom i - enter
     "postcss": "^8.4.47",
     "sass": "^1.80.6",
     "sharp": "^0.33.5"
+--------------------
+# php -S localhost:3000
 
+---------------------
+# composer
+phpmailer:
+composer require phpmailer/phpmailer
+
+-----------------------
+# mailtrap
+se utiliza como servidor para el envio de emails
 

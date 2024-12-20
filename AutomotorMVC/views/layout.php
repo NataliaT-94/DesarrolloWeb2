@@ -11,7 +11,6 @@ if(!isset($inicio)){
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,10 +21,10 @@ if(!isset($inicio)){
     <title>Automotor</title>
 </head>
 <body>
-    <header class="header <?php echo $inicio ? 'inicio' : '' ?>">
+    <header class="header <?php echo $inicio ? 'inicio' : ''; ?>">
         <div class="contenedor contenido-header">
             <div class="barra">
-                <a href="index.php">
+                <a href="/">
                     <img src="http://localhost/GitHub/DesarrolloWeb2/AutomotorMVC/public/build/img/logo-novo-fiat.svg" alt="logotipo de automotor">
                 </a>
 
@@ -36,21 +35,19 @@ if(!isset($inicio)){
                 <div class="derecha">
                     <img class="dark-mode-boton" src="http://localhost/GitHub/DesarrolloWeb2/AutomotorMVC/public/build/img/dark-mode.svg">
                     <nav class="navegacion">
-                        <a href="nosotros.php">Nosotros</a>
-                        <a href="anuncios.php">Anuncios</a>
-                        <a href="blog.php">Blog</a>
-                        <a href="contacto.php">Contacto</a>
+                        <a href="/nosotros">Nosotros</a>
+                        <a href="/vehiculos">Anuncios</a>
+                        <a href="/blog">Blog</a>
+                        <a href="/contacto">Contacto</a>
                         <?php if($auth): ?>
-                            <a href="../cerrar-sesion.php">Cerrar Sesion</a>
+                            <a href="/cerrar-sesion">Cerrar Sesion</a>
                         <?php endif; ?>
                     </nav>
                 </div>
   
             </div><!----  .barra  ---->
+            <?php  echo $inicio ? "<h1>Venta de Vehiculos 0KM</h1>" : ''; ?>
 
-            <?php if($inicio){ ?>
-                <h1>Venta de Vehiculos 0KM</h1>
-            <?php } ?>
         </div>
     </header>
 
@@ -59,10 +56,10 @@ if(!isset($inicio)){
     <footer class="footer seccion">
         <div class="contenedor contenedor-footer">
             <nav class="navegacion">
-                <a href="nosotros .html">Nosotros</a>
-                <a href="anuncios.html">Anuncios</a>
-                <a href="blog.html">Blog</a>
-                <a href="contacto.html">Contacto</a>
+                <a href="nosotros.php">Nosotros</a>
+                <a href="anuncios.php">Anuncios</a>
+                <a href="blog.php">Blog</a>
+                <a href="contacto.php">Contacto</a>
             </nav>
         </div>
         <p class="copyright">Todos los derechos Reservados <?php echo date('Y'); ?> &copy;</p>
