@@ -38,7 +38,7 @@
 
             <div class="texto-entrada">
                 <a href="entrada.html">
-                    <h4>Terraza en el techo de tu casa</h4>
+                    <h4>Guia para la mantencion del  vehiculo</h4>
                     <p class="informacion-meta">Escritorio el: <span>01/10/2024</span> por: <span>Admin</span></p>
 
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, aperiam architecto quas quam reiciendis voluptatibus expedita possimus a</p>
@@ -56,8 +56,8 @@
             </div>
 
             <div class="texto-entrada">
-                <a href="entrada.html">
-                    <h4>Guia para la decoracion de tu hogar</h4>
+                <a href="entrada.php">
+                    <h4>Vehiculo deportivo</h4>
                     <p class="informacion-meta">Escritorio el: <span>01/10/2024</span> por: <span>Admin</span></p>
 
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, aperiam architecto quas quam reiciendis voluptatibus expedita possimus ao</p>

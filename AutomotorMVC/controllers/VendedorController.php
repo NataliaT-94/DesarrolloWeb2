@@ -48,7 +48,7 @@ class VendedorController{
 
     public static function actualizar(Router $router){
         $errores = Vendedor::getErrores();
-        $id = validarORedireccionar('/');
+        $id = validarORedireccionar('/admin');
 
         //Obtener datos dek vendedor a actualizar
         $vendedor = Vendedor::find($id);
@@ -64,7 +64,11 @@ class VendedorController{
             $errores = $vendedor -> validar();
 
             if(empty($errores)){
-                $vendedor -> guardar();
+                $resultado = $vendedor -> guardar();
+
+                if($resultado) {
+                    header('location: /admin');
+                }
             }
         }
 

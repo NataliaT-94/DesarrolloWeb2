@@ -32,14 +32,16 @@ class ActiveRecord{
 
     // Registros - CRUD
     public function guardar(){
+        $resultado = '';
         if(!is_null($this -> id)){//no tiene que eswtar en null para actualizar
             //Actualiza
-            $this -> actualizar();
+            $resultado = $this->actualizar();
         
         } else {//si esta en null crea
             //Creando un nuevo registro
-            $this -> crear();
+            $resultado = $this->crear();
         }
+        return $resultado;
     }
 
     //Lista todos los registros
@@ -132,6 +134,7 @@ class ActiveRecord{
         if($resultado){
             $this -> borrarImagen();
         }
+        return $resultado;
     }
 
     public static function consultarSQL($query){

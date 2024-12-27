@@ -1,5 +1,5 @@
 <?php
-
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../includes/app.php';
 
 use MVC\Router;
@@ -18,7 +18,7 @@ $router->get('/vehiculos/actualizar', [AutomotorController::class, 'actualizar']
 $router->post('/vehiculos/actualizar', [AutomotorController::class, 'actualizar']);
 $router->post('/vehiculos/eliminar', [AutomotorController::class, 'eliminar']);
 
-$router->get('/', [AutomotorController::class, 'index']);
+$router->get('/', [VendedorController::class, 'index']);
 $router->get('/vendedores/crear', [VendedorController::class, 'crear']);
 $router->post('/vendedores/crear', [VendedorController::class, 'crear']);
 $router->get('/vendedores/actualizar', [VendedorController::class, 'actualizar']);
