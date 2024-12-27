@@ -27,17 +27,17 @@
         <tbody><!--- Mostrar los Resultados -->
             <?php foreach( $vehiculos as $vehiculo): ?>
             <tr>
-                <td><?php echo $vehiculo -> id; ?></td>
-                <td><?php echo $vehiculo -> titulo; ?></td>
-                <td><img src="/imagenes/<?php echo $vehiculo -> imagen; ?>" class="imagen-tabla"></td>
-                <td>$<?php echo $vehiculo -> precio; ?></td>
+                <td><?php echo $vehiculo->id; ?></td>
+                <td><?php echo $vehiculo->titulo; ?></td>
+                <td><img src="/imagenes/<?php echo $vehiculo->imagen; ?>" class="imagen-tabla"></td>
+                <td>$<?php echo $vehiculo->precio; ?></td>
                 <td>
                     <form method="POST" action="vehiculos/eliminar" class="w-100">
-                        <input type="hidden" name="id" value="<?php echo $vehiculo -> id; ?>"><!--//sirve paa eviar la info del id que se elimino -->
+                        <input type="hidden" name="id" value="<?php echo $vehiculo->id; ?>"><!--//sirve paa eviar la info del id que se elimino -->
                         <input type="hidden" name="tipo" value="vehiculo">
                         <input type="submit" class="boton-rojo-block" value="Eliminar">
                     </form>
-                    <a href="/vehiculos/actualizar?id=<?php echo $vehiculo -> id; ?>" class="boton-amarillo-block">Actualizar</a>
+                    <a href="/vehiculos/actualizar?id=<?php echo $vehiculo->id; ?>" class="boton-amarillo-block">Actualizar</a>
 
                 </td>
             </tr>
@@ -59,9 +59,9 @@
             <tbody><!--- Mostrar los Resultados -->
                 <?php foreach( $vendedores as $vendedor): ?>
                 <tr>
-                    <td><?php echo $vendedor -> id; ?></td>
-                    <td><?php echo $vendedor -> nombre . " " . $vendedor -> apellido; ?></td>
-                    <td><?php echo $vendedor -> telefono; ?></td>
+                    <td><?php echo $vendedor->id; ?></td>
+                    <td><?php echo $vendedor->nombre . " " . $vendedor->apellido; ?></td>
+                    <td><?php echo $vendedor->telefono; ?></td>
                     <td>
                         <form method="POST" class="w-100" action="/vendedores/eliminar">
                             <input type="hidden" name="id" value="<?php echo $vendedor -> id; ?>"><!--//sirve paa eviar la info del id que se elimino -->

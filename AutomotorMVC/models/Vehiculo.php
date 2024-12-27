@@ -44,26 +44,37 @@ class Vehiculo extends ActiveRecord{
         if(strlen($this -> descripcion) < 50){
             self::$errores[] = "La descripcion es oblidgatoria y debe tener al menos 50 caracteres";
         }
-        if(strlen($this -> modelo) < 50){
+        if(!$this -> modelo){
             self::$errores[] = "Debes añadir un modelo";
         }
-        if(strlen($this -> puertas) < 50){
+        if(!$this -> puertas){
             self::$errores[] = "Debes añadir cantidad de puertas";
         }
-        if(strlen($this -> motor) < 50){
+        if(!$this -> motor){
             self::$errores[] = "Debes añadir un modelo de motor";
         }
         if(!$this -> vendedorId){
             self::$errores[] = "Elije un vendedor";
         }
 
-        if(!$this -> imagen){
-                self::$errores[] = "La imagen es obligatoria";
-        }
-
+        // if(!$this -> imagen){
+        //         self::$errores[] = "La imagen es obligatoria";
+        // }
         
+        if(!$this->id )  {
+            $this->validarImagen();
+        }
         return self::$errores;
     }
+
+    public function validarImagen() {
+        if(!$this->imagen ) {
+            self::$errores[] = 'La Imagen es Obligatoria';
+        }
+    }
+
+        
+       
 }
 
 ?>

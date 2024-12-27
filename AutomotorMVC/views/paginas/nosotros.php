@@ -4,9 +4,9 @@
         <div class="contenido-nosotros">
             <div class="imagen">
                 <picture>
-                    <source srcset="build/img/nosotros.avif" type="image/avif">
-                    <source srcset="build/img/nosotros.jpg" type="image/jpeg">
-                    <img loading="lazy" src="build/img/nosotros.jpg" alt="Sobre nosotros">
+                    <source srcset="build/img/imagen2.avif" type="image/avif">
+                    <source srcset="build/img/imagen2.jpg" type="image/jpeg">
+                    <img loading="lazy" src="build/img/imagen2.jpg" alt="Sobre nosotros">
                 </picture>
             </div>
 

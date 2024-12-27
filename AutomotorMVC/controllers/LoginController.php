@@ -32,7 +32,6 @@ class LoginController{
                     //Password incorrecto(mensaje de error)
                         $errores = Admin::getErrores();
                     }
-               
                 }
             }
         }
@@ -42,7 +41,11 @@ class LoginController{
         ]);
     }
     public static function logout(){
-        echo "Desde logout";
+        session_start();
+
+        $_SESSION = [];
+         
+        header('Location: /');
     }
 
 

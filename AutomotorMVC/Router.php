@@ -15,30 +15,34 @@ class Router{
     }
 
     public function comprobarRutas(){//valida que las rutas existan
+      
+      session_start();
+      $auth = $_SESSION['login'] ?? null;
+      
+      //Arreglo de rutas protegidas...
+       $rutas_protegidas = ['/admin', '/vehiculos/crear',  '/vehiculos/actualizar',  '/vehiculos/eliminar', '/vendedores/crear',  '/vendedores/actualizar',  '/vendedores/eliminar' ];
+      
+      
       $urlActual = $_SERVER['PATH_INFO'] ?? '/'; //lee la url actual
-      // $urlActual = "index"; 
       $metodo = $_SERVER['REQUEST_METHOD'];
 
       if($metodo === 'GET'){
-        // echo $urlActual;
-        // echo "<br>";
         $fn = $this -> rutasGET[$urlActual] ?? NULL;//asociamos a que url se refiere la funcion, si no existe asignar null
-        // echo "<h1>fn: ". json_encode($fn) . "</h1>";
-        // echo "<pre>";
-        // var_dump($this -> rutasGET);
-        // echo "</pre>";
       } else {
-        // debuguear($this);
+
         $fn = $this -> rutasPOST[$urlActual] ?? NULL;
       }
+
+      //Proteger las rutas
+      if(in_array($urlActual, $rutas_protegidas) && !$auth){
+        header('Location: /');
+      }
+
       if($fn){
         //La URL existe y hay una funcion
         call_user_func($fn, $this);//nos premite llama una funcion cuando no sabemos como se llama la funcion
       } else {
-        // echo $metodo;
-        // echo "<br>";
-        // Ruta no definida, intentar cargar controlador/acción dinámico
-        // $this->resolverControlador($urlActual);
+
         echo "404 - Página no encontrada.";
       }
     }
@@ -51,6 +55,7 @@ class Router{
       }
 
       ob_start();//Inicia un almacenamiento en memoria
+      // entonces incluimos la vista en el layout
       include __DIR__ . "/views/$view.php";
 
       $contenido = ob_get_clean();//Limpiamos la memoria

@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
 
     eventListeners();
-
     darkMode();
 
 });
@@ -68,10 +67,10 @@ function seleccionarMetodo(e) {
             <p>Elija la fecha y la hora</p>
 
             <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="contacto[fecha]">
+            <input type="date" id="fecha" name="contacto[fecha]" required>
 
             <label for="hora">Hora:</label>
-            <input type="time" id="hora" min="09:00" max="18:00" name="contacto[hora]">
+            <input type="time" id="hora" min="09:00" max="18:00" name="contacto[hora]" required>
 
         `;
     } else {

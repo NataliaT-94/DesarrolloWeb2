@@ -35,7 +35,7 @@ class PaginasController{
     }
     public static function vehiculo(Router $router){
         
-        $id = validarORedireccionar('/propiedades');
+        $id = validarORedireccionar('/vehiculos');
 
         //Buscar el vehiculo por su id
         $vehiculo = Vehiculo::find($id);
@@ -57,10 +57,10 @@ class PaginasController{
         ]);
     }
     public static function contacto(Router $router){
+        $mensaje = null;
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            $mensaje = null;
-
+            
             $respuestas = $_POST['contacto'];
 
             //Crear una instancia de PHPMailer
@@ -88,6 +88,11 @@ class PaginasController{
             $contenido = '<html>'; 
             $contenido .= '<p>Tienes un Nuevo Mensaje</p>';
             $contenido .= '<p>Nombre: ' . $respuestas['nombre'] . '</p>';
+            $contenido .= '<p>Mensaje: ' . $respuestas['mensaje'] . '</p>';
+            $contenido .= '<p>Vende o Compra: ' . $respuestas['tipo'] . '</p>';
+            $contenido .= '<p>Precio o Presupuesto: $' . $respuestas['precio'] . '</p>';
+            $contenido .= '<p>Prefiere ser contactado por: ' . $respuestas['contacto'] . '</p>';
+
 
             //Enviar de forma condicional algunos campos de email o telefono
             if($respuestas['contacto'] === 'telefono'){
@@ -103,10 +108,6 @@ class PaginasController{
 
             }
 
-            $contenido .= '<p>Mensaje: ' . $respuestas['mensaje'] . '</p>';
-            $contenido .= '<p>Vende o Compra: ' . $respuestas['tipo'] . '</p>';
-            $contenido .= '<p>Precio o Presupuesto: $' . $respuestas['precio'] . '</p>';
-            $contenido .= '<p>Prefiere ser contactado por: ' . $respuestas['contacto'] . '</p>';
             $contenido .= '</html>';
 
             $mail -> Body = $contenido;

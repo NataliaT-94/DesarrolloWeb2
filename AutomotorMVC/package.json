@@ -8,7 +8,7 @@
     "gulp": "gulp",
     "dev": "gulp"
   },
-  "author": "Juan De La Torre",
+  "author": "Natt Techeira",
   "license": "ISC",
   "devDependencies": {
     "cssnano": "^7.0.6",

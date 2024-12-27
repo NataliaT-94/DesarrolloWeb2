@@ -16,7 +16,7 @@ class AutomotorController{
         //Muestra mesaje condicional
         $resultado = $_GET['resultado'] ?? null;
 
-        $router -> render('vehiculos/admin', [
+        $router -> render('/vehiculos/admin', [
             'vehiculos' => $vehiculos,
             'vendedores' => $vendedores,
             'resultado' => $resultado
@@ -61,7 +61,7 @@ class AutomotorController{
             }
         }
     
-        $router->render('vehiculos/crear', [
+        $router->render('/vehiculos/crear', [
             'vehiculo' => $vehiculo,
             'vendedores' => $vendedores,
             'errores' => $errores
@@ -103,7 +103,10 @@ class AutomotorController{
       
               if(empty($errores)){
  
-                  $vehiculo -> guardar();          
+                $resultado = $vehiculo -> guardar();
+                  if($resultado) {
+                    header('location: /vehiculos');
+                }          
               }
           }
 
@@ -114,19 +117,24 @@ class AutomotorController{
         ]);
     }
 
-    public static function eliminar(){
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
-            //Validar ID
-            $id = $_POST['id'];
-            $id = filter_var($id, FILTER_VALIDATE_INT);
+    public static function eliminar(Router $router) {
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $tipo = $_POST['tipo'];
+
+            // peticiones validas
+            if(validarTipoContenido($tipo) ) {
+                // Leer el id
+                $id = $_POST['id'];
+                $id = filter_var($id, FILTER_VALIDATE_INT);
     
-            if($id){
-                $tipo = $_POST['tipo'];
-    
-                if(validarTipoContenido($tipo)){
-                    //Obtener los datos de la vehiculo
-                    $vehiculo = Vehiculo::find($id);
-                    $vehiculo -> eliminar();
+                // encontrar y eliminar la propiedad
+                $vehiculo = Vehiculo::find($id);
+                $resultado = $vehiculo->eliminar();
+
+                // Redireccionar
+                if($resultado) {
+                    header('location: /vehiculos');
                 }
             }
         }
