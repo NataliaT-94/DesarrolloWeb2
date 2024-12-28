@@ -16,7 +16,7 @@ if(!isset($inicio)){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost/GitHub/DesarrolloWeb2/AutomotorMVC/public/build/css/app.css">
+    <link rel="stylesheet" href="./build/css/app.css">
     
     <title>Automotor</title>
 </head>
@@ -25,15 +25,15 @@ if(!isset($inicio)){
         <div class="contenedor contenido-header">
             <div class="barra">
                 <a href="/">
-                    <img src="http://localhost/GitHub/DesarrolloWeb2/AutomotorMVC/public/build/img/logo-novo-fiat.svg" alt="logotipo de automotor">
+                    <img src="./build/img/logo-novo-fiat.svg" alt="logotipo de automotor">
                 </a>
 
                 <div class="mobile-menu">
-                    <img src="http://localhost/GitHub/DesarrolloWeb2/AutomotorMVC/public/build/img/barras.avif" alt="icono menu responsive">
+                    <img src="./build/img/barras.avif" alt="icono menu responsive">
                 </div>
 
                 <div class="derecha">
-                    <img class="dark-mode-boton" src="http://localhost/GitHub/DesarrolloWeb2/AutomotorMVC/public/build/img/dark-mode.svg">
+                    <img class="dark-mode-boton" src="./build/img/dark-mode.svg">
                     <nav class="navegacion">
                         <a href="/nosotros">Nosotros</a>
                         <a href="/vehiculos">Anuncios</a>
@@ -65,6 +65,6 @@ if(!isset($inicio)){
         <p class="copyright">Todos los derechos Reservados <?php echo date('Y'); ?> &copy;</p>
     </footer>
 
-    <script src="http://localhost/GitHub/DesarrolloWeb2/AutomotorMVC/public/build/js/bundle.min.js"></script>
+    <script src="./build/js/bundle.min.js"></script>
 </body>
 </html>
