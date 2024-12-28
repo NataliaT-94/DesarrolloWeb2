@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-12-2024 a las 16:33:31
+-- Tiempo de generación: 28-12-2024 a las 21:39:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -33,6 +33,13 @@ CREATE TABLE `usuarios` (
   `password` char(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `email`, `password`) VALUES
+(1, 'correo@correo.com', '$2y$12$M9bliU2aUULApltlbDgnHOTYIcaclSNyrF4Ytlxzz09kYTKKfwo86');
+
 -- --------------------------------------------------------
 
 --
@@ -57,7 +64,10 @@ CREATE TABLE `vehiculos` (
 --
 
 INSERT INTO `vehiculos` (`id`, `titulo`, `precio`, `imagen`, `descripcion`, `modelo`, `puertas`, `motor`, `creado`, `vendedorId`) VALUES
-(2, 'cronos drive', 300000.00, '', 'El mejor vehiculo nacional', 2024, 4, 2, '0000-00-00', 1);
+(7, 'cronos drive', 123444.00, '', 'El mejor vehiculoEl mejor vehiculoEl mejor vehiculoEl mejor vehiculoEl mejor vehiculo', 2023, 4, 2, '0000-00-00', 2),
+(8, 'Argo drive', 123900.00, '', 'El mejor vehiculoEl mejor vehiculoEl mejor vehiculoEl mejor vehiculoEl mejor vehiculo', 2024, 5, 2, '0000-00-00', 3),
+(9, 'mobi drive', 1200000.00, '', 'El mejor vehiculoEl mejor vehiculoEl mejor vehiculoEl mejor vehiculoEl mejor vehiculo', 2024, 4, 2, '0000-00-00', 2),
+(10, ' argo nuevo1', 12343245.00, '732abae85f6640932d42458fb4374127.jpg', 'argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1argo nuevo1', 2023, 5, 2, '2024-12-27', 3);
 
 -- --------------------------------------------------------
 
@@ -77,8 +87,16 @@ CREATE TABLE `vendedores` (
 --
 
 INSERT INTO `vendedores` (`id`, `nombre`, `apellido`, `telefono`) VALUES
-(1, 'Natalia', 'Techeira', '1128117562'),
-(2, 'Braian', 'Zamudio', '1138117563');
+(2, 'Braian', 'Zamudio', '1138117563'),
+(3, ' Evelyn', 'Techaira', '1134577467 '),
+(4, ' Evelyn', 'Techaira', '1134577467 '),
+(5, ' Alejandra', 'Techeira', '1123468722 '),
+(6, ' Alejandra', 'Techeira', '1123468722 '),
+(7, ' Alejandra', 'Techeira', '1123468722 '),
+(8, ' Lilian', 'Techeira', '1124557788 '),
+(9, ' Lilian', 'Techeira', '1124557788 '),
+(10, ' Lilian', 'Techeira', '1124557788 '),
+(11, ' Lilian', 'Techeira', '1124557788 ');
 
 --
 -- Índices para tablas volcadas
@@ -111,19 +129,19 @@ ALTER TABLE `vendedores`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `vehiculos`
 --
 ALTER TABLE `vehiculos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `vendedores`
 --
 ALTER TABLE `vendedores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Restricciones para tablas volcadas
