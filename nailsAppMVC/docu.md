@@ -51,3 +51,10 @@ cd public : para ir a la carpeta public
 
  php -S localhost:3000 : creamos un localhost desde la carpeta public
  
+# composer require phpmailer/phpmailer
+composer update
+
+------------------------------------------
+# https://mailtrap
+
+phpMailer
