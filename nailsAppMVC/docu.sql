@@ -23,7 +23,7 @@
 --     servicioId int(11) forenkey servicios
 -----------------------------------------------
 
-CREATE TABLE `nailsmvc`.`usuarios` (`id` INT(11) NOT NULL AUTO_INCREMENT , `nombre` VARCHAR(60) NOT NULL , `apellido` VARCHAR(60) NOT NULL , `email` VARCHAR(30) NOT NULL , `telefono` VARCHAR(10) NOT NULL , `admin` BOOLEAN NOT NULL , `confirmado` BOOLEAN NOT NULL , `token` VARCHAR(15) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `nailsmvc`.`usuarios` (`id` INT(11) NOT NULL AUTO_INCREMENT , `nombre` VARCHAR(60) NOT NULL , `apellido` VARCHAR(60) NOT NULL , `email` VARCHAR(30) NOT NULL , `password` VARCHAR(60) NOT NULL , `telefono` VARCHAR(10) NOT NULL , `admin` BOOLEAN NOT NULL , `confirmado` BOOLEAN NOT NULL , `token` VARCHAR(15) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
 
 CREATE TABLE `nailsmvc`.`servicios` (`id` INT(11) NOT NULL AUTO_INCREMENT , `nombre` VARCHAR(60) NOT NULL , `precio` DECIMAL(5,2) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

@@ -152,7 +152,7 @@ class ActiveRecord{
         $query .= " LIMIT 1";
 
         //Actualizar BD
-        $resultado = self::$db-query($query);
+        $resultado = self::$db->query($query);
         return $resultado;
     }
 
