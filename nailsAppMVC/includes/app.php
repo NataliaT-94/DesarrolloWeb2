@@ -2,9 +2,13 @@
 
 require 'funciones.php';
 require 'database.php';
-require '/../vendor/autoload.php';
 
-//Conectar a la bd
+
+
+require __DIR__ . '/../vendor/autoload.php';
+
+//Conectar a la base de datos
+$db = conectarDB();
 
 use Model\ActiveRecord;
 ActiveRecord::setDB($db);
