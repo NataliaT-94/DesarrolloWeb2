@@ -70,6 +70,17 @@ class ActiveRecord{
         return $atributos;
     }
 
+    public function sanitizarAtributos(){
+        $atributos = $this -> atributos();
+        $sanitizado = [];
+    
+        foreach($atributos as $key => $value){
+            $sanitizado[$key] = self::$db -> escape_string($value);
+        }
+        
+        return $sanitizado;
+    }
+
     //Sincroniza BD con Objetos en memoria
     public function sincronizar($args = []){
         foreach($args as $key => $value){
@@ -102,7 +113,7 @@ class ActiveRecord{
 
     //Buscar un registro por su id
     public static function find($id){
-        $query = "SELECT * FROM " . static::$tabla ."WHERE id = ${id}";
+        $query = "SELECT * FROM " . static::$tabla ." WHERE id = ${id}";
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
@@ -110,6 +121,13 @@ class ActiveRecord{
     //Obtener Registro con cierta cantidad
     public static function get($limite){
         $query = "SELECT * FROM " . static::$tabla ."LIMIT ${limite}";
+        $resultado = self::consultarSQL($query);
+        return array_shift($resultado);
+    }
+
+    //Buscar un registro por su columna y valor
+    public static function where($columna, $valor){
+        $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
