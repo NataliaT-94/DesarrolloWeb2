@@ -14,10 +14,12 @@
 
     label{
         flex: 0 0 10rem;
+        font-size: 2rem;
 
     }
     input{
         flex: 1;
+        font-size: 2rem;
         border: none;
         padding: calc(v.$separacion/4);
         border-radius: 1rem;
@@ -25,5 +27,11 @@
         -moz-border-radius: 1rem;
         -ms-border-radius: 1rem;
         -o-border-radius: 1rem;
+
+        &:disabled{
+            background-color: lighten(v.$violeta, 40%);
+            color: v.$blanco;
+            cursor: not-allowed;
+        }
 }
 }
