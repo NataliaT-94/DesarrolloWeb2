@@ -19,6 +19,14 @@
         -o-border-radius: 1rem;
         padding: 3rem;
         text-align: center;
+        box-shadow: 5px 5px 5px v.$rosa;
+
+        &.seleccionado{
+            background-color: v.$verde;
+            p{
+                color: v.$blanco;
+            }
+        }
 
 
         &:hover{
@@ -29,21 +37,31 @@
             -o-transform: scale(1.1);
             transition-property: transform;
             transition-duration: 300ms;
-    }
+            box-shadow: none;
         }
+    }
+        
 
         p{
             color: v.$blanco;
             font-style: italic;
             margin: calc(v.$separacion/4) 0;
+            text-shadow: 1px  0px 0px v.$negro,
+            0px  1px 0px v.$negro,
+           -1px  0px 0px v.$negro,
+            0px -1px 0px v.$negro;
         }
     
         .precio-servicio{
             color: v.$verde;
-            font-weight: v.$bold;
+            font-weight: v.$black;
             font-size: 3rem;
             margin: 0;
             border-color: v.$blanco;
+            text-shadow: 1px  0px 0px v.$negro,
+            0px  1px 0px v.$negro,
+           -1px  0px 0px v.$negro,
+            0px -1px 0px v.$negro;
+        }
 
-    }
 }
