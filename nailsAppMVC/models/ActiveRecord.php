@@ -140,10 +140,10 @@ class ActiveRecord{
         //Insertar en la BD
         $query = " INSERT INTO " . static::$tabla . " ( ";
         $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES (' ";
+        $query .= " ) VALUES ('";
         $query .= join("', '", array_values($atributos));
-        $query .= " ') ";
-        echo $query;
+        $query .= "') ";
+        
         //Como debuguear Fetch con la extencion thunder Client 
         //return json_encode(['query' => $query]);
 
