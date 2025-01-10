@@ -143,7 +143,7 @@ class ActiveRecord{
         $query .= " ) VALUES (' ";
         $query .= join("', '", array_values($atributos));
         $query .= " ') ";
-
+        echo $query;
         //Como debuguear Fetch con la extencion thunder Client 
         //return json_encode(['query' => $query]);
 
