@@ -23,3 +23,23 @@
         padding: 3rem 0;
     }
  }
+
+ .barra{
+    margin: v.$separacion 0;
+
+    @include m.tablet{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .boton{
+        @include m.boton(v.$amarillo, v.$violeta);
+        margin: 0;
+        text-shadow: 1px  0px 0px v.$rosa,
+        0px  1px 0px v.$rosa,
+       -1px  0px 0px v.$rosa,
+        0px -1px 0px v.$rosa;
+    
+    }
+ }
