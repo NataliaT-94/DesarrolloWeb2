@@ -53,15 +53,15 @@
         }
     
         .precio-servicio{
-            color: v.$verde;
+            color: v.$blanco;
             font-weight: v.$black;
             font-size: 3rem;
             margin: 0;
             border-color: v.$blanco;
-            text-shadow: 1px  0px 0px v.$negro,
-            0px  1px 0px v.$negro,
-           -1px  0px 0px v.$negro,
-            0px -1px 0px v.$negro;
+            text-shadow: 1px  0px 0px v.$rojo,
+            0px  1px 0px v.$rojo,
+           -1px  0px 0px v.$rojo,
+            0px -1px 0px v.$rojo;
         }
 
 }
