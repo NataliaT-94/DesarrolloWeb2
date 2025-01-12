@@ -36,6 +36,7 @@
         align-items: center;
     }
 
+
     .boton{
         @include m.boton(v.$amarillo, v.$violeta);
         margin: 0;
@@ -43,6 +44,23 @@
         0px  1px 0px v.$rosa,
        -1px  0px 0px v.$rosa,
         0px -1px 0px v.$rosa;
-    
+        font-size: 1.8rem;
+        padding: 1.5rem;
+    }
+ }
+
+ .barra-servicios{
+    margin-bottom: v.$separacion;
+
+    @include m.tablet{
+        display: flex;
+        justify-content: space-between;
+    }
+    a{
+        font-size: 1.8rem;
+    }
+    .boton{
+        margin: 0 0 1rem 0;
+        padding: 1.5rem;
     }
  }
