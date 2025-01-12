@@ -15,6 +15,12 @@
     </form>
 </div>
 
+<?php
+    if(count($citas) === 0){
+        echo "<h2>No hay Citas en esta Fecha</h2>";
+    }
+?>
+
 <div id="citas-admin">
     <ul class="citas">
 
@@ -47,6 +53,11 @@
             if(esUltimo($actual, $proximo)){
         ?>
                 <p class="total">Total:  <span>$ <?php echo $total; ?></span> </p>
+        
+                <form action="/api/eliminar" method="POST">
+                    <input type="hidden" name="id" value="<?php echo $cita->id; ?>">
+                    <input type="submit" class="boton-eliminar" value="Eliminar">
+                </form>
         <?php
             }
         ?>
