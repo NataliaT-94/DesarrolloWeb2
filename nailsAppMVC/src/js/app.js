@@ -8,12 +8,21 @@ const cita = {
     hora: '',
     servicios: []
 }
+console.log('ROOT');
 
 document.addEventListener('DOMContentLoaded', function(){
-    iniciarApp();
+    inicial();
+    iniciarAppUsuario();
+    console.log('DOMContentLoaded');
 });//Cuando todo el DOM este cargado ejecutar la figuiente funcion
 
-function iniciarApp(){
+function inicial(){
+    console.log('Inicial');
+    
+}
+function iniciarAppUsuario(){
+    console.log('Iniciar APP');
+    
     mostrarSeccion();//Muestra y Oculta las secciones
     tabs();//Cambia la seccion cuando se presionen los tabs
     botonesPaginador();//Agrega o Quita los botones del paginador
@@ -116,6 +125,8 @@ function paginaSiguiente(){
 }
 
 async function consultarAPI(){
+    console.log('Consultar API');
+    
     try{
         const url = 'http://localhost:3000/api/servicios';
         const resultado = await fetch(url);
@@ -125,11 +136,14 @@ async function consultarAPI(){
 
     } catch (error){
         console.log(error);
+        console.log('Error Consultar  api');
         
     }
 }
 
 function mostrarServicios(servicios){
+    console.log('Mostrar Servicios');
+    
     servicios.forEach( servicio => {
         const { id, nombre, precio } = servicio;
 

@@ -1,5 +1,3 @@
-const { logError } = require("gulp-dart-sass");
-
 document.addEventListener('DOMContentLoaded', function(){
     iniciarApp();
 });
