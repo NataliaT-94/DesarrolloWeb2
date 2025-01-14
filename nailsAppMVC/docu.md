@@ -58,3 +58,7 @@ composer update
 # https://mailtrap
 
 phpMailer
+
+-------------------------------------------
+# Deployment y variables de entorno
+composer require vlucas/phpdotenv: en terminal
