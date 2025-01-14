@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "gulp": "gulp"
+    "gulp": "gulp",
+    "buil": "gulp build"
   },
   "author": "Natt Techeira",
   "license": "ISC",

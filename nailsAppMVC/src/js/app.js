@@ -8,20 +8,15 @@ const cita = {
     hora: '',
     servicios: []
 }
-console.log('ROOT');
+
 
 document.addEventListener('DOMContentLoaded', function(){
-    inicial();
     iniciarAppUsuario();
-    console.log('DOMContentLoaded');
+
 });//Cuando todo el DOM este cargado ejecutar la figuiente funcion
 
-function inicial(){
-    console.log('Inicial');
-    
-}
 function iniciarAppUsuario(){
-    console.log('Iniciar APP');
+
     
     mostrarSeccion();//Muestra y Oculta las secciones
     tabs();//Cambia la seccion cuando se presionen los tabs
@@ -125,10 +120,10 @@ function paginaSiguiente(){
 }
 
 async function consultarAPI(){
-    console.log('Consultar API');
     
     try{
-        const url = 'http://localhost:3000/api/servicios';
+        // const url = '$(location.origin)/api/servicios';
+        const url = '/api/servicios';
         const resultado = await fetch(url);
         const servicios = await resultado.json();
 
@@ -136,13 +131,10 @@ async function consultarAPI(){
 
     } catch (error){
         console.log(error);
-        console.log('Error Consultar  api');
-        
     }
 }
 
 function mostrarServicios(servicios){
-    console.log('Mostrar Servicios');
     
     servicios.forEach( servicio => {
         const { id, nombre, precio } = servicio;
@@ -205,6 +197,7 @@ function nombreCliente(){
 }
 
 function seleccionarFecha(){
+
     const inputFecha = document.querySelector('#fecha');
     inputFecha.addEventListener('input', function(e){
         const dia = new Date(e.target.value).getUTCDay();
@@ -355,7 +348,8 @@ async function reservarCita(){
 
     try {
         //Peticion hacia la API
-        const url = 'http://localhost:3000/api/citas';
+        // const url = '$(location.origin)/api/citas';
+        const url = '/api/citas';
 
         const respuesta = await fetch(url, {
             method: 'POST',

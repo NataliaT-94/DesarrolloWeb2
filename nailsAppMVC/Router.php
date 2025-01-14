@@ -22,7 +22,8 @@ class Router{
     //    $rutas_protegidas = ['/admin', '/vehiculos/crear',  '/vehiculos/actualizar',  '/vehiculos/eliminar', '/vendedores/crear',  '/vendedores/actualizar',  '/vendedores/eliminar' ];
       
       
-      $urlActual = $_SERVER['PATH_INFO'] ?? '/'; //lee la url actual
+      //$urlActual = $_SERVER['PATH_INFO'] ?? '/'; //lee la url actual
+      $urlActual = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';//elimina la parte del token de la url y detecta lapagina
       $metodo = $_SERVER['REQUEST_METHOD'];
 
       if($metodo === 'GET'){
