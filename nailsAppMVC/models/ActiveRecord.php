@@ -71,11 +71,11 @@ class ActiveRecord{
     }
 
     public function sanitizarAtributos(){
-        $atributos = $this -> atributos();
+        $atributos = $this->atributos();
         $sanitizado = [];
     
         foreach($atributos as $key => $value){
-            $sanitizado[$key] = self::$db -> escape_string($value);
+            $sanitizado[$key] = self::$db->escape_string($value);
         }
         
         return $sanitizado;
@@ -104,7 +104,7 @@ class ActiveRecord{
     }
 
     
-    //Todos los registros
+    //Lista Todos los registros
     public static function all(){
         $query = "SELECT * FROM " . static::$tabla;
         $resultado = self::consultarSQL($query);

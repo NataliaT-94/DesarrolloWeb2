@@ -200,6 +200,7 @@ function seleccionarFecha(){
 
     const inputFecha = document.querySelector('#fecha');
     inputFecha.addEventListener('input', function(e){
+        e.preventDefault();
         const dia = new Date(e.target.value).getUTCDay();
 
         if([6, 0].includes(dia)){
@@ -214,6 +215,7 @@ function seleccionarFecha(){
 function seleccionarHora(){
     const inputHora = document.querySelector('#hora');
     inputHora.addEventListener('input', function(e){
+        
         const horaCita = e.target.value;
         const hora = horaCita.split(":")[0];
 

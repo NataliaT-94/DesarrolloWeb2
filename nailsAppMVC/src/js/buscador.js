@@ -7,7 +7,7 @@ function iniciarApp(){
 }
 
 function buscarPorFecha(){
-    const fechaInput = document.querySelector('#fecha');
+    const fechaInput = document.querySelector('#fechaAdmin');
     fechaInput.addEventListener('input', function(e){
         const fechaSeleccionada = e.target.value;
         
