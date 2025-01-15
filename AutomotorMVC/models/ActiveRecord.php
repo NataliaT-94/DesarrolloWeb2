@@ -33,7 +33,7 @@ class ActiveRecord{
     // Registros - CRUD
     public function guardar(){
         $resultado = '';
-        if(!is_null($this -> id)){//no tiene que eswtar en null para actualizar
+        if(!is_null($this->id)){//no tiene que eswtar en null para actualizar
             //Actualiza
             $resultado = $this->actualizar();
         
@@ -79,7 +79,7 @@ class ActiveRecord{
     public function crear() {
 
         //Sanitizar los datos
-        $atributos = $this -> sanitizarAtributos();
+        $atributos = $this->sanitizarAtributos();
 
         //array_keys: te permite acceder a las llaves de un array
         //array_values : te permite acceder al valor de un array
@@ -93,13 +93,13 @@ class ActiveRecord{
         
         $query = " INSERT INTO " . static::$tabla . " ( ";
         $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES (' ";
+        $query .= " ) VALUES ('";
         $query .= join("', '", array_values($atributos));
-        $query .= " ') ";
+        $query .= "') ";
 
         // debuguear($query);
 
-        $resultado = self::$db -> query($query);
+        $resultado = self::$db->query($query);
 
         return $resultado;
     }
@@ -115,10 +115,10 @@ class ActiveRecord{
 
         $query = "UPDATE " . static::$tabla . " SET ";
         $query .= join(', ', $valores);
-        $query .= " WHERE id = '" . self::$db -> escape_string($this -> id) . "' ";
-        $query .= " LIMIT 1 ";
+        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+        $query .= " LIMIT 1";
 
-        $resultado = self::$db -> query($query);
+        $resultado = self::$db->query($query);
 
         return $resultado;
         
@@ -127,9 +127,9 @@ class ActiveRecord{
     //Eliminar un registro
     public function eliminar(){
         //Elimminar el registro
-        $query = "DELETE FROM " . static::$tabla . " WHERE id = " . self::$db -> escape_string($this -> id) . " LIMIT 1";
+        $query = "DELETE FROM " . static::$tabla . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
     
-        $resultado = self::$db -> query($query);
+        $resultado = self::$db->query($query);
         
         if($resultado){
             $this -> borrarImagen();
@@ -139,11 +139,11 @@ class ActiveRecord{
 
     public static function consultarSQL($query){
         //Consultar la base de datos
-        $resultado = self::$db -> query($query);
+        $resultado = self::$db->query($query);
 
         //Iterar los resultados
         $array = [];
-        while($registro = $resultado -> fetch_assoc()){
+        while($registro = $resultado->fetch_assoc()){
             $array[] = static::crearObjeto($registro);
         }
 
@@ -162,7 +162,7 @@ class ActiveRecord{
 
         foreach($registro as $key => $value){
             if(property_exists($objeto, $key)){//property_exists: verifica que la propiedad exista
-                $objeto -> $key = $value;//una vez que verifique que exista el objeto le asigna el valor
+                $objeto->$key = $value;//una vez que verifique que exista el objeto le asigna el valor
             }
         }
                     
@@ -177,17 +177,17 @@ class ActiveRecord{
 
             if($columna === 'id') continue;//ignora al id
 
-            $atributos[$columna] = $this -> $columna;
+            $atributos[$columna] = $this->$columna;
         }
         return $atributos;
     }
     
     public function sanitizarAtributos(){
-        $atributos = $this -> atributos();
+        $atributos = $this->atributos();
         $sanitizado = [];
     
         foreach($atributos as $key => $value){
-            $sanitizado[$key] = self::$db -> escape_string($value);
+            $sanitizado[$key] = self::$db->escape_string($value);
         }
         
         return $sanitizado;
@@ -198,7 +198,7 @@ class ActiveRecord{
     public function sincronizar( $args = []){
         foreach($args as $key => $value){
             if(property_exists($this, $key) && !is_null($value)){//this hace referencia al obejto actual
-                $this -> $key = $value;
+                $this->$key = $value;
             }
         }
     }
@@ -207,21 +207,21 @@ class ActiveRecord{
     //Subida de archivos
     public function setImagen($imagen){
         //Elimina la imagen previa
-        if(!is_null($this -> id)){
-            $this -> borrarImagen();
+        if(!is_null($this->id)){
+            $this->borrarImagen();
         }
         //Asignar al atributo imagen el nombre de la imagen
         if($imagen){
-            $this -> imagen = $imagen;
+            $this->imagen = $imagen;
         }
     }
 
     //Eliminar el archivo
     public function borrarImagen(){
         //Comprobar si existe el archivo
-        $existeArchivo = file_exists(CARPETA_IMAGENES . $this -> imagen);
+        $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
         if($existeArchivo){
-            unlink(CARPETA_IMAGENES . $this -> imagen);
+            unlink(CARPETA_IMAGENES . $this->imagen);
         }
         
     }

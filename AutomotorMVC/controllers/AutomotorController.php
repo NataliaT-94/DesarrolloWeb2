@@ -6,6 +6,7 @@ use Model\Vendedor;
 
 
 
+
 class AutomotorController{
     public static function index(Router $router){
         $vehiculos = Vehiculo::all();
@@ -105,7 +106,7 @@ class AutomotorController{
  
                 $resultado = $vehiculo -> guardar();
                   if($resultado) {
-                    header('location: /vehiculos');
+                    header('location: /admin');
                 }          
               }
           }
@@ -134,7 +135,7 @@ class AutomotorController{
 
                 // Redireccionar
                 if($resultado) {
-                    header('location: /vehiculos');
+                    header('location: /admin');
                 }
             }
         }
