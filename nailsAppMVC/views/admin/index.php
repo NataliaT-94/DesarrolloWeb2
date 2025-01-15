@@ -9,7 +9,7 @@
 
         <div class="campo">
             <label for="fecha">Fecha</label>
-            <input type="date" name="fecha" id="fecha" value="<?php echo $fecha; ?>" />
+            <input type="date" name="fecha" id="fechaAdmin" value="<?php echo $fecha; ?>" />
         </div>
 
     </form>
