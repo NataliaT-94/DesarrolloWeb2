@@ -70,10 +70,9 @@ class PaginasController{
             $mail -> isSMTP();
             $mail -> Host = 'sandbox.smtp.mailtrap.io';
             $mail -> SMTPAuth = true;
-            $mail -> Username = '035b486eecc490';
-            $mail -> Password = '********d858';
-            $mail -> SMTPSecure = 'tls';
             $mail -> Port = 2525;
+            $mail -> Username = '035b486eecc490';
+            $mail -> Password = '91e94a2d08d858';
 
             //Configurar el contenido del email
             $mail -> setFrom('admin@automotormvc.com'); //quien envia el email
@@ -81,7 +80,7 @@ class PaginasController{
             $mail -> Subject = 'Tienes un Nuevo Mensaje'; //Es el mensaje que llega cuando tenemos un nuevo email
 
             //Habilitar HTML
-            $mail -> isHTML(true);
+            $mail -> isHTML(TRUE);
             $mail -> CharSet = 'UTF-8';
 
             //Definir el contenido

@@ -11,7 +11,7 @@ use Controllers\PaginasController;
 $router = new Router();
 
 //Zona Privada
-$router->get('/', [AutomotorController::class, 'index']);
+$router->get('/admin', [AutomotorController::class, 'index']);
 $router->get('/vehiculos/crear', [AutomotorController::class, 'crear']);
 $router->post('/vehiculos/crear', [AutomotorController::class, 'crear']);
 $router->get('/vehiculos/actualizar', [AutomotorController::class, 'actualizar']);

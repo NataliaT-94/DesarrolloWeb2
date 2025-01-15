@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
+    console.log('dom');
+
 
     eventListeners();
     darkMode();
@@ -59,6 +61,7 @@ function seleccionarMetodo(e) {
     const contactoDiv = document.querySelector('#contacto');
 
 
+
     if(e.target.value === 'telefono') {
         contactoDiv.innerHTML = `
             <label for="telefono">Numero Teléfono</label>
@@ -79,4 +82,5 @@ function seleccionarMetodo(e) {
             <input type="email" placeholder="Tu Email" id="email" name="contacto[email]" required>
         `;
     }
+
 }

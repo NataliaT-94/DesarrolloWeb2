@@ -91,6 +91,7 @@ class VendedorController{
                 if(validarTipoContenido($tipo)){
                     $vendedor = Vendedor::find($id);
                     $vendedor -> eliminar();
+                    header('location: /admin');
                 }
             }
 

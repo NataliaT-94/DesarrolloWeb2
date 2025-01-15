@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit7b5f75a9bb9f440db0a1f4a30e5e1617
+class ComposerStaticInit8102a857847ed74e155cb35cbe6d6d55
 {
     public static $prefixLengthsPsr4 = array (
         'P' => 
@@ -15,11 +15,6 @@ class ComposerStaticInit7b5f75a9bb9f440db0a1f4a30e5e1617
         array (
             'Model\\' => 6,
             'MVC\\' => 4,
-        ),
-        'I' => 
-        array (
-            'Intervention\\Image\\' => 19,
-            'Intervention\\Gif\\' => 17,
         ),
         'C' => 
         array (
@@ -40,14 +35,6 @@ class ComposerStaticInit7b5f75a9bb9f440db0a1f4a30e5e1617
         array (
             0 => __DIR__ . '/../..' . '/',
         ),
-        'Intervention\\Image\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/intervention/image/src',
-        ),
-        'Intervention\\Gif\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/intervention/gif/src',
-        ),
         'Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/controllers',
@@ -61,9 +48,9 @@ class ComposerStaticInit7b5f75a9bb9f440db0a1f4a30e5e1617
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit7b5f75a9bb9f440db0a1f4a30e5e1617::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit7b5f75a9bb9f440db0a1f4a30e5e1617::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit7b5f75a9bb9f440db0a1f4a30e5e1617::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit8102a857847ed74e155cb35cbe6d6d55::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit8102a857847ed74e155cb35cbe6d6d55::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit8102a857847ed74e155cb35cbe6d6d55::$classMap;
 
         }, null, ClassLoader::class);
     }

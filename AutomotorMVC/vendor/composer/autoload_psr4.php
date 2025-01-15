@@ -9,7 +9,5 @@ return array(
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Model\\' => array($baseDir . '/models'),
     'MVC\\' => array($baseDir . '/'),
-    'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src'),
-    'Intervention\\Gif\\' => array($vendorDir . '/intervention/gif/src'),
     'Controllers\\' => array($baseDir . '/controllers'),
 );

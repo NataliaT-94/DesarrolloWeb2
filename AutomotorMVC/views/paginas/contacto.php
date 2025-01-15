@@ -53,8 +53,8 @@
                 <label for="contactar-email">E-mail</label>
                 <input type="radio" value="email" id="contactar-email" name="contacto[contacto]" required>
             </div>
-
             <div id="contacto"></div>
+
 
   
         </fieldset>
