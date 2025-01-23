@@ -1,0 +1,21 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+
+.reestablecer{
+    margin-top: 5rem;
+    .uptask{
+      @include m.textDegradado(v.$cyan, v.$gris);
+    }
+
+    input[type="submit"]{
+      @include m.boton(v.$cyan, v.$blanco);
+    }
+
+    .acciones{
+      a{
+        color: v.$cyan;
+      }
+        
+    }
+}
