@@ -3,7 +3,7 @@
         'name' => 'natt1/up-task-mvc',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '57d00fb7d14a290d7a8603bccfbcd2b34e6f008f',
+        'reference' => 'a1029a3124733b8efa52f5dbe6ebc090ca8c9950',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'natt1/up-task-mvc' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '57d00fb7d14a290d7a8603bccfbcd2b34e6f008f',
+            'reference' => 'a1029a3124733b8efa52f5dbe6ebc090ca8c9950',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
