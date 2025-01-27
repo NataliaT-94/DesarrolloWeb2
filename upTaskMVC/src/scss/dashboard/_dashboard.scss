@@ -1,0 +1,43 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.dashboard{
+    background-color: lighten(v.$rosa, 48%);
+
+    @include m.tablet{
+        display: flex;
+        height: 100vh;
+    }
+
+    .principal{
+        flex: 1;
+    }
+
+    .contenido{
+        padding: 5rem;
+
+        .nombre-pagina{
+            font-size: 2.8rem;
+            text-align: center;
+            color: v.$rosa;
+        }
+    }
+
+    .formulario{
+        label{
+            color: v.$morado;
+            font-weight: bold;
+        }
+        input:not([type="submit"]){
+            background-color: lighten(v.$rosa, 40%);
+        }
+        input[type="submit"]{
+            @include m.boton(v.$rosa,v.$blanco);
+            border-radius: .5rem;
+            padding: 1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+    }
+}
