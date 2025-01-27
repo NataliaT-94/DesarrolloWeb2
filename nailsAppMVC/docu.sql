@@ -56,7 +56,11 @@ INSERT INTO `servicios` (`id`, `nombre`, `precio`) VALUES
 ('12', 'Decoracion por uña', '10.00'),
 
 
-CREATE TABLE citas( id INT(11) AUTO_INCREMENT, fecha DATE NOT NULL, hora TIME NOT NULL, usuarioId INT(11) NOT NULL, PRIMARY KEY (id), KEY usuarioId (usuarioId), CONSTRAINT usuarios_FK FOREIGN KEY (usuarioId) REFERENCES usuarios(id) );
+CREATE TABLE citas( id INT(11) AUTO_INCREMENT, 
+fecha DATE NOT NULL, hora TIME NOT NULL, 
+usuarioId INT(11) NOT NULL, PRIMARY KEY (id), 
+KEY usuarioId (usuarioId), 
+CONSTRAINT usuarios_FK FOREIGN KEY (usuarioId) REFERENCES usuarios(id) );
 
 CREATE TABLE citasServicios( id INT(11) AUTO_INCREMENT, citaId INT(11) NOT NULL, PRIMARY KEY (id), KEY citaId (citaId), CONSTRAINT citas_FK FOREIGN KEY (citaId) REFERENCES citas(id) );
 

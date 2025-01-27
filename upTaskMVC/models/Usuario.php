@@ -1,6 +1,8 @@
 <?php
 namespace Model;
 
+use Model\ActiveRecord;
+
 class Usuario extends ActiveRecord{
     protected static $tabla = 'usuarios';
     protected static $columnasDB = ['id', 'nombre', 'email', 'password', 'token', 'confirmado'];
@@ -21,6 +23,20 @@ class Usuario extends ActiveRecord{
         $this->password2 = $args['password2'] ?? '';
         $this->token = $args['token'] ?? '';
         $this->confirmado = $args['confirmado'] ?? 0;
+    }
+
+    //Validar el Login de Usuarios
+    public function validarLogin(){
+        if(!$this->email){
+            self::$alertas['error'][] = 'El Email del Usuario es Obligatorio';
+        }
+        if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
+            self::$alertas['error'][] = 'Email No Valido';
+        }
+        if(!$this->password){
+            self::$alertas['error'][] = 'El Password es Obligatorio';
+        }
+        return self::$alertas;
     }
 
     //Validacion para cuentas nuevas
@@ -54,6 +70,16 @@ public function validarEmail(){
     }
     if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
         self::$alertas['error'][] = 'Email No Valido';
+    }
+    return self::$alertas;
+}
+
+public function validarPassword(){
+    if(!$this->password){
+        self::$alertas['error'][] = 'El Password es Obligatorio';
+    }
+    if(strlen($this->password) < 6){
+        self::$alertas['error'][] = 'El Password debe contener al menos 6 caracteres';
     }
     return self::$alertas;
 }
