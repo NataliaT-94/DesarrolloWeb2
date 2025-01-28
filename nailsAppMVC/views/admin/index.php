@@ -68,5 +68,5 @@
     </ul>
 </div>
 <?php
-    $script = "<script src='build/js/bundle.js'></script";
+    $script = "<script src='build/js/bundle.js'></script>";
 ?>

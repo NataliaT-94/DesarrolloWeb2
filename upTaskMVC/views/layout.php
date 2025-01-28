@@ -11,6 +11,10 @@
     <body>
 
     <?php echo $contenido; ?>
-    <?php echo $script ?? ''; ?>
+
+
+    <?php
+        echo $script ?? '';
+    ?>
 </body>
 </html>
