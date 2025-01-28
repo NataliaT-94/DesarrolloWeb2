@@ -7,6 +7,8 @@
         </div>
     </div>
 
-<?php include_once __DIR__ . '/footer-dashboard.php'; ?>
+    <?php include_once __DIR__ . '/footer-dashboard.php'; ?>
+    
+    <?php $script = "<script src='build/js/bundle.js'></script>";
 
-<?php '<script src="build/js/bundle.js"></script>' ?>
+    ?>
