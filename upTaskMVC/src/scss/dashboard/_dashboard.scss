@@ -11,6 +11,7 @@
 
     .principal{
         flex: 1;
+        overflow: scroll;
     }
 
     .contenido{
@@ -33,11 +34,15 @@
         }
         input[type="submit"]{
             @include m.boton(v.$rosa,v.$blanco);
-            border-radius: .5rem;
             padding: 1rem;
             text-transform: uppercase;
             font-weight: bold;
             font-size: 1.4rem;
-        }
+            border-radius: .5rem;
+            -webkit-border-radius: .5rem;
+            -moz-border-radius: .5rem;
+            -ms-border-radius: .5rem;
+            -o-border-radius: .5rem;
+}
     }
 }
