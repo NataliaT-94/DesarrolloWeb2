@@ -7,7 +7,7 @@ class Router{
     public $rutasPOST = [];
 
     public function get($url, $fn){//tomas las url que  reaccionan con get, primer parametro la url y el segundo para,etro la funcion que cumple
-        $this -> rutasGET[$url] = $fn;
+      $this -> rutasGET[$url] = $fn;
     }
     public function post($url, $fn){//tomas las url que  reaccionan con get, primer parametro la url y el segundo para,etro la funcion que cumple
         $this -> rutasPOST[$url] = $fn;
