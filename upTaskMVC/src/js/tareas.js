@@ -1,6 +1,10 @@
+
+
 obtenerTareas();
 let tareas = [];
 let filtradas = [];
+
+
 
 
 //Boton para mostrar el Modal de Agregar tarea
@@ -382,4 +386,4 @@ function mostrarFormulario(editar = false, tarea = {}){
 
 
 
-    
+
