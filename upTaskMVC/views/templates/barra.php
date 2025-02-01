@@ -1,7 +1,7 @@
 <div class="barra-mobile">
     <h1>UpTask</h1>
     <div class="menu">
-        <img id="mobile-menu" src="build/img/mbrimorevertical_99485.svg" alt="imagen menu">
+        <img id="mobile-menu" src="build/img/free_icon_2.svg" alt="imagen menu">
     </div>
 </div>
 

@@ -45,13 +45,12 @@
             text-align: center;
         }
 
-        .cerrar-menu{
+        .menu{
             display: flex;
             justify-content: space-between;
-            height: 2rem;
-            width: 2rem;
 
             img{
+                width: 4rem;
                 &:hover{
                     cursor: pointer;
                 }
