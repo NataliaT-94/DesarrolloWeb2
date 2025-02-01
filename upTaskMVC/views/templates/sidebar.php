@@ -2,7 +2,7 @@
     <div class="contenedor-sidebar">
         <h2>UpTask</h2>
     <div class="menu">
-        <img id="cerrar-menu" src="build/img/bigcancelsymbol_121964.svg" alt="imagen cerrar menu">
+        <img id="cerrar-menu" src="build/img/free_icon_1.svg" alt="imagen cerrar menu">
     </div>
     </div>
 
