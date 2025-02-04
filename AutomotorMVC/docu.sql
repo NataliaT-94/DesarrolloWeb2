@@ -30,3 +30,8 @@ CREATE TABLE `automotormvc`.`usuarios` (`id` INT NOT NULL AUTO_INCREMENT ,
 
 INSERT INTO `vehiculos`(`titulo`, `precio`, `descripcion`, `modelo`, `puertas`, `motor`, `vendedorId`) VALUES
  ('cronos drive','123444','El mejor vehiculoEl mejor vehiculoEl mejor vehiculoEl mejor vehiculoEl mejor vehiculo','2023','4','1.6','2');
+
+ INSERT INTO `vendedores`(`id`, `nombre`, `apellido`, `telefono`) VALUES ('1','Natt','Techeira','1125397568');
+ INSERT INTO `vendedores`(`id`, `nombre`, `apellido`, `telefono`) VALUES ('2','Eve','Techeira','1122347538');
+
+ INSERT INTO `usuarios`(`id`, `email`, `password`) VALUES ('1','correo@correo.com','$2y$10$HfWvkMI2QAVIXmTS94V.u.aem3c9Daaan1I0Zy/JqsoZd2v1oQQmS')
