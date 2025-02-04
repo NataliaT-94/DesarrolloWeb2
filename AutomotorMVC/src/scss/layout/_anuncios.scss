@@ -34,14 +34,17 @@
     li{
         flex: 1;
         display: flex;
+        justify-content: center;
 
         img{
             flex: 0 0 3rem;
             margin-right: 1rem;
+            width: .8rem;
         }
 
         p{
             font-weight: $black;
+
         }
     }
 }
