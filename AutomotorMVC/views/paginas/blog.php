@@ -4,7 +4,7 @@
         <article class="entrada-blog">
             <div class="imagen">
                 <picture>
-                    <source srcset="build/img/imagen2.avif" type="image/avif">
+                    <source srcset="build/img/imagen2.webp" type="image/webp">
                     <source srcset="build/img/imagen2.jpg" type="image/jpeg">
                     <img loading="lazy" src="build/img/blog1.jpg" alt="Texto Entrada Blog">
                 </picture>
@@ -23,7 +23,7 @@
         <article class="entrada-blog">
             <div class="imagen">
                 <picture>
-                    <source srcset="build/img/imagen3.avif" type="image/avif">
+                    <source srcset="build/img/imagen3.webp" type="image/webp">
                     <source srcset="build/img/imagen3.jpg" type="image/jpeg">
                     <img loading="lazy" src="build/img/imagen3.jpg" alt="Texto Entrada Blog">
                 </picture>
@@ -41,7 +41,7 @@
         <article class="entrada-blog">
             <div class="imagen">
                 <picture>
-                    <source srcset="build/img/imagen7.avif" type="image/avif">
+                    <source srcset="build/img/imagen7.webp" type="image/webp">
                     <source srcset="build/img/imagen7.jpg" type="image/jpeg">
                     <img loading="lazy" src="build/img/imagen7.jpg" alt="Texto Entrada Blog">
                 </picture>
@@ -60,7 +60,7 @@
         <article class="entrada-blog">
             <div class="imagen">
                 <picture>
-                    <source srcset="build/img/imagen6.avif" type="image/avif">
+                    <source srcset="build/img/imagen6.webp" type="image/webp">
                     <source srcset="build/img/imagen6.jpg" type="image/jpeg">
                     <img loading="lazy" src="build/img/imagen6.jpg" alt="Texto Entrada Blog">
                 </picture>

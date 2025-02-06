@@ -4,7 +4,7 @@
         <div class="contenido-nosotros">
             <div class="imagen">
                 <picture>
-                    <source srcset="build/img/imagen2.avif" type="image/avif">
+                    <source srcset="build/img/imagen2.webp" type="image/webp">
                     <source srcset="build/img/imagen2.jpg" type="image/jpeg">
                     <img loading="lazy" src="build/img/imagen2.jpg" alt="Sobre nosotros">
                 </picture>

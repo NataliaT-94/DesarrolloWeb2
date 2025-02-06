@@ -50,19 +50,19 @@ function versionWebp() {
         // .pipe(notify({ message: 'Imagen Completada'}));
 }
 
-function versionAvif() {
-    return src(paths.imagenes)
-        .pipe(avif({ quality: 50 })) // Configura la calidad del AVIF
-        .pipe(dest('./public/build/img'))
-        // .pipe(notify({ message: 'Imagen AVIF generada' }));
-}
+// function versionAvif() {
+//     return src(paths.imagenes)
+//         .pipe(avif({ quality: 50 })) // Configura la calidad del AVIF
+//         .pipe(dest('./public/build/img'))
+//         // .pipe(notify({ message: 'Imagen AVIF generada' }));
+// }
 
 function watchArchivos() {
     watch( paths.scss, css );
     watch( paths.js, javascript );
     watch( paths.imagenes, imagenes );
     watch( paths.imagenes, versionWebp );
-    watch( paths.imagenes, versionAvif );
+    // watch( paths.imagenes, versionAvif );
 }
   
-exports.default = parallel(css, javascript,  imagenes, versionWebp, versionAvif, watchArchivos );
+exports.default = parallel(css, javascript,  imagenes, versionWebp, watchArchivos );

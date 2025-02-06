@@ -7,7 +7,7 @@
     <?php } ?>
 
     <picture>
-        <source srcset="build/img/imagen8.avif" type="image/avif">
+        <source srcset="build/img/imagen8.webp" type="image/webp">
         <source srcset="build/img/imagen8.jpg" type="image/jpeg">
         <img loading="lazy" src="build/img/imagen8.jpg" alt="Texto Entrada Blog">
     </picture>

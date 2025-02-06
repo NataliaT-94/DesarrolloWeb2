@@ -3,12 +3,9 @@
 
     <a href="/" class="boton boton-verde">Volver</a>
 
-    <?php foreach($errores as $error): ?>
-        <div class="alerta error">
-            <?php echo $error; ?>
-        </div>
-
-    <?php endforeach; ?>
+    <?php
+        include_once __DIR__ . "/../templates/alertas.php";
+    ?>
 
     <form class="formulario" method="POST" action="/vendedores/crear">
         <!-- GET: guarda la informacion en la URL, se comunica con el name: titulo// no es recomendable para mandar datos a un servidor, porque expone los datos en la URL -->

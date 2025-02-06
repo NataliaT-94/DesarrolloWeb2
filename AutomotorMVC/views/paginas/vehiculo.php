@@ -8,15 +8,15 @@
             
         <ul class="iconos-caracteristicas">
             <li>
-                <img class="icono" loading="lazy" src="build/img/icono_wc.svg" alt="icono modelo">
+                <img class="icono" loading="lazy" src="build/img/car_key_d9cncoh02xtz.svg" alt="icono modelo">
                 <p><?php echo $vehiculo->modelo; ?></p>
             </li>
             <li>
-                <img class="icono" loading="lazy" src="build/img/icono_estacionamiento.svg" alt="icono puertas">
+                <img class="icono" loading="lazy" src="build/img/car_433tzimfitbx.svg" alt="icono puertas">
                 <p><?php echo $vehiculo->puertas; ?></p>
             </li>
             <li>
-                <img class="icono" loading="lazy" src="build/img/icono_dormitorio.svg" alt="icono motor">
+                <img class="icono" loading="lazy" src="build/img/motor_69xol7zxvoaa.svg" alt="icono motor">
                 <p><?php echo $vehiculo->motor; ?></p>
             </li>
         </ul>
