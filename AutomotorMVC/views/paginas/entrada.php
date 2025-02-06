@@ -2,7 +2,7 @@
         <h1>Guia para la mantencion del  vehiculo</h1>
         
         <picture>
-            <source srcset="build/img/imagen3.avif" type="image/avif">
+            <source srcset="build/img/imagen3.webp" type="image/webp">
             <source srcset="build/img/imagen3.jpg" type="image/jpeg">
             <img loading="lazy" src="build/img/imagen3.jpg" alt="Imagen de la propiedad">
         </picture>

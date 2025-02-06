@@ -3,7 +3,7 @@
         'name' => 'natt1/automotor-mvc',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '272b8a00375c14a2c1f86bdd5cfd6c71ef151b3d',
+        'reference' => '9a8240c50991879dbbf87e4234d8228964efc834',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'natt1/automotor-mvc' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '272b8a00375c14a2c1f86bdd5cfd6c71ef151b3d',
+            'reference' => '9a8240c50991879dbbf87e4234d8228964efc834',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

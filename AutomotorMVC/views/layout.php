@@ -29,7 +29,7 @@ if(!isset($inicio)){
                 </a>
 
                 <div class="mobile-menu">
-                    <img src="./build/img/barras.avif" alt="icono menu responsive">
+                    <img src="./build/img/barras.svg" alt="icono menu responsive">
                 </div>
 
                 <div class="derecha">

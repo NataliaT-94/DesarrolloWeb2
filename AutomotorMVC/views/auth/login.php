@@ -1,12 +1,10 @@
-<h1>Login</h1>
 <main class="contenedor seccion contenido-centrado">
         <h1>Iniciar Secion</h1>
 
-        <?php foreach($errores as $error):?>
-            <div class="alerta error">
-                <?php echo $error; ?>
-            </div>
-        <?php endforeach;?>
+        <?php
+            include_once __DIR__ . "/../templates/alertas.php";
+        ?>
+
 
         <form method="POST" class="formulario" action="/login">
             <fieldset>
@@ -21,4 +19,8 @@
             </fieldset>
             <input type="submit" value="Iniciar Sesion" class="boton boton-verde">
         </form>
+        <div class="acciones">
+            <a href="/crear-cuenta">¿Aun no tienes una cuanta? Crear una</a>
+            <a href="/olvide">¿Olvidaste tu Contraseña?</a>
+        </div>
     </main>

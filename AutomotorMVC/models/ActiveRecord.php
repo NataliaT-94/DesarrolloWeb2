@@ -9,25 +9,28 @@ class ActiveRecord{
     protected static $columnasDB = [];
 
 
-    //Errores
-    protected static  $errores = [];
+    //alertas
+    protected static  $alertas = [];
 
 
     //Definir la conexion a la BD
     public static function setDB($database){
         self::$db = $database;
     }
+    public static function setAlerta($tipo, $mensaje){
+        self::$alertas[$tipo][] = $mensaje;
+    }
 
     //Validacion
-    public static function getErrores(){
+    public static function getAlertas(){
 
-        return static::$errores;
+        return static::$alertas;
     }
 
     public function validar(){
 
-        static::$errores = [];
-        return static::$errores;
+        static::$alertas = [];
+        return static::$alertas;
     }
 
     // Registros - CRUD
@@ -74,6 +77,14 @@ class ActiveRecord{
         $resultado = self::consultarSQL($query);
     
         return $resultado;
+    }
+
+    
+    //Buscar un registro por su columna y valor
+    public static function where($columna, $valor){
+        $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
+        $resultado = self::consultarSQL($query);
+        return array_shift($resultado);
     }
     
     public function crear() {

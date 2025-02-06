@@ -30,19 +30,21 @@ class AutomotorController{
     
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $vehiculo = new Vehiculo($_POST['vehiculo']);
+
+            
     
             // Generar un nombre único
             $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
     
             // Validar la imagen
-            if (isset($_FILES['vehiculo']['tmp_name']['imagen']) && !empty($_FILES['vehiculo']['tmp_name']['imagen'])) {
+            if (isset($_FILES['vehiculo']['tmp_name']['imagen']) && !empty($_FILES['vehiculo']['tmp_name']['imagen'])) {//si esta definida y no esta vacia
                 $imagenTmp = $_FILES['vehiculo']['tmp_name']['imagen']; // Archivo temporal
                 $vehiculo->setImagen($nombreImagen);
             
                 // Crear carpeta si no existe
                 $carpetaImagenes = '../../imagenes/';
-                if (!is_dir($carpetaImagenes)) {
-                    mkdir($carpetaImagenes);
+                if (!is_dir($carpetaImagenes)) {//si no hay directorio
+                    mkdir($carpetaImagenes);//creamos directorio
                 }
             
                 // Subir la imagen
