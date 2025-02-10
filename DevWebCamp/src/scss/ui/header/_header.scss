@@ -27,14 +27,7 @@
     }
 
     &__enlace{
-        color: v.$amarillo;
-        font-size: 1.4rem;
-        text-transform: uppercase;
-        font-weight: v.$bold;
-
-        &:hover{
-            color: v.$naranja;
-        }
+        @include m.enlace;
     }
 
     &__contenido{
