@@ -52,6 +52,11 @@
     margin: 0 auto;
 }
 
+@mixin contenedor-md{
+    width: min(95%, 80rem);
+    margin: 0 auto;
+}
+
 @mixin contenedor-sm{
     width: min(95%, 60rem);
     margin: 0 auto;
@@ -134,4 +139,47 @@
     &__ocultar{
         display: none;
     }
+}
+
+@mixin enlace{
+    all:unset;
+    color: v.$amarillo;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    font-weight: v.$bold;
+    
+    &:hover{
+        color: v.$naranja;
+    }
+}
+
+@mixin shadow{
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 8px 27px -5px, rgba(50, 50, 93, 0.25) 0px 13px 16px -8px;
+}
+
+@mixin reset-list{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@mixin tags{
+    @include reset-list;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+
+    >li{
+        background-color: v.$naranja;
+        padding: 1rem;
+        border-radius: .5rem;
+        -webkit-border-radius: .5rem;
+        -moz-border-radius: .5rem;
+        -ms-border-radius: .5rem;
+        -o-border-radius: .5rem;
+        font-size: 1.4rem;
+        font-weight: v.$bold;
+        color: v.$blanco;
+}
 }
