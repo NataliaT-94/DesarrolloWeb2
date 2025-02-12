@@ -13,7 +13,7 @@
         </div>
         <div class="formulario__campo">
             <label for="password" class="formulario__label">Password</label>
-            <input type="password" class="formulario__input" placeholder="Tu Password" id="password" name="email">
+            <input type="password" class="formulario__input" placeholder="Tu Password" id="password" name="password">
         </div>
 
         <input type="submit" class="formulario__submit" value="Iniciar Sesion"> 

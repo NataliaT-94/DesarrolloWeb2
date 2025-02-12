@@ -7,17 +7,15 @@
 --     token varchar(15)
 --     confirmado tinyint(1)
 
--- -Proyectos
+-- -ponentes
 --     id int(11)
---     proyecto varchar(60)
---     url varchar(32)
---     propietarioId int(11)(FK)
-
--- -Tareas
---     id int(11)
---     nombre varchar(60)
---     estado tinyint(1)
---     proyectoId int(11)(FK)
+--     nombre varchar(40)
+--     apellido varchar(40)
+--     ciudad varchar(20)
+--     pais varchar(20)
+--     imagen varchar(32)
+--     tags varchar(120)
+--     redes text
 
 
 -----------------------------------------------
@@ -32,3 +30,16 @@ CREATE TABLE `usuarios` (
   `admin` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+CREATE TABLE `ponentes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(40) DEFAULT NULL,
+  `apellido` varchar(40) DEFAULT NULL,
+  `ciudad` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `pais` varchar(20) DEFAULT NULL,
+  `imagen` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `tags` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `redes` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
