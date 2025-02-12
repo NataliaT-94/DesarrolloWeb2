@@ -26,48 +26,80 @@ class AutomotorController{
     public static function crear(Router $router) {
         $vehiculo = new Vehiculo;
         $vendedores = Vendedor::all();
-        $errores = Vehiculo::getErrores();
+        $alertas = Vehiculo::getAlertas();
     
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $vehiculo = new Vehiculo($_POST['vehiculo']);
-
-            
     
+            /** Subida de Archivos */
             // Generar un nombre único
-            $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+            $nombreImagen = md5(uniqid(rand(), true));
     
             // Validar la imagen
-            if (isset($_FILES['vehiculo']['tmp_name']['imagen']) && !empty($_FILES['vehiculo']['tmp_name']['imagen'])) {//si esta definida y no esta vacia
-                $imagenTmp = $_FILES['vehiculo']['tmp_name']['imagen']; // Archivo temporal
-                $vehiculo->setImagen($nombreImagen);
-            
-                // Crear carpeta si no existe
-                $carpetaImagenes = '../../imagenes/';
-                if (!is_dir($carpetaImagenes)) {//si no hay directorio
-                    mkdir($carpetaImagenes);//creamos directorio
+            if (!empty($_FILES['vehiculo']['tmp_name']['imagen'])) {
+                // Crear imagen desde archivo subido
+                $imagen_original = @imagecreatefromstring(file_get_contents($_FILES['vehiculo']['tmp_name']['imagen']));
+    
+                if ($imagen_original !== false) {
+                    // Obtener tamaño original
+                    $ancho_original = imagesx($imagen_original);
+                    $alto_original = imagesy($imagen_original);
+    
+                    // Definir nuevo tamaño (800x600)
+                    $nuevo_ancho = 800;
+                    $nuevo_alto = 600;
+    
+                    // Crear lienzo en blanco
+                    $imagen_redimensionada = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
+    
+                    // Redimensionar la imagen
+                    imagecopyresampled(
+                        $imagen_redimensionada,
+                        $imagen_original,
+                        0, 0, 0, 0,
+                        $nuevo_ancho, $nuevo_alto,
+                        $ancho_original, $alto_original
+                    );
+    
+                    // Asignar el nombre de la imagen al objeto Vehiculo
+                    $vehiculo->setImagen($nombreImagen);
                 }
-            
-                // Subir la imagen
-                move_uploaded_file($imagenTmp, $carpetaImagenes . $nombreImagen);
             }
-            
     
             // Validar
-            $errores = $vehiculo->validar();
-            if (empty($errores)) {
-                // Guarda en la base de datos
+            $alertas = $vehiculo->validar();
+    
+            if (empty($alertas) && isset($imagen_redimensionada)) {
+                // Crear carpeta si no existe
+                $carpetaImagenes = '../public/img/automotor';
+                if (!is_dir($carpetaImagenes)) {
+                    mkdir($carpetaImagenes, 0755, true);
+                }
+    
+                // Guardar la imagen en formato JPEG
+                imagejpeg($imagen_redimensionada, $carpetaImagenes . $nombreImagen . '.jpg', 80);
+    
+                // Guardar la imagen en formato WEBP
+                imagewebp($imagen_redimensionada, $carpetaImagenes . $nombreImagen . '.webp', 80);
+    
+                // Liberar memoria
+                imagedestroy($imagen_original);
+                imagedestroy($imagen_redimensionada);
+    
+                // Guardar en la base de datos
                 $resultado = $vehiculo->guardar();
     
                 if ($resultado) {
                     header('location: /vehiculos');
+                    exit;
                 }
             }
         }
     
-        $router->render('/vehiculos/crear', [
+        $router->render('vehiculos/crear', [
             'vehiculo' => $vehiculo,
             'vendedores' => $vendedores,
-            'errores' => $errores
+            'alertas' => $alertas
         ]);
     }
     
@@ -76,7 +108,7 @@ class AutomotorController{
         $id = validarORedireccionar('/admin');
         $vehiculo = Vehiculo::find($id);
         $vendedores = Vendedor::all();
-        $errores = Vehiculo::getErrores();
+        $alertas = Vehiculo::getAlertas();
 
         //Metodo POST para actualizar
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {//nos trae informacion detallada del servidor
@@ -88,7 +120,7 @@ class AutomotorController{
               $vehiculo -> sincronizar($args);
       
               //Validacion
-              $errores = $vehiculo -> validar();
+              $alertas = $vehiculo -> validar();
       
               //Subida de archivos
                   //Generar un nombre unico
@@ -104,7 +136,7 @@ class AutomotorController{
                   $vehiculo -> setImagen($nombreImagen);
               }
       
-              if(empty($errores)){
+              if(empty($alertas)){
  
                 $resultado = $vehiculo -> guardar();
                   if($resultado) {
@@ -116,7 +148,7 @@ class AutomotorController{
         $router -> render('/vehiculos/actualizar', [
             'vehiculo' => $vehiculo,
             'vendedores' => $vendedores,
-            'errores' => $errores
+            'alertas' => $alertas
         ]);
     }
 

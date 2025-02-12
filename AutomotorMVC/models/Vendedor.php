@@ -23,20 +23,20 @@ class Vendedor extends ActiveRecord{
 
     public function validar(){
         if(!$this->nombre){//si no hay titulo
-            self::$errores[] = "El Nombre es obligatorio";
+            self::$alertas[] = "El Nombre es obligatorio";
         }
         if(!$this->apellido){//si no hay titulo
-            self::$errores[] = "El Apellido es obligatorio";
+            self::$alertas[] = "El Apellido es obligatorio";
         }
         if(!$this->telefono){//si no hay titulo
-            self::$errores[] = "El Telefono es obligatorio";
+            self::$alertas[] = "El Telefono es obligatorio";
         }
         //exprecion regular
         if(!preg_match('/[0-9]{10}/', $this->telefono)){//es una extencion fija de 1o numeros, que acepta numeros del 0 al 9
-            self::$errores[] = "Formato no valido";
+            self::$alertas[] = "Formato no valido";
         }
 
-        return self::$errores;
+        return self::$alertas;
     }
 }
 
