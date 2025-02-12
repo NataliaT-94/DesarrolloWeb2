@@ -19,7 +19,7 @@ class VendedorController{
     }
 
     public static function crear(Router $router){
-        $errores = Vendedor::getErrores();
+        $alertas = Vendedor::getAlertas();
         $vendedor = new Vendedor;
         
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -27,10 +27,10 @@ class VendedorController{
         $vendedor = new Vendedor($_POST['vendedor']);
 
         //Validar que no haya campos vacios
-        $errores = $vendedor -> validar();
+        $alertas = $vendedor -> validar();
 
-        //No hay errores
-        if(empty($errores)){
+        //No hay alertas
+        if(empty($alertas)){
                 // Guarda en la base de datos
                 $resultado = $vendedor->guardar();
             
@@ -41,13 +41,13 @@ class VendedorController{
     }
 
         $router -> render('vendedores/crear', [
-            'errores' => $errores,
+            'alertas' => $alertas,
             'vendedor' => $vendedor
         ]);
     }
 
     public static function actualizar(Router $router){
-        $errores = Vendedor::getErrores();
+        $alertas = Vendedor::getAlertas();
         $id = validarORedireccionar('/admin');
 
         //Obtener datos dek vendedor a actualizar
@@ -61,9 +61,9 @@ class VendedorController{
             $vendedor -> sincronizar($args);
 
             //Validacion
-            $errores = $vendedor -> validar();
+            $alertas = $vendedor -> validar();
 
-            if(empty($errores)){
+            if(empty($alertas)){
                 $resultado = $vendedor -> guardar();
 
                 if($resultado) {
@@ -73,7 +73,7 @@ class VendedorController{
         }
 
         $router->render('vendedores/actualizar',[
-            'errores' => $errores,
+            'alertas' => $alertas,
             'vendedor' => $vendedor
         ]);
     }

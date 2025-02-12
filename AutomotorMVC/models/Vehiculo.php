@@ -34,42 +34,42 @@ class Vehiculo extends ActiveRecord{
 
     public function validar(){
         if(!$this->titulo){//si no hay titulo
-            self::$errores[] = "Debes añadir un titulo";
+            self::$alertas[] = "Debes añadir un titulo";
         }
 
         if(!$this->precio){
-            self::$errores[] = "Debes añadir un precio";
+            self::$alertas[] = "Debes añadir un precio";
         }
 
         if(strlen($this->descripcion) < 50){
-            self::$errores[] = "La descripcion es oblidgatoria y debe tener al menos 50 caracteres";
+            self::$alertas[] = "La descripcion es oblidgatoria y debe tener al menos 50 caracteres";
         }
         if(!$this->modelo){
-            self::$errores[] = "Debes añadir un modelo";
+            self::$alertas[] = "Debes añadir un modelo";
         }
         if(!$this->puertas){
-            self::$errores[] = "Debes añadir cantidad de puertas";
+            self::$alertas[] = "Debes añadir cantidad de puertas";
         }
         if(!$this->motor){
-            self::$errores[] = "Debes añadir un modelo de motor";
+            self::$alertas[] = "Debes añadir un modelo de motor";
         }
         if(!$this->vendedorId){
-            self::$errores[] = "Elije un vendedor";
+            self::$alertas[] = "Elije un vendedor";
         }
 
         // if(!$this -> imagen){
-        //         self::$errores[] = "La imagen es obligatoria";
+        //         self::$alertas[] = "La imagen es obligatoria";
         // }
         
         if(!$this->id )  {
             $this->validarImagen();
         }
-        return self::$errores;
+        return self::$alertas;
     }
 
     public function validarImagen() {
         if(!$this->imagen ) {
-            self::$errores[] = 'La Imagen es Obligatoria';
+            self::$alertas[] = 'La Imagen es Obligatoria';
         }
     }
 
