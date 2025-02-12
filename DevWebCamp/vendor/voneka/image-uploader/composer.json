@@ -1,0 +1,24 @@
+{
+    "name": "voneka/image-uploader",
+    "description":"Uma biblioteca simples para upload de imagens",
+    "type": "library",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Agostinho Uanicela",
+            "email": "agostinho.uanicela@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Voneka\\ImageUploader\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "intervention/image": "^2.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}

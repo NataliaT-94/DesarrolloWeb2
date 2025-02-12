@@ -14,6 +14,10 @@ class ComposerStaticInitd3ee9ce9c5e82e3f6ebc646e329be11e
     );
 
     public static $prefixLengthsPsr4 = array (
+        'V' => 
+        array (
+            'Voneka\\ImageUploader\\' => 21,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php80\\' => 23,
@@ -52,6 +56,10 @@ class ComposerStaticInitd3ee9ce9c5e82e3f6ebc646e329be11e
     );
 
     public static $prefixDirsPsr4 = array (
+        'Voneka\\ImageUploader\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/voneka/image-uploader/src',
+        ),
         'Symfony\\Polyfill\\Php80\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
