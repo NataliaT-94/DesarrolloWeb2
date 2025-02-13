@@ -33,7 +33,8 @@
                                 Editar
                             </a> 
 
-                            <form action="" class="table__formulario ">
+                            <form method="POST" action="/adimn/ponentes/eliminar" class="table__formulario ">
+                                <input type="hidden" name="id" value="<?php echo $ponente->id; ?>">
                                 <button class="table__accion table__accion--eliminar" type="submit">
                                     <i class="fa-solid fa-circle-xmark"></i>
                                     Eliminar
@@ -49,3 +50,7 @@
         <p class="text-center">No hay Ponentes Registrados</p>
     <?php } ?>
 </div>
+
+<?php
+    echo $paginacion;
+?>
