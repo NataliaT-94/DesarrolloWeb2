@@ -29,7 +29,7 @@
             <tr>
                 <td><?php echo $vehiculo->id; ?></td>
                 <td><?php echo $vehiculo->titulo; ?></td>
-                <td><img src="/imagenes/<?php echo $vehiculo->imagen; ?>" class="imagen-tabla"></td>
+                <td><img src="../public/img/automotor<?php echo $vehiculo->imagen; ?>" class="imagen-tabla"></td>
                 <td>$<?php echo $vehiculo->precio; ?></td>
                 <td>
                     <form method="POST" action="vehiculos/eliminar" class="w-100">
