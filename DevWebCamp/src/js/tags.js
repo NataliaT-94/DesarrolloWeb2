@@ -11,10 +11,8 @@
 
         //Recuperar el input oculto
         if(tagsInputHidden.value !== ''){
-            console.log(tagsInputHidden.value.split(','));
-
-            // tags = tagsInputHidden.value.split(',');
-            // mostrarTags();
+            tags = tagsInputHidden.value.split(',');
+            mostrarTags();
         }
 
         //Escuchar los cambios en el input
