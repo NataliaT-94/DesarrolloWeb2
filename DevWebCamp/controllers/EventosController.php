@@ -5,6 +5,7 @@ namespace Controllers;
 use MVC\Router;
 use Model\Categoria;
 use Model\Dia;
+use Model\Evento;
 use Model\Hora;
 
 class EventosController {
@@ -19,6 +20,20 @@ class EventosController {
         $categorias = Categoria::all();
         $dias = Dia::all('ASC');
         $horas = Hora::all('ASC');
+        $evento = new Evento;
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $evento->sincronizar($_POST);
+            $alertas = $evento->validar();
+
+            if(empty($alertas)){
+                $resultado = $evento->guardar();
+
+                if($resultado){
+                    header('Location: /admin/eventos');
+                }
+            }
+        }
         
 
 
@@ -27,7 +42,8 @@ class EventosController {
             'alertas' => $alertas,
             'categorias' => $categorias,
             'dias' => $dias,
-            'horas' => $horas
+            'horas' => $horas,
+            'evento' => $evento
         ]);
     }
         
