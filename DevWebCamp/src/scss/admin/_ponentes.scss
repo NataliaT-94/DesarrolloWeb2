@@ -1,0 +1,30 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.listado-ponentes{
+    @include m.reset-list;
+    @include m.grid(1, 1rem);
+
+    &__ponente{
+        color: v.$naranja;
+        border: 1px solid v.$naranja;
+        padding: 1rem;
+        border-radius: 1rem;
+        -webkit-border-radius: 1rem;
+        -moz-border-radius: 1rem;
+        -ms-border-radius: 1rem;
+        -o-border-radius: 1rem;
+        text-align: center;
+
+        &:hover{
+            cursor: pointer;
+        }
+
+        &--seleccionado{
+            @extend .listado-ponentes__ponente;
+            background-color: v.$naranja;
+            color: v.$blanco;
+        }
+}
+
+}

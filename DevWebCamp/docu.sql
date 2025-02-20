@@ -1,4 +1,4 @@
--- 3 tablas
+-- 6 tablas
 -- -Usuarios(clientes y Admin)
 --     id int(11)
 --     nombre varchar(30)
@@ -32,6 +32,17 @@
 --     id int(11)
 --     hora varchar(13)
 
+
+
+-- -evventos
+--     id int(11)
+--     nombre varchar(120)
+--     descripcion text,
+--     disponibles int(11)
+--     categoria_id int(11)
+--     dia_id int(11)
+--     hora_id int(11)
+--     ponente_id int(11)
 
 
 -----------------------------------------------
@@ -97,3 +108,26 @@ INSERT INTO `horas` (`id`, `hora`) VALUES
 (6, '17:00 - 17:55'),
 (7, '18:00 - 18:55'),
 (8, '19:00 - 19:55');
+
+
+CREATE TABLE `eventos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(120) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `descripcion` text,
+  `disponibles` int DEFAULT NULL,
+  `categoria_id` int NOT NULL,
+  `dia_id` int NOT NULL,
+  `hora_id` int NOT NULL,
+  `ponente_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_eventos_categorias_idx` (`categoria_id`),
+  KEY `fk_eventos_dias1_idx` (`dia_id`),
+  KEY `fk_eventos_horas1_idx` (`hora_id`),
+  KEY `fk_eventos_ponentes1_idx` (`ponente_id`),
+  CONSTRAINT `fk_eventos_categorias` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`),
+  CONSTRAINT `fk_eventos_dias1` FOREIGN KEY (`dia_id`) REFERENCES `dias` (`id`),
+  CONSTRAINT `fk_eventos_horas1` FOREIGN KEY (`hora_id`) REFERENCES `horas` (`id`),
+  CONSTRAINT `fk_eventos_ponentes1` FOREIGN KEY (`ponente_id`) REFERENCES `ponentes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+INSERT INTO `eventos`(`id`, `nombre`, `descripcion`, `disponibles`, `categoria_id`, `dia_id`, `hora_id`, `ponente_id`) VALUES ('2','Next.js','Descripcion del evento 2','40','1','2','5','1'), ('3','Next.js','Descripcion del evento 3','40','2','1','4','1')
