@@ -168,3 +168,76 @@ INSERT INTO `eventos` (`id`, `nombre`, `descripcion`, `disponibles`, `categoria_
 (30, 'Vue.js - Pinia para reemplazar Vuex', 'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sodales condimentum magna fringilla egestas. In non pellentesque magna, at mollis velit. Morbi nec dapibus diam. Phasellus ante neque, blandit eget tortor a, cursus molestie turpis. Aenean placerat aliquet nibh, et interdum ipsum finibus at. Nulla sit amet faucibus leo, vel blandit urna. Curabitur dictum euismod sem, eget euismod magna pulvinar et. Nam semper aliquet nunc eu ornare. ', 25, 1, 2, 3, 14),
 (31, 'GraphQL - Introducción Práctica', 'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sodales condimentum magna fringilla egestas. In non pellentesque magna, at mollis velit. Morbi nec dapibus diam. Phasellus ante neque, blandit eget tortor a, cursus molestie turpis. Aenean placerat aliquet nibh, et interdum ipsum finibus at. Nulla sit amet faucibus leo, vel blandit urna. Curabitur dictum euismod sem, eget euismod magna pulvinar et. Nam semper aliquet nunc eu ornare. ', 30, 1, 2, 8, 15),
 (32, 'React y TailwindCSS - Frontend Moderno', 'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec sodales condimentum magna fringilla egestas. In non pellentesque magna, at mollis velit. Morbi nec dapibus diam. Phasellus ante neque, blandit eget tortor a, cursus molestie turpis. Aenean placerat aliquet nibh, et interdum ipsum finibus at. Nulla sit amet faucibus leo, vel blandit urna. Curabitur dictum euismod sem, eget euismod magna pulvinar et. Nam semper aliquet nunc eu ornare. ', 30, 1, 2, 6, 17);
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE `paquetes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+INSERT INTO `paquetes` (`id`, `nombre`) VALUES
+(1, 'Presencial'),
+(2, 'Virtual'),
+(3, 'Gratis');
+
+------------------------------------------------------------------------------
+
+CREATE TABLE `registros` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `paquete_id` int DEFAULT NULL,
+  `pago_id` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `token` varchar(8) DEFAULT NULL,
+  `usuario_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `usuarioId` (`usuario_id`),
+  KEY `paquete_id` (`paquete_id`),
+  CONSTRAINT `registros_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`),
+  CONSTRAINT `registros_ibfk_2` FOREIGN KEY (`paquete_id`) REFERENCES `paquetes` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+----------------------------------------------------------------
+CREATE TABLE `regalos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+
+
+INSERT INTO `regalos` (`id`, `nombre`) VALUES
+(1, 'Paquete Stickers'),
+(2, 'Camisa Mujer - Chica'),
+(3, 'Camisa Mujer - Mediana'),
+(4, 'Camisa Mujer - Grande'),
+(5, 'Camisa Mujer - XL'),
+(6, 'Camisa Hombre - Chica'),
+(7, 'Camisa Hombre - Mediana'),
+(8, 'Camisa Hombre - Grande'),
+(9, 'Camisa Hombre - XL');
+
+-------------------------------------------------------
+
+ALTER TABLE registros
+ADD COLUMN regalo_id INT;
+
+
+ALTER TABLE registros
+ADD CONSTRAINT fk_regalos
+FOREIGN KEY (regalo_id) REFERENCES regalos(id)
+ON DELETE SET NULL
+ON UPDATE CASCADE;
+
+--------------------------------------------------------------
+
+CREATE TABLE `eventos_registros` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `evento_id` int DEFAULT NULL,
+  `registro_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `evento_id` (`evento_id`),
+  KEY `registro_id` (`registro_id`),
+  CONSTRAINT `eventos_registros_ibfk_1` FOREIGN KEY (`evento_id`) REFERENCES `eventos` (`id`),
+  CONSTRAINT `eventos_registros_ibfk_2` FOREIGN KEY (`registro_id`) REFERENCES `registros` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

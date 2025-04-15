@@ -10,6 +10,10 @@
             align-items: flex-start;
         }
     }
+    &__submit{
+        margin-top: 3rem;
+        @include m.boton(v.$naranja, v.$blanco);
+    }
 }
 
 .paquete{
@@ -35,4 +39,5 @@
         font-weight: v.$black;
         text-align: center;
     }
+
 }
