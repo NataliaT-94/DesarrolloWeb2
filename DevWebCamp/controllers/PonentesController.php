@@ -8,10 +8,11 @@ use Model\Ponente;
 
 class PonentesController {
     public static function index(Router $router){
+
+        
         if(!is_admin()){
             header('Location: /login');
         }
-
         $pagina_actual = $_GET['page'];
         $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
 
@@ -20,15 +21,15 @@ class PonentesController {
         }
     
         $registros_por_pagina = 10;
-
         $total = Ponente::total();
-
         $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total);
+
+        if($paginacion->total_paginas() < $pagina_actual){
+            header('Location: /admin/ponentes?page=1');
+        }
+
         $ponentes = Ponente::paginar($registros_por_pagina, $paginacion->offset());
 
-        if(!is_admin()){
-            header('Location: /login');
-        }
 
         $router->render('admin/ponentes/index',[
             'titulo' => 'Ponentes / Conferencistas',
