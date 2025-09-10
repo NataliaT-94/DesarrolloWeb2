@@ -1,5 +1,9 @@
 <?php
 namespace Model;
+
+use mysqli;
+use Dotenv\Dotenv;
+
 class ActiveRecord {
 
     // Base DE DATOS
@@ -9,6 +13,27 @@ class ActiveRecord {
 
     // Alertas y Mensajes
     protected static $alertas = [];
+
+    // -----------------------------
+    // Cargar conexión desde .env
+    // -----------------------------
+    public static function initDB() {
+        if (!self::$db) {
+
+
+            // Crear la conexión
+            self::$db = new mysqli(
+                $_ENV['BD_HOST'],
+                $_ENV['BD_USER'],
+                $_ENV['BD_PASS'],
+                $_ENV['BD_NAME']
+            );
+
+            if (self::$db->connect_error) {
+                die("Error de conexión a la BD: " . self::$db->connect_error);
+            }
+        }
+    }
     
     // Definir la conexión a la BD - includes/database.php
     public static function setDB($database) {

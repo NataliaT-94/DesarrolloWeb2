@@ -25,9 +25,9 @@ class Email{
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
         
-        $mail->setFrom('cuentas@nailsapp.com');
-        $mail->addAddress('cuentas@nailsapp.com', 'NailsApp.com');
-        $mail->Subject = 'Confirma tu Cuenta';
+        $mail->setFrom('prueba@nailsapp.com');//quien evia el email
+        $mail->addAddress('prueba@nailsapp.com', 'prueba.com');//quien recibe
+        $mail->Subject = 'Confirma tu Cuenta';//el mensaje que llega, lo primero que se lee cuando llega el mensaje
 
         //Set HTML
         $mail->isHTML(TRUE);
@@ -56,8 +56,8 @@ class Email{
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('cuentas@nailsapp.com');
-        $mail->addAddress('cuentas@nailsapp.com', 'NailsApp.com');
+        $mail->setFrom('prueba@nailsapp.com');
+        $mail->addAddress('prueba@nailsapp.com', 'prueba.com');
         $mail->Subject = 'Reestablece tu Contraseña';
 
         //Set HTML

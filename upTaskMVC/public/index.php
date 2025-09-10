@@ -29,7 +29,7 @@ $router->post('/reestablecer', [LoginController::class, 'reestablecer']);
 
 //Confirmacion de Cuenta
 $router->get('/mensaje', [LoginController::class, 'mensaje']);
-$router->get('/confirmar', [LoginController::class, 'confirmar']);
+$router->get('/confirmar-cuenta', [LoginController::class, 'confirmar']);
 
 //ZONA DE PROYECTOS
 $router->get('/dashboard', [DashboardController::class, 'index']);

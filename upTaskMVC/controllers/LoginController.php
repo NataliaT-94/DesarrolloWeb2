@@ -82,14 +82,15 @@ class LoginController{
 
                     //Generar Token
                     $usuario->crearToken();
-
-                    //Crear nuevo Usuario
-                    $resultado = $usuario->guardar();
-
+                    
                     //Enviar email
                     $email = new Email($usuario->nombre, $usuario->email, $usuario->token);
                     $email->enviarConfirmacion();
-
+                    
+                    
+                    //Crear nuevo Usuario
+                    $resultado = $usuario->guardar();
+                    
                     if($resultado){
                         header('Location: /mensaje');
                     }

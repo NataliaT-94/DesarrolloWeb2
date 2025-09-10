@@ -3,7 +3,7 @@
         'name' => 'natt1/bienesraices_inicio',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '3c55c5126df167cc0b9aae846f428c0a47ad9003',
+        'reference' => '554e02fd2e12a6618f13d693e34ad4338ecc90ef',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'guzzlehttp/psr7' => array(
-            'pretty_version' => '2.7.0',
-            'version' => '2.7.0.0',
-            'reference' => 'a70f5c95fb43bc83f07c9c948baa0dc1829bf201',
+            'pretty_version' => '2.7.1',
+            'version' => '2.7.1.0',
+            'reference' => 'c2270caaabe631b3b44c85f99e5a04bbb8060d16',
             'type' => 'library',
             'install_path' => __DIR__ . '/../guzzlehttp/psr7',
             'aliases' => array(),
@@ -31,7 +31,7 @@
         'natt1/bienesraices_inicio' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '3c55c5126df167cc0b9aae846f428c0a47ad9003',
+            'reference' => '554e02fd2e12a6618f13d693e34ad4338ecc90ef',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

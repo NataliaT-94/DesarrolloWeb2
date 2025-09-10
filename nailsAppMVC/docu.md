@@ -62,3 +62,8 @@ phpMailer
 -------------------------------------------
 # Deployment y variables de entorno
 composer require vlucas/phpdotenv: en terminal
+
+-------------------------------------------
+# Correr project
+En la carpeta public click derecho terminal 
+comando php -S localhost:3000

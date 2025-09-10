@@ -40,6 +40,10 @@ CREATE TABLE `usuarios` (
 INSERT INTO `usuarios` (`id`, `email`, `password`) VALUES
 (1, 'correo@correo.com', '$2y$12$M9bliU2aUULApltlbDgnHOTYIcaclSNyrF4Ytlxzz09kYTKKfwo86');
 
+ALTER TABLE `usuarios` ADD `nombre` VARCHAR(60) NOT NULL AFTER `apellido` VARCHAR(60) NOT NULL;
+ALTER TABLE `usuarios` ADD `telefono` INT NOT NULL AFTER `password`, ADD `admin` INT NOT NULL AFTER `telefono`, ADD `confirmado` INT NOT NULL AFTER `admin`, ADD `token` VARCHAR(60) NOT NULL AFTER `confirmado`;
+
+
 -- --------------------------------------------------------
 
 --

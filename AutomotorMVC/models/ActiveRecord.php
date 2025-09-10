@@ -1,241 +1,198 @@
 <?php
 namespace Model;
 
-class ActiveRecord{
-    
-    //BASE DE DATOS
+use mysqli;
+use Dotenv\Dotenv;
+
+class ActiveRecord {
+
+    // BASE DE DATOS
     protected static $db;
     protected static $tabla = '';
     protected static $columnasDB = [];
 
+    // ALERTAS
+    protected static $alertas = [];
 
-    //alertas
-    protected static  $alertas = [];
+    // -----------------------------
+    // Cargar conexión desde .env
+    // -----------------------------
+    public static function initDB() {
+        if (!self::$db) {
 
 
-    //Definir la conexion a la BD
-    public static function setDB($database){
-        self::$db = $database;
+            // Crear la conexión
+            self::$db = new mysqli(
+                $_ENV['BD_HOST'],
+                $_ENV['BD_USER'],
+                $_ENV['BD_PASS'],
+                $_ENV['BD_NAME']
+            );
+
+            if (self::$db->connect_error) {
+                die("Error de conexión a la BD: " . self::$db->connect_error);
+            }
+        }
     }
-    public static function setAlerta($tipo, $mensaje){
+
+    // -----------------------------
+    // Alertas
+    // -----------------------------
+    public static function setAlerta($tipo, $mensaje) {
         self::$alertas[$tipo][] = $mensaje;
     }
 
-    //Validacion
-    public static function getAlertas(){
-
+    public static function getAlertas() {
         return static::$alertas;
     }
 
-    public function validar(){
-
+    public function validar() {
         static::$alertas = [];
         return static::$alertas;
     }
 
-    // Registros - CRUD
-    public function guardar(){
-        $resultado = '';
-        if(!is_null($this->id)){//no tiene que eswtar en null para actualizar
-            //Actualiza
-            $resultado = $this->actualizar();
-        
-        } else {//si esta en null crea
-            //Creando un nuevo registro
-            $resultado = $this->crear();
-        }
-        return $resultado;
+    // -----------------------------
+    // CRUD
+    // -----------------------------
+    public function guardar() {
+        return !is_null($this->id) ? $this->actualizar() : $this->crear();
     }
 
-    //Lista todos los registros
-    public static function all(){
-        $query = "SELECT * FROM " . static::$tabla;//hereda el metodo y busca el atibuto en la clase que se esta heredando
-        // debuguear($query);
-
-        $resultado = self::consultarSQL($query);
-
-        return $resultado;
+    public static function all() {
+        self::initDB();
+        $query = "SELECT * FROM " . static::$tabla;
+        return self::consultarSQL($query);
     }
 
-
-
-    //Busca un registro por su id
-    public static function find($id){
-        $query = "SELECT * FROM " . static::$tabla . " WHERE id = ${id}";
-
-        $resultado = self::consultarSQL($query);
-
-        return array_shift($resultado);//retorna la primera posicion
-
-    }
-
-    //Obtiene determinado numero de registros
-    public static function get($cantidad){
-        $query = "SELECT * FROM " . static::$tabla . " LIMIT  ${cantidad}";//static:hereda el metodo y busca el atibuto en la clase que se esta heredando
-        //  debuguear($query);
-    
-        $resultado = self::consultarSQL($query);
-    
-        return $resultado;
-    }
-
-    
-    //Buscar un registro por su columna y valor
-    public static function where($columna, $valor){
-        $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
+    public static function find($id) {
+        self::initDB();
+        $query = "SELECT * FROM " . static::$tabla . " WHERE id = " . intval($id);
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
-    
-    public function crear() {
 
-        //Sanitizar los datos
-        $atributos = $this->sanitizarAtributos();
-
-        //array_keys: te permite acceder a las llaves de un array
-        //array_values : te permite acceder al valor de un array
-        //join: transforma un array en un string
-
-
-        // insertar base de datos
-        // $query = 'INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, banio, estacionamiento, creado, vendedorId) 
-        //           VALUES ("' . $this->titulo . '", "' . $this->precio . '", "' . $this->imagen . '", "' . $this->descripcion . '", "' . $this->habitaciones . '", 
-        //           "' . $this->banio . '", "' . $this->estacionamiento . '", "' . $this->creado . '", "' . $this->vendedorId . '")';
-        
-        $query = " INSERT INTO " . static::$tabla . " ( ";
-        $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES ('";
-        $query .= join("', '", array_values($atributos));
-        $query .= "') ";
-
-        // debuguear($query);
-
-        $resultado = self::$db->query($query);
-
-        return $resultado;
+    public static function get($cantidad) {
+        self::initDB();
+        $query = "SELECT * FROM " . static::$tabla . " LIMIT " . intval($cantidad);
+        return self::consultarSQL($query);
     }
 
-    public function actualizar(){
-        //Sanitizar los datos
-        $atributos = $this -> sanitizarAtributos();
+    public static function where($columna, $valor) {
+        self::initDB();
+        $columna = self::$db->real_escape_string($columna);
+        $valor = self::$db->real_escape_string($valor);
+        $query = "SELECT * FROM " . static::$tabla . " WHERE {$columna} = '{$valor}'";
+        $resultado = self::consultarSQL($query);
+        return array_shift($resultado);
+    }
 
+    public function crear() {
+        self::initDB();
+        $atributos = $this->sanitizarAtributos();
+        $query = "INSERT INTO " . static::$tabla . " (" . join(', ', array_keys($atributos)) . ") 
+                  VALUES ('" . join("', '", array_values($atributos)) . "')";
+        return self::$db->query($query) ?: die("Error en INSERT: " . self::$db->error);
+    }
+
+    public function actualizar() {
+        self::initDB();
+        $atributos = $this->sanitizarAtributos();
         $valores = [];
-        foreach($atributos as $key => $value){
+        foreach ($atributos as $key => $value) {
             $valores[] = "{$key}='{$value}'";
         }
-
-        $query = "UPDATE " . static::$tabla . " SET ";
-        $query .= join(', ', $valores);
-        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
-        $query .= " LIMIT 1";
-
-        $resultado = self::$db->query($query);
-
-        return $resultado;
-        
+        $query = "UPDATE " . static::$tabla . " SET " . join(', ', $valores) . 
+                 " WHERE id = '" . self::$db->escape_string($this->id) . "' LIMIT 1";
+        return self::$db->query($query) ?: die("Error en UPDATE: " . self::$db->error);
     }
 
-    //Eliminar un registro
-    public function eliminar(){
-        //Elimminar el registro
-        $query = "DELETE FROM " . static::$tabla . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
-    
-        $resultado = self::$db->query($query);
-        
-        if($resultado){
-            $this -> borrarImagen();
+    public function eliminar() {
+        self::initDB();
+        $query = "DELETE FROM " . static::$tabla . " WHERE id = '" . self::$db->escape_string($this->id) . "' LIMIT 1";
+        $resultado = self::$db->query($query) ?: die("Error en DELETE: " . self::$db->error);
+
+        if ($resultado) {
+            $this->borrarImagen();
         }
         return $resultado;
     }
 
-    public static function consultarSQL($query){
-        //Consultar la base de datos
+    // -----------------------------
+    // Consultas seguras
+    // -----------------------------
+    public static function consultarSQL($query) {
+        self::initDB();
         $resultado = self::$db->query($query);
 
-        //Iterar los resultados
+        if (!$resultado) {
+            die("Error en la consulta SQL: " . self::$db->error . " | Query: " . $query);
+        }
+
         $array = [];
-        while($registro = $resultado->fetch_assoc()){
+        while ($registro = $resultado->fetch_assoc()) {
             $array[] = static::crearObjeto($registro);
         }
 
-        // debuguear($array);
-
-        //Liberar la memoria
-        $resultado -> free();
-
-
-        //Retornar los resultados
+        $resultado->free();
         return $array;
     }
 
-    protected static function crearObjeto($registro){//transforma el array en objeto
+    protected static function crearObjeto($registro) {
         $objeto = new static;
-
-        foreach($registro as $key => $value){
-            if(property_exists($objeto, $key)){//property_exists: verifica que la propiedad exista
-                $objeto->$key = $value;//una vez que verifique que exista el objeto le asigna el valor
+        foreach ($registro as $key => $value) {
+            if (property_exists($objeto, $key)) {
+                $objeto->$key = $value;
             }
         }
-                    
         return $objeto;
     }
 
-    //Identificar y unir los atributos de la BD
-    public function atributos(){
+    // -----------------------------
+    // Atributos y sanitización
+    // -----------------------------
+    public function atributos() {
         $atributos = [];
-
-        foreach(static::$columnasDB as $columna){
-
-            if($columna === 'id') continue;//ignora al id
-
+        foreach (static::$columnasDB as $columna) {
+            if ($columna === 'id') continue;
             $atributos[$columna] = $this->$columna;
         }
         return $atributos;
     }
-    
-    public function sanitizarAtributos(){
+
+    public function sanitizarAtributos() {
+        self::initDB();
         $atributos = $this->atributos();
         $sanitizado = [];
-    
-        foreach($atributos as $key => $value){
+        foreach ($atributos as $key => $value) {
             $sanitizado[$key] = self::$db->escape_string($value);
         }
-        
         return $sanitizado;
     }
-    
 
-    //Sincroniza el objeto en memoria con los cambios realizados por el usuario
-    public function sincronizar( $args = []){
-        foreach($args as $key => $value){
-            if(property_exists($this, $key) && !is_null($value)){//this hace referencia al obejto actual
+    public function sincronizar($args = []) {
+        foreach ($args as $key => $value) {
+            if (property_exists($this, $key) && !is_null($value)) {
                 $this->$key = $value;
             }
         }
     }
 
-    
-    //Subida de archivos
-    public function setImagen($imagen){
-        //Elimina la imagen previa
-        if(!is_null($this->id)){
+    // -----------------------------
+    // Manejo de imágenes
+    // -----------------------------
+    public function setImagen($imagen) {
+        if (!is_null($this->id)) {
             $this->borrarImagen();
         }
-        //Asignar al atributo imagen el nombre de la imagen
-        if($imagen){
+        if ($imagen) {
             $this->imagen = $imagen;
         }
     }
 
-    //Eliminar el archivo
-    public function borrarImagen(){
-        //Comprobar si existe el archivo
-        $existeArchivo = file_exists(CARPETA_IMAGENES . $this->imagen);
-        if($existeArchivo){
+    public function borrarImagen() {
+        if (defined('CARPETA_IMAGENES') && file_exists(CARPETA_IMAGENES . $this->imagen)) {
             unlink(CARPETA_IMAGENES . $this->imagen);
         }
-        
     }
 }
-
 ?>

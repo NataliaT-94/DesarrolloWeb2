@@ -1,22 +1,27 @@
+@use "sass:color";
+@use '../base/variables' as v; 
+
+
 .dark-mode{
-    background-color: darken($grisOscuro, 10);
+    background-color: color.adjust(v.$grisOscuro, $lightness: -10%);
+    
 
     p,td{
-        color: $blanco;
+        color: v.$blanco;
     }
 
     a,h1,h2,h3,h4{
-        color: $gris;
+        color: v.$gris;
     }
 
     .anuncio,
     .resumen-vehiculo{
-        background-color: $grisOscuro;
-        border: 1px solid $grisOscuro;
-        color: $blanco;
+        background-color: v.$grisOscuro;
+        border: 1px solid v.$grisOscuro;
+        color: v.$blanco;
 
         .precio{
-            color: $verde;
+            color: v.$verde;
         }
 
         .icono{
@@ -25,22 +30,22 @@
     }
 
     .texto-nosotros blockquote{
-        color: $blanco;
+        color: v.$blanco;
     }
 
     .formulario{
         label,
         legend,
         p{
-            color: $gris;
+            color: v.$gris;
         }
 
         input:not([type="submit"]),
         textarea,
         select{
-            background-color: $grisOscuro;
-            border: 1px solid $grisOscuro;
-            color: $blanco;
+            background-color: v.$grisOscuro;
+            border: 1px solid v.$grisOscuro;
+            color: v.$blanco;
         }
     }
 }

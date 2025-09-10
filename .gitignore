@@ -1,3 +1,4 @@
 # Evitamos de que github intente comitear esa carpeta, ya que la misma se genera del sass y es un procesado
 feria-emprendedores/build/
 node_modules/
+.env
