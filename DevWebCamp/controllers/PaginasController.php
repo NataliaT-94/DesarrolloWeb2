@@ -13,6 +13,13 @@ class PaginasController {
     public static function index(Router $router) {
         $eventos = Evento::ordenar('hora_id', 'ASC');
 
+        $eventos_formatedos = [
+            'conferencias_v' => [],
+            'conferencias_s' => [],
+            'workshops_v' => [],
+            'workshops_s' => []
+        ];
+
         $eventos_formatedos = [];
         foreach($eventos as $evento){
             $evento->categoria = Categoria::find($evento->categoria_id);//con esto podemos imprimir el nombre de la categoria en la tabla, en ves de mostrar el numero del id

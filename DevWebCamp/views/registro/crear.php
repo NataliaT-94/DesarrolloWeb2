@@ -31,10 +31,12 @@
 
             <div class="paquete__pago">
 
-                <form action="https://www.sandbox.paypal.com/ncp/payment/9V2UAZSF3PUGL" method="post" target="_blank">
-                <input class="pp-9V2UAZSF3PUGL paquetes__submit" type="submit" value="Pagar ahora" />
-                <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" style="margin-top:2rem;" />
-                <section> Con la tecnología de <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:1.5rem;vertical-align:middle;"/></section>
+                <!-- <form action="https://www.sandbox.paypal.com/ncp/payment/9V2UAZSF3PUGL" method="post" target="_blank"> -->
+                <form method="POST" action="/finalizar-registro/pagar">
+                    <input type="hidden" name="paquete_id" value="1">
+                    <input class="paquetes__submit" type="submit" value="Pagar ahora" />
+                    <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" style="margin-top:2rem;" />
+                    <section> Con la tecnología de <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:1.5rem;vertical-align:middle;"/></section>
                 </form> 
             </div>
 
@@ -51,10 +53,12 @@
 
             <p class="paquete__precio">$49</p>
 
-            <form action="https://www.sandbox.paypal.com/ncp/payment/DJNK3X2WGABSN" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-            <input class="pp-DJNK3X2WGABSN paquetes__submit" type="submit" value="Pagar ahora" />
-            <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
-            <section> Con la tecnología de <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+            <!-- <form action="https://www.sandbox.paypal.com/ncp/payment/DJNK3X2WGABSN" method="POST" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;"> -->
+            <form method="POST" action="/finalizar-registro/pagar">
+                <input type="hidden" name="paquete_id" value="2">
+                <input class="paquetes__submit" type="submit" value="Pagar ahora" />
+                <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
+                <section> Con la tecnología de <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
             </form>
         </div>
     </div>

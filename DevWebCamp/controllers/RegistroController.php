@@ -116,7 +116,8 @@ class RegistroController {
 
             //Validar que post no venga vacio
             if(empty($_POST)){
-                echo json_encode([]);
+                // echo json_encode([]);
+                header('Location: /finalizar-registro');
                 return;
             }
 
@@ -137,11 +138,31 @@ class RegistroController {
 
                 $registro = new Registro($datos);
                 $resultado = $registro->guardar();
-                echo json_encode($resultado);
+                // echo json_encode($resultado);
+
+                if ($resultado) {
+                    // Si el paquete es presencial (1), redirige a conferencias
+                    if ($registro->paquete_id === "1") {
+                        header('Location: /finalizar-registro/conferencias');
+                        return;
+                    }
+
+                    // Si el paquete es virtual (2), redirige al boleto directamente
+                    if ($registro->paquete_id === "2") {
+                        header('Location: /boleto?id=' . urlencode($registro->token));
+                        return;
+                    }
+                } else {
+                    header('Location: /finalizar-registro');
+                }
+
+
             } catch (\Throwable $th){
-                echo json_encode([
-                    'resultado' => 'error'
-                ]);
+                // echo json_encode([
+                //     'resultado' => 'error'
+                // ]);
+
+                header('Location: /finalizar-registro');
             }
         }
     }
