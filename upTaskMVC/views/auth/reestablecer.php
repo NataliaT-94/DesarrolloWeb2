@@ -20,8 +20,8 @@
             <?php } ?>
 
         <div class="acciones">
-            <a href="/crear">Crear una Cuenta</a>
-            <a href="/olvide">Olvide mi Contraseña</a>
+            <a href="crear">Crear una Cuenta</a>
+            <a href="olvide">Olvide mi Contraseña</a>
         </div>
     </div><!-- .contenedor-sm --->
 </div>

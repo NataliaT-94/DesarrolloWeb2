@@ -16,39 +16,34 @@ class Email{
     }
 
     public function enviarConfirmacion(){
-       //Crear el objeto de email
-        $mail = new PHPMailer();
+        $mail = new PHPMailer(true);
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
         $mail->Port = $_ENV['EMAIL_PORT'];
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
-        
-        $mail->setFrom('prueba@nailsapp.com');//quien evia el email
-        $mail->addAddress('prueba@nailsapp.com', 'prueba.com');//quien recibe
-        $mail->Subject = 'Confirma tu Cuenta';//el mensaje que llega, lo primero que se lee cuando llega el mensaje
 
-        //Set HTML
+        $mail->setFrom('cuentas@prueba.com', 'Nails App');
+        $mail->addAddress($this->email, $this->nombre);
+        $mail->Subject = 'Confirma tu Cuenta';
+
         $mail->isHTML(TRUE);
         $mail->CharSet = 'UTF-8';
 
-        $contenido = "<html>";
-        $contenido = "<p><strong>Hola " . $this->nombre . "</strong> Has creado tu cuenata en Nails App, solo debes confirmarla presionando el siguiente enlace</p>";
-        $contenido .= "<p>Presiona aqui: <a href='" . $_ENV['APP_URL'] . "/confirmar-cuenta?token=" . $this->token ."'>Confirmar Cuenta</a> </p>";
-        $contenido .= "<p>Si tu no solicitaste esta cuenta, puedes ignorar el mensaje</p>";
+        $contenido  = "<html>";
+        $contenido .= "<p><strong>Hola " . htmlspecialchars($this->nombre) . "</strong> Has creado tu cuenta en Nails App, confirmala presionando el siguiente enlace:</p>";
+        $contenido .= "<p>Presiona aquí: <a href='" . $_ENV['APP_URL'] . "confirmar-cuenta?token=" . urlencode($this->token) ."'>Confirmar Cuenta</a></p>";
+        $contenido .= "<p>Si tú no solicitaste esta cuenta, puedes ignorar este mensaje.</p>";
         $contenido .= "</html>";
 
         $mail->Body = $contenido;
-
-        //Enviar el mail
         $mail->send();
     }
 
     public function enviarInstrucciones(){
-        //Crear el objeto de email
-// Looking to send emails in production? Check out our Email API/SMTP product!
-        $mail = new PHPMailer();
+        
+        $mail = new PHPMailer(true);
         $mail->isSMTP();
         $mail->Host = $_ENV['EMAIL_HOST'];
         $mail->SMTPAuth = true;
@@ -56,26 +51,20 @@ class Email{
         $mail->Username = $_ENV['EMAIL_USER'];
         $mail->Password = $_ENV['EMAIL_PASS'];
 
-        $mail->setFrom('prueba@nailsapp.com');
-        $mail->addAddress('prueba@nailsapp.com', 'prueba.com');
+        $mail->setFrom('cuentas@prueba.com', 'Nails App');
+        $mail->addAddress($this->email, $this->nombre);
         $mail->Subject = 'Reestablece tu Contraseña';
 
-        //Set HTML
-        $mail->isHTML(TRUE);
+        $mail->isHTML(true);
         $mail->CharSet = 'UTF-8';
 
-        $contenido = "<html>";
-        $contenido = "<p><strong>Hola " . $this->nombre . "</strong> Has solicitado reestablecer tu Contraseña, sigue el siguiente enlace pa hacerlo</p>";
-        $contenido .= "<p>Presiona aqui: <a href='" . $_ENV['APP_URL'] . "/recuperar?token=" . $this->token ."'>Reestablecer Contraseña</a> </p>";
-        $contenido .= "<p>Si tu no solicitaste este cambio, puedes ignorar el mensaje</p>";
+        $contenido  = "<html>";
+        $contenido .= "<p><strong>Hola " . htmlspecialchars($this->nombre) . "</strong> Has solicitado reestablecer tu contraseña, sigue el siguiente enlace:</p>";
+        $contenido .= "<p>Presiona aquí: <a href='" . $_ENV['APP_URL'] . "recuperar?token=" . urlencode($this->token) ."'>Reestablecer Contraseña</a></p>";
+        $contenido .= "<p>Si tú no solicitaste este cambio, puedes ignorar el mensaje.</p>";
         $contenido .= "</html>";
 
         $mail->Body = $contenido;
-
-        //Enviar el mail
         $mail->send();
     }
-
 }
-
-?>

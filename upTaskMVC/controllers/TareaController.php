@@ -9,10 +9,11 @@ use Model\Proyecto;
 class TareaController{
 
     public static function index(){
-        $proyectoId = $_GET['id'];
+        $proyectoId = $_GET['id'] ?? null;
         
         
-        if(!$proyectoId) header('Location: /dashboard');
+        // if(!$proyectoId) header('Location: dashboard');
+        if(!$proyectoId) redirect('dashboard');
   
 
         $proyecto = Proyecto::where('url', $proyectoId);
@@ -21,6 +22,7 @@ class TareaController{
 
   
         $tareas = Tarea::belongsTo('proyectoId', $proyecto->id);
+        header('Content-Type: application/json');
         // debuguear($tareas);
         echo json_encode(['tareas' => $tareas]);
         

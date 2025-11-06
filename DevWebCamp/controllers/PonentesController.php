@@ -11,13 +11,15 @@ class PonentesController {
 
         
         if(!is_admin()){
-            header('Location: /login');
+            // header('Location: /login');
+            redirect('login');
         }
-        $pagina_actual = $_GET['page'];
+        $pagina_actual = $_GET['page'] ?? 1;
         $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
 
         if(!$pagina_actual || $pagina_actual <1){
-            header('Location: /admin/ponentes?page=1');
+            // header('Location: /admin/ponentes?page=1');
+            redirect('admin/ponentes?page=1');
         }
     
         $registros_por_pagina = 10;
@@ -25,7 +27,8 @@ class PonentesController {
         $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total);
 
         if($paginacion->total_paginas() < $pagina_actual){
-            header('Location: /admin/ponentes?page=1');
+            // header('Location: /admin/ponentes?page=1');
+            redirect('admin/ponentes?page=1');
         }
 
         $ponentes = Ponente::paginar($registros_por_pagina, $paginacion->offset());
@@ -40,7 +43,8 @@ class PonentesController {
         
     public static function crear(Router $router){
         if(!is_admin()){
-            header('Location: /login');
+            // header('Location: /login');
+            redirect('login');
         }
 
         $alertas = [];
@@ -48,7 +52,8 @@ class PonentesController {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(!is_admin()){
-                header('Location: /login');
+                // header('Location: /login');
+                redirect('login');
             }
 
             //leer imagen
@@ -115,7 +120,8 @@ class PonentesController {
                 $resultado = $ponente->guardar();
 
                 if($resultado){
-                    header('Location: /admin/ponentes');
+                    // header('Location: /admin/ponentes');
+                    redirect('admin/ponentes');
                 }
             }
         }
@@ -130,7 +136,8 @@ class PonentesController {
 
     public static function editar(Router $router){
         if(!is_admin()){
-            header('Location: /login');
+            // header('Location: /login');
+            redirect('login');
         }
 
         $alertas = [];
@@ -140,21 +147,24 @@ class PonentesController {
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
         if(!$id){
-            header('Location: /admin/ponente');
+            // header('Location: /admin/ponente');
+            redirect('admin/ponente');
         }
 
         //Obtener ponente a Editar
         $ponente = Ponente::find($id);
         
         if(!$ponente){
-            header('Location: /admin/ponente');
+            // header('Location: /admin/ponente');
+            redirect('admin/ponente');
         }
 
         $ponente->imagen_actual = $ponente->imagen;
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(!is_admin()){
-                header('Location: /login');
+                // header('Location: /login');
+                redirect('login');
             }
 
             //leer imagen
@@ -219,7 +229,8 @@ class PonentesController {
                 $resultado = $ponente->guardar();
 
                 if($resultado){
-                    header('Location: /admin/ponentes');
+                    // header('Location: /admin/ponentes');
+                    redirect('admin/ponentes');
                 }
             }
         }
@@ -246,13 +257,15 @@ class PonentesController {
             $ponente = Ponente::find($id);
 
             if(!isset($ponente)){
-                header('Location: /admin/ponentes');
+                // header('Location: /admin/ponentes');
+                redirect('admin/ponentes');
             }
 
             $resultado = $ponente->eliminar();
 
             if($resultado){
-                header('Location: /admin/ponentes');
+                // header('Location: /admin/ponentes');
+                redirect('admin/ponentes');
             }
 
             $ponente->eliminar();

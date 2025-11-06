@@ -1,12 +1,5 @@
 <h2 class="dashboard__heading"><?php echo $titulo; ?></h2>
 
-<div class="dashboard__contenedor-boton">
-    <a class="dashboard__boton" href="/admin/ponentes/crear">
-        <i class="fa-solid fa-circle-plus"></i>
-        Añadir Ponente
-    </a>
-</div>
-
 <div class="dashboard__contenedor">
     <?php if(!empty($registros)){ ?>
         <table class="table">
@@ -22,13 +15,13 @@
                 <?php foreach($registros as $registro) {?>
                     <tr class="table__tr">
                         <td class="table__td">
-                            <?php echo $registro->usuario->nombre . " " . $registro->usuario->apellido; ?>
+                            <?php echo $usuario->nombre . " " . $usuario->apellido; ?>
                         </td>
                         <td class="table__td">
-                            <?php echo $registro->usuario->email; ?>
+                            <?php echo $usuario->email; ?>
                         </td>
                         <td class="table__td">
-                            <?php echo $registro->paquete->nombre; ?>
+                            <?php echo $paquete->nombre; ?>
                         </td>
                     </tr>
                 <?php } ?>

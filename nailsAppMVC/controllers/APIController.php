@@ -7,13 +7,17 @@ use Model\CitaServicio;
 use Model\Servicio;
 
 class APIController{
-    public static function index(){
-       $servicios = Servicio::all();
 
-    //    debuguear($servicios);
-       echo json_encode($servicios);
+  /** GET /api/servicios */
+    public static function index(){
+        header('Content-Type: application/json; charset=utf-8');
+        $servicios = Servicio::all();
+        echo json_encode($servicios);
+        exit;
     }
     
+
+    /** POST /api/citas */
     public static function guardar(){
       // $respuesta = [
       //    'datos' => $_POST
@@ -23,7 +27,7 @@ class APIController{
       $cita = new Cita($_POST);
       $resultado = $cita->guardar();
 
-      $id = $resultado['id'];
+      $id = $resultado['id'] ?? null;
 
       // $respuesta = [
       //    'cita' => $cita

@@ -6,7 +6,7 @@
 
         <?php include_once __DIR__ . '/../templates/alertas.php'; ?>
 
-        <form class="formulario" method="POST" action="/crear">
+        <form class="formulario" method="POST" action="crear">
             <div class="campo">
                 <label for="nombre">Nombre</label>
                 <input type="text" id="nombre" placeholder="Tu Nombre" name="nombre" value="<?php echo $usuario->nombre; ?>">
@@ -28,8 +28,8 @@
         </form>
 
         <div class="acciones">
-            <a href="/">Si ya tienes cuenta, Inicia Sesion</a>
-            <a href="/olvide">Olvide mi Contraseña</a>
+            <a href="">Si ya tienes cuenta, Inicia Sesion</a>
+            <a href="olvide">Olvide mi Contraseña</a>
         </div>
     </div><!-- .contenedor-sm --->
 </div>

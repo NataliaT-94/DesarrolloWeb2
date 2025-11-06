@@ -34,6 +34,12 @@ class ActiveRecord{
         //Consultar la bd
         $resultado = self::$db->query($query);
 
+                // Si la consulta falló, logueamos y devolvemos array vacío (evita fatal en fetch_assoc)
+        if ($resultado === false) {
+            error_log("MySQL error (". self::$db->errno ."): ". self::$db->error ." | Query: ".$query);
+            return [];
+        }
+
         //Iterar los resultados
         $array = [];
         while($registro = $resultado->fetch_assoc()){
@@ -70,25 +76,32 @@ class ActiveRecord{
         return $atributos;
     }
 
-    public function sanitizarAtributos(){
-        $atributos = $this->atributos();
-        $sanitizado = [];
-    
-        foreach($atributos as $key => $value){
-            $sanitizado[$key] = self::$db->escape_string($value);
-        }
-        
-        return $sanitizado;
-    }
+public function sanitizarAtributos(): array {
+    $atributos = $this->atributos();
+    $sanitizado = [];
 
-    //Sincroniza BD con Objetos en memoria
-    public function sincronizar($args = []){
-        foreach($args as $key => $value){
-            if(property_exists($this, $key) && !is_null($value)){
-                $this->$key = $value;
-            }
+    foreach ($atributos as $key => $value) {
+        if ($value === null) {
+            // mantenemos null para luego generar NULL en SQL
+            $sanitizado[$key] = null;
+        } else {
+            // escapamos como string (incluye números/booleans casteados)
+            $sanitizado[$key] = self::$db->real_escape_string((string)$value);
         }
     }
+    return $sanitizado;
+}
+
+// Sincroniza datos del formulario con las propiedades del modelo
+public function sincronizar($args = []){
+    foreach($args as $key => $value){
+        if(property_exists($this, $key)){
+            // si viene cadena vacía podés dejarla como null
+            $this->$key = ($value === '') ? null : $value;
+        }
+    }
+}
+
 
     //Registros - CRUD
     public function guardar(){
@@ -113,21 +126,21 @@ class ActiveRecord{
 
     //Buscar un registro por su id
     public static function find($id){
-        $query = "SELECT * FROM " . static::$tabla ." WHERE id = ${id}";
+        $query = "SELECT * FROM " . static::$tabla ." WHERE id = {$id}";
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
 
     //Obtener Registro con cierta cantidad
     public static function get($limite){
-        $query = "SELECT * FROM " . static::$tabla ."LIMIT ${limite}";
+        $query = "SELECT * FROM " . static::$tabla ." LIMIT {$limite}";
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
 
     //Buscar un registro por su columna y valor
     public static function where($columna, $valor){
-        $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
+        $query = "SELECT * FROM " . static::$tabla . " WHERE {$columna} = '{$valor}'";
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
@@ -139,49 +152,39 @@ class ActiveRecord{
     }
 
     //Crear un nuevo registro
-    public function crear(){
-        //Resaltar los datos
-        $atributos = $this->sanitizarAtributos();
+public function crear(){
+    $atributos = $this->sanitizarAtributos();
 
-        //Insertar en la BD
-        $query = " INSERT INTO " . static::$tabla . " ( ";
-        $query .= join(', ', array_keys($atributos));
-        $query .= " ) VALUES ('";
-        $query .= join("', '", array_values($atributos));
-        $query .= "') ";
-        
-        //Como debuguear Fetch con la extencion thunder Client 
-        //return json_encode(['query' => $query]);
+    $columnas = join(', ', array_keys($atributos));
+    $valores  = join(', ', array_map(
+        fn($v) => $v === null ? 'NULL' : "'$v'",
+        array_values($atributos)
+    ));
 
-        //Resultados de la consulta
-        $resultado = self::$db->query($query);
-        return [
-            'resultado' => $resultado,
-            'id' => self::$db->insert_id
-        ];
-    }
+    $query = "INSERT INTO " . static::$tabla . " ( $columnas ) VALUES ( $valores )";
+
+    $resultado = self::$db->query($query);
+    return [
+        'resultado' => $resultado,
+        'id' => self::$db->insert_id
+    ];
+}
 
     //Actualizar el registro
-    public function actualizar(){
-        //sanitizar los datos
-        $atributos = $this->sanitizarAtributos();
+public function actualizar(){
+    $atributos = $this->sanitizarAtributos();
 
-        //Iterar para ir agregando cada campo de la BD
-        $valores = [];
-        foreach($atributos as $key => $value){
-            $valores[] = "{$key}='{$value}'";
-        }
-
-        //Consultar SQL
-        $query = "UPDATE " . static::$tabla ." SET ";
-        $query .= join(', ', $valores);
-        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
-        $query .= " LIMIT 1";
-
-        //Actualizar BD
-        $resultado = self::$db->query($query);
-        return $resultado;
+    $valores = [];
+    foreach($atributos as $key => $value){
+        $valores[] = ($value === null) ? "{$key}=NULL" : "{$key}='{$value}'";
     }
+
+    $id = self::$db->real_escape_string((string)$this->id);
+    $query = "UPDATE " . static::$tabla . " SET " . join(', ', $valores) .
+             " WHERE id = '$id' LIMIT 1";
+
+    return self::$db->query($query);
+}
 
     //Eliminar un Registro por su ID
     public function eliminar(){

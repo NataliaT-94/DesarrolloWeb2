@@ -7,7 +7,7 @@
         <?php include_once __DIR__ . '/../templates/alertas.php'; ?>
 
 
-        <form class="formulario" method="POST" action="/">
+        <form class="formulario" method="POST" action="">
             <div class="campo">
                 <label for="email">Email</label>
                 <input type="email" id="email" placeholder="Tu Email" name="email">
@@ -21,8 +21,8 @@
         </form>
 
         <div class="acciones">
-            <a href="/crear">Crear una Cuenta</a>
-            <a href="/olvide">Olvide mi Contraseña</a>
+            <a href="crear">Crear una Cuenta</a>
+            <a href="olvide">Olvide mi Contraseña</a>
         </div>
     </div><!-- .contenedor-sm --->
 </div>

@@ -12,6 +12,7 @@ class Registro extends ActiveRecord {
     public $token;
     public $usuario_id;
     public $regalo_id;
+    
 
 
 

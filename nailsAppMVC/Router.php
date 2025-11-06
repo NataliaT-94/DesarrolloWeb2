@@ -5,62 +5,73 @@ class Router{
 
     public $rutasGET = [];
     public $rutasPOST = [];
-
-    public function get($url, $fn){//tomas las url que  reaccionan con get, primer parametro la url y el segundo para,etro la funcion que cumple
-        $this -> rutasGET[$url] = $fn;
-    }
-    public function post($url, $fn){//tomas las url que  reaccionan con get, primer parametro la url y el segundo para,etro la funcion que cumple
-        $this -> rutasPOST[$url] = $fn;
+    public function get($url, $fn){
+        $this->rutasGET[$url] = $fn;
     }
 
-    public function comprobarRutas(){//valida que las rutas existan
-      
-      session_start();
-    //   $auth = $_SESSION['login'] ?? null;
-      
-    //   //Arreglo de rutas protegidas...
-    //    $rutas_protegidas = ['/admin', '/vehiculos/crear',  '/vehiculos/actualizar',  '/vehiculos/eliminar', '/vendedores/crear',  '/vendedores/actualizar',  '/vendedores/eliminar' ];
-      
-      
-      //$urlActual = $_SERVER['PATH_INFO'] ?? '/'; //lee la url actual
-      $urlActual = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';//elimina la parte del token de la url y detecta lapagina
-      $metodo = $_SERVER['REQUEST_METHOD'];
-
-      if($metodo === 'GET'){
-        $fn = $this -> rutasGET[$urlActual] ?? NULL;//asociamos a que url se refiere la funcion, si no existe asignar null
-      } else {
-
-        $fn = $this -> rutasPOST[$urlActual] ?? NULL;
-      }
-
-      //Proteger las rutas
-    //   if(in_array($urlActual, $rutas_protegidas) && !$auth){
-    //     header('Location: /');
-    //   }
-
-      if($fn){
-        //La URL existe y hay una funcion
-        call_user_func($fn, $this);//nos premite llama una funcion cuando no sabemos como se llama la funcion
-      } else {
-
-        echo "404 - Página no encontrada.";
-      }
+    public function post($url, $fn){
+        $this->rutasPOST[$url] = $fn;
     }
-    
-    //Muestra una vista
+
+    public function comprobarRutas(){
+        // La sesión ya se inicia en public/index.php
+
+            // URI sin querystring
+        $uri = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
+
+        // Directorio donde está el script (index.php), p. ej. "/dev/nailsAppMVC/public"
+        // Tomamos SOLO el directorio, no el archivo
+        $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+        $scriptDir = rtrim($scriptDir, '/');
+
+        // Si la URI comienza con ese directorio, lo removemos para obtener la ruta "lógica" de la app
+        if ($scriptDir && $scriptDir !== '/' && strpos($uri, $scriptDir) === 0) {
+            $uri = substr($uri, strlen($scriptDir)) ?: '/';
+        }
+
+            // Normalizar
+            if ($uri === '') { $uri = '/'; }
+
+            $metodo = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+            if ($metodo === 'GET') {
+                $fn = $this->rutasGET[$uri] ?? null;
+            } else {
+                $fn = $this->rutasPOST[$uri] ?? null;
+            }
+
+            if ($fn) {
+                call_user_func($fn, $this);
+            } else {
+                http_response_code(404);
+                echo "404 - Página no encontrada.";
+            }
+    }
+
     public function render($view, $datos = []){
+        foreach($datos as $key => $value){
+            $$key = $value;
+        }
 
-      foreach($datos as $key => $value){
-        $$key = $value; //$$ significa variable de variable
-      }
+        // ROOT_DIR se define en includes/app.php
+        if (!defined('ROOT_DIR')) {
+            define('ROOT_DIR', dirname(__DIR__));
+        }
 
-      ob_start();//Inicia un almacenamiento en memoria
-      // entonces incluimos la vista en el layout
-      include __DIR__ . "/views/$view.php";
+        // basePath para prefijar enlaces y formularios (siempre termina con /)
+        $scriptDir = rtrim(str_replace('\\','/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/');
+        $basePath = ($scriptDir && $scriptDir !== '/') ? ($scriptDir . '/') : '/';
 
-      $contenido = ob_get_clean();//Limpiamos la memoria
-      include __DIR__ . "/views/layout.php";
+        // assetBase para estáticos (en este caso igual a basePath)
+        $assetBase = $basePath;
+
+        ob_start();
+        include ROOT_DIR . "/views/$view.php";
+        $contenido = ob_get_clean();
+
+        include ROOT_DIR . "/views/layout.php";
     }
+
 }
 
-?>
+

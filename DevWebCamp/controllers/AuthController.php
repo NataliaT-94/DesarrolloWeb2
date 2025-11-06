@@ -27,7 +27,10 @@ class AuthController {
                     if( password_verify($_POST['password'], $usuario->password) ) {
                         
                         // Iniciar la sesión
-                        session_start();    
+                        if (session_status() === PHP_SESSION_NONE) {//verificamos si hay una sesion iniciada
+                            session_start();
+                        }   
+
                         $_SESSION['id'] = $usuario->id;
                         $_SESSION['nombre'] = $usuario->nombre;
                         $_SESSION['apellido'] = $usuario->apellido;
@@ -36,9 +39,12 @@ class AuthController {
 
                         //Redireccion
                         if($usuario->admin){
-                            header('Location: /admin/dashboard');
+                            
+                            redirect('admin/dashboard');
                         } else{
-                            header('Location: /finalizar-registro');
+                            
+                            redirect('finalizar-registro');
+
                         }
                         
                     } else {
@@ -59,9 +65,12 @@ class AuthController {
 
     public static function logout() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            session_start();
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
             $_SESSION = [];
-            header('Location: /');
+            
+            redirect('');
         }
        
     }
@@ -101,7 +110,8 @@ class AuthController {
                     
 
                     if($resultado) {
-                        header('Location: /mensaje');
+                        // header('Location: /mensaje');
+                        redirect('mensaje');
                     }
                 }
             }
@@ -164,18 +174,16 @@ class AuthController {
 
         $token = s($_GET['token']);
 
-        $token_valido = true;
-
-        if(!$token) header('Location: /');
-
         // Identificar el usuario con este token
         $usuario = Usuario::where('token', $token);
 
-        if(empty($usuario)) {
-            Usuario::setAlerta('error', 'Token No Válido, intenta de nuevo');
-            $token_valido = false;
-        }
+        $token_valido = false;
 
+        if(empty($usuario)) {
+            Usuario::setAlerta('error', 'Token no Válido');
+        } else {
+            $token_valido = true;
+        }
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -190,14 +198,15 @@ class AuthController {
                 $usuario->hashPassword();
 
                 // Eliminar el Token
-                $usuario->token = null;
+                $usuario->token = '';
 
                 // Guardar el usuario en la BD
                 $resultado = $usuario->guardar();
 
                 // Redireccionar
                 if($resultado) {
-                    header('Location: /login');
+                    // header('Location: /login');
+                    redirect('login');
                 }
             }
         }

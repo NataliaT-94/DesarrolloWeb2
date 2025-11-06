@@ -35,7 +35,7 @@ class Paginacion {
     public function enlace_anterior(){
         $html = '';
         if($this->pagina_anterior()){
-            $html .= "<a class=\"paginacion__enlace paginacion__enlace--texto\" href=\"?page={$this->pagina_anterior()}\">&laquo; Anterior</a>";
+            $html .= "<a class=\"paginacion__enlace paginacion__enlace--texto\" href=\"admin/ponentes?page={$this->pagina_anterior()}\">&laquo; Anterior</a>";
         }
         return $html;
 
@@ -44,7 +44,7 @@ class Paginacion {
     public function enlace_siguiente(){
         $html = '';
         if($this->pagina_siguiente()){
-            $html .= "<a class=\"paginacion__enlace paginacion__enlace--texto\" href=\"?page={$this->pagina_siguiente()}\">Siguiente &raquo;</a>";
+            $html .= "<a class=\"paginacion__enlace paginacion__enlace--texto\" href=\"admin/ponentes?page={$this->pagina_siguiente()}\">Siguiente &raquo;</a>";
         }
         return $html;
     }
@@ -55,7 +55,7 @@ class Paginacion {
             if($i === $this->pagina_actual){
                 $html .= "<span class=\"paginacion__enlace paginacion__enlace--actual \">{$i}</span>";
             } else {
-                $html .= "<a class=\"paginacion__enlace paginacion__enlace--numero \" href=\"?page={$i}\">{$i}</a>";
+                $html .= "<a class=\"paginacion__enlace paginacion__enlace--numero \" href=\"admin/ponentes?page={$i}\">{$i}</a>";
 
             }
         }

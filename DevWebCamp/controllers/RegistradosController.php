@@ -12,7 +12,8 @@ class RegistradosController {
     public static function index(Router $router){
         
         if(!is_admin()){
-            header('Location: /login');
+            // header('Location: /login');
+            redirect('login');
         }
 
         
@@ -20,30 +21,35 @@ class RegistradosController {
         $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
 
         if(!$pagina_actual || $pagina_actual < 1){
-            header('Location: /admin/registrados?page=1');
+            // header('Location: /admin/registrados?page=1');
+            redirect('admin/registrados?page=1');
         }
     
         $registros_por_pagina = 10;
         $total = Registro::total();
+        
+        // exit;
         $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total);
 
         if($paginacion->total_paginas() < $pagina_actual){
-            header('Location: /admin/registrados?page=1');
+            // header('Location: /admin/registrados?page=1');
+            redirect('admin/registrados?page=1');
         }
 
         $registros = Registro::paginar($registros_por_pagina, $paginacion->offset());
-
         
         foreach($registros as $registro){
-            $registro->usuario = Usuario::find($registro->usuario_id);
-            $registro->paquete = Paquete::find($registro->paquete_id);
+            $usuario = Usuario::find($registro->usuario_id);
+            $paquete = Paquete::find($registro->paquete_id);
         }
         // debuguear($registros);
 
         $router->render('admin/registrados/index',[
             'titulo' => 'Usuarios Registrados',
             'registros' => $registros,
-            'paginacion' => $paginacion->paginacion()
+            'paginacion' => $paginacion->paginacion(),
+            'paquete' => $paquete,
+            'usuario' => $usuario
         ]);
     }
         

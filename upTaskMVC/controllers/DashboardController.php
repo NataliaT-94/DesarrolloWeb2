@@ -14,13 +14,11 @@ class DashboardController{
        $id = $_SESSION['id'];
        $proyectos = Proyecto::belongsTo('propietarioId', $id);
        
-        
         //REnder a la vista
         $router->render('dashboard/index', [
             'titulo' => 'Proyectos',
-            'proyectos' => $proyectos
-
-
+            'proyectos' => $proyectos,
+            'basePath' => BASE_URL
         ]);
     }
 
@@ -47,34 +45,42 @@ class DashboardController{
                 $proyecto->guardar();
 
                 //Redireccionar
-                header('Location: /proyecto?=' . $proyecto->url);
+                // header('Location: /proyecto?=' . $proyecto->url);
+                redirect('proyecto?id=' . urlencode($proyecto->url));
+
             }
        }
         
         //REnder a la vista
         $router->render('dashboard/crear-proyecto', [
             'titulo' => 'Crear Proyectos',
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'basePath' => BASE_URL
 
 
         ]);
     }
 
     public static function proyecto(Router $router){
-        $token = $_GET['id'];
+        // $token = $_GET['id'];
+        $token = $_GET['id'] ?? null;
         
-        if(!$token) header('Location: /dashboard');
+        // if(!$token) header('Location: /dashboard');
+        if(!$token) redirect('dashboard');
         
         //Revisar que la persona que visita el proyecto, es quien lo creo
         $proyecto = Proyecto::where('url', $token);
         
         if($proyecto->propietarioId !== $_SESSION['id']){
-            header('Location: /dashboard');
+            // header('Location: /dashboard');
+            redirect('dashboard');
         }
          
          //REnder a la vista
          $router->render('dashboard/proyecto', [
-             'titulo' => $proyecto->proyecto
+             'titulo' => $proyecto->proyecto,
+             'proyectoId' => $proyecto->url,
+            'basePath' => BASE_URL
  
          ]);
      }
@@ -116,7 +122,8 @@ class DashboardController{
         $router->render('dashboard/perfil', [
             'titulo' => 'Perfil',
             'usuario' => $usuario,
-            'alertas' => $alertas
+            'alertas' => $alertas,
+            'basePath' => BASE_URL
 
 
         ]);
@@ -167,8 +174,8 @@ class DashboardController{
         //REnder a la vista
         $router->render('dashboard/cambiar-password', [
             'titulo' => 'Cambiar Password',
-            'alertas' => $alertas
-
+            'alertas' => $alertas,
+            'basePath' => BASE_URL
 
         ]);
     }

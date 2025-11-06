@@ -6,7 +6,7 @@
         require_once __DIR__ . '/../templates/alertas.php';
     ?>
 
-    <form action="/registro" class="formulario" method="POST">
+    <form action="registro" class="formulario" method="POST">
         <div class="formulario__campo">
             <label for="nombre" class="formulario__label">Nombre</label>
             <input type="text" class="formulario__input" placeholder="Tu Nombre" id="nombre" name="nombre" value="<?php echo $usuario->nombre; ?>">
@@ -32,8 +32,8 @@
     </form>
 
     <div class="acciones">
-        <a href="/login" class="acciones__enlace">¿Ya tienes cuenta? Iniciar Sesion</a>
-        <a href="/olvide" class="acciones__enlace">¿Olvidaste tu Password?</a>
+        <a href="login" class="acciones__enlace">¿Ya tienes cuenta? Iniciar Sesion</a>
+        <a href="olvide" class="acciones__enlace">¿Olvidaste tu Password?</a>
     </div>
 
 </main>

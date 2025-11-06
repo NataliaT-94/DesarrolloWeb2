@@ -115,7 +115,7 @@ import Swal from 'sweetalert2';
             datos.append('eventos', eventosId);
             datos.append('regalo_id', regaloId);
 
-            const url = '/finalizar-registro/conferencias';
+            const url = 'finalizar-registro/conferencias';
             const respuesta = await fetch(url, {
                 method: 'POST',
                 body: datos
@@ -139,7 +139,7 @@ import Swal from 'sweetalert2';
                     'Registro Exitoso',
                     'Tus conferencias se han almacenado y tu registro fue exitoso, te esperamos en DevWebCamp',
                     'success'
-                ).then(() => location.href = `/boleto?id=${resultado.token}`)
+                ).then(() => location.href = `boleto?id=${resultado.token}`)
             }else {
                 Swal.fire({
                     title: 'Error',

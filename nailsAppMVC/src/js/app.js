@@ -1,3 +1,4 @@
+
 let paso = 1;
 const pasoInicial = 1;
 const pasoFinal = 3;
@@ -123,8 +124,9 @@ async function consultarAPI(){
     
     try{
         // const url = '$(location.origin)/api/servicios';
-        const url = '/api/servicios';
-        const resultado = await fetch(url);
+        // const url = 'api/servicios';
+        const urlServicios = 'api/servicios';
+        const resultado = await fetch(urlServicios);
         const servicios = await resultado.json();
 
         mostrarServicios(servicios);
@@ -351,9 +353,10 @@ async function reservarCita(){
     try {
         //Peticion hacia la API
         // const url = '$(location.origin)/api/citas';
-        const url = '/api/citas';
+        // const url = 'api/citas';
+        const urlCrearCita = 'api/citas';
 
-        const respuesta = await fetch(url, {
+        const respuesta = await fetch(urlCrearCita, {
             method: 'POST',
             body: datos
         });

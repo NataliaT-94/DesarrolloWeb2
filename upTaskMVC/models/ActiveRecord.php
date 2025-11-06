@@ -17,26 +17,26 @@ class ActiveRecord {
     // -----------------------------
     // Cargar conexión desde .env
     // -----------------------------
-    public static function initDB() {
-        if (!self::$db) {
+    // public static function initDB() {
+    //     if (!self::$db) {
 
 
-            // Crear la conexión
-            self::$db = new mysqli(
-                $_ENV['BD_HOST'],
-                $_ENV['BD_USER'],
-                $_ENV['BD_PASS'],
-                $_ENV['BD_NAME']
-            );
+    //         // Crear la conexión
+    //         self::$db = new mysqli(
+    //             $_ENV['BD_HOST'],
+    //             $_ENV['BD_USER'],
+    //             $_ENV['BD_PASS'],
+    //             $_ENV['BD_NAME']
+    //         );
 
-            if (self::$db->connect_error) {
-                die("Error de conexión a la BD: " . self::$db->connect_error);
-            }
-        }
-    }
+    //         if (self::$db->connect_error) {
+    //             die("Error de conexión a la BD: " . self::$db->connect_error);
+    //         }
+    //     }
+    // }
     
     // Definir la conexión a la BD - includes/database.php
-    public static function setDB($database) {
+    public static function initDB($database) {
         self::$db = $database;
     }
 
@@ -74,28 +74,28 @@ class ActiveRecord {
 
     // Busca un registro por su id
     public static function find($id) {
-        $query = "SELECT * FROM " . static::$tabla  ." WHERE id = ${id}";
+        $query = "SELECT * FROM " . static::$tabla  ." WHERE id = {$id}";
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
     }
 
     // Obtener Registro
     public static function get($limite) {
-        $query = "SELECT * FROM " . static::$tabla . " LIMIT ${limite}";
+        $query = "SELECT * FROM " . static::$tabla . " LIMIT {$limite}";
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
     }
 
     // Busqueda Where con Columna 
     public static function where($columna, $valor) {
-        $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
+        $query = "SELECT * FROM " . static::$tabla . " WHERE {$columna} = '{$valor}'";
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
     }
 
     // Busca todos los registros que pertenecen a un ID
     public static function belongsTo($columna, $valor) {
-        $query = "SELECT * FROM " . static::$tabla . " WHERE ${columna} = '${valor}'";
+        $query = "SELECT * FROM " . static::$tabla . " WHERE {$columna} = '{$valor}'";
         $resultado = self::consultarSQL($query);
         return $resultado ;
     }
@@ -201,7 +201,7 @@ class ActiveRecord {
         $atributos = $this->atributos();
         $sanitizado = [];
         foreach($atributos as $key => $value ) {
-            $sanitizado[$key] = self::$db->escape_string($value);
+            $sanitizado[$key] = self::$db->escape_string($value ?? '');
         }
         return $sanitizado;
     }

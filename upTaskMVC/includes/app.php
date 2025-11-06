@@ -12,15 +12,34 @@ use Dotenv\Dotenv;
 use Model\ActiveRecord;
 require __DIR__ . '/../vendor/autoload.php';
 
-$dotenv = Dotenv::createImmutable(__DIR__);
+// Iniciar sesión (solo si no está iniciada)
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
+// Define la raíz del proyecto (1 nivel arriba de /includes)
+if (!defined('ROOT_DIR')) {
+    define('ROOT_DIR', dirname(__DIR__));
+}
+
+// Carga .env desde la raíz del proyecto
+$dotenv = Dotenv::createImmutable(ROOT_DIR);
 $dotenv->safeLoad();
 
-require 'funciones.php';
-require_once __DIR__ . '/database.php';
+
+
+require __DIR__ . '/funciones.php';
+require __DIR__ . '/database.php';
 
 
 //Conectar a la base de datos
 $db = conectarDB();
 
-ActiveRecord::initDB();
+ActiveRecord::initDB($db);
+
+// Definir una constante global con la URL base del proyecto
+if (!defined('BASE_URL')) {
+    define('BASE_URL', $_ENV['APP_URL'] ?? '/');
+}
 ?>

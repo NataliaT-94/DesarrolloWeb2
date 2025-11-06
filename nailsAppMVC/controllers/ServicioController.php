@@ -29,7 +29,8 @@ class ServicioController{
 
             if(empty($alertas)){
                 $servicio->guardar();
-                header('Location:/servicios');
+                // header('Location:/servicios');
+                redirect('servicios');
             }
         }
         $router->render('servicios/crear', [
@@ -53,7 +54,8 @@ class ServicioController{
 
             if(empty($alertas)){
                 $servicio->guardar();
-                header('Location:/servicios');
+                // header('Location:/servicios');
+                redirect('servicios');
             }
         }
         $router->render('servicios/actualizar', [
@@ -76,7 +78,7 @@ class ServicioController{
                 }
             }
     
-            header('Location: /servicios');
+            redirect('servicios');
         }
     }
     

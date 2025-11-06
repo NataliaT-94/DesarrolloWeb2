@@ -3,11 +3,11 @@
         'name' => 'natt1/nails-app-mvc',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '554e02fd2e12a6618f13d693e34ad4338ecc90ef',
+        'reference' => 'b022b4325aff98987762c83003af60a5d58fd09e',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'dev' => true,
+        'dev' => false,
     ),
     'versions' => array(
         'graham-campbell/result-type' => array(
@@ -22,7 +22,7 @@
         'natt1/nails-app-mvc' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '554e02fd2e12a6618f13d693e34ad4338ecc90ef',
+            'reference' => 'b022b4325aff98987762c83003af60a5d58fd09e',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

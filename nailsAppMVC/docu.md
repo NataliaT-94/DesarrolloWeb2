@@ -67,3 +67,8 @@ composer require vlucas/phpdotenv: en terminal
 # Correr project
 En la carpeta public click derecho terminal 
 comando php -S localhost:3000
+
+-------------------------------------------
+# Cuando realizamos cambio en el JS
+Debemos actualizar la carpeta build : boton derecho-upload folder
+Luego corremos nuevamente el npm run gulp en la terminal

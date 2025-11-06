@@ -1,5 +1,6 @@
 <h2 class="dashboard__heading"><?php echo $titulo; ?></h2>
 
+
 <main class="bloques">
     <div class="bloques__grid">
         <div class="bloque">
@@ -8,7 +9,7 @@
             <?php foreach($registros as $registro) { ?>
                 <div class="bloque__contenido">
                     <p class="bloque__texto">
-                        <?php echo $registro->usuario->nombre . " " . $registro->usuario->apellido; ?>
+                        <?php echo $usuario->nombre . " " . $usuario->apellido; ?>
                     </p>
                 </div>
                 

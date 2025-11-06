@@ -23,14 +23,15 @@ class LoginController{
                     //El usuario Existe
                     if(password_verify($_POST['password'], $usuario->password)){
                         //Iniciar sesion
-                        session_start();
+                        // session_start();
                         $_SESSION['id'] = $usuario->id;
                         $_SESSION['nombre'] = $usuario->nombre;
                         $_SESSION['email'] = $usuario->email;
                         $_SESSION['login'] = true;
 
                         //Redireccionar
-                        header('Location: /dashboard');
+                        // header('Location: /dashboard');
+                        redirect('dashboard');
 
                     } else {
                         Usuario::setAlerta('error', 'Password Incorrecto');
@@ -50,14 +51,15 @@ class LoginController{
     
     public static function logout(){
         $_SESSION = [];
-        header('Location: /');
+        // header('Location: /');
+        redirect('');
         
         
     }
 
     public static function crear(Router $router){
-        $alertas = [];
         $usuario = new Usuario;//instanciar el usuario
+        $alertas = [];
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             $usuario->sincronizar($_POST);
@@ -92,12 +94,12 @@ class LoginController{
                     $resultado = $usuario->guardar();
                     
                     if($resultado){
-                        header('Location: /mensaje');
+                        // header('Location: /mensaje');
+                        redirect('mensaje');
+                        return;
                     }
                 }
-            }
-
-        
+            }        
         }
 
         //REnder a la vista
@@ -153,13 +155,14 @@ class LoginController{
         $token = s($_GET['token']);
         $mostrar = true;
         
-        if(!$token) header('Location: /');
+        // if(!$token) header('Location: /');
+        if(!$token) redirect('');
 
         //Identificar el usuario con este token
         $usuario = Usuario::where('token', $token);
 
         if(empty($usuario)){
-            Usuario::setAlertas('error', 'Token No Valido');
+            Usuario::setAlerta('error', 'Token No Valido');
             $mostrar = false;
         }
 
@@ -183,7 +186,8 @@ class LoginController{
 
                 //REdireccionar
                 if($resultado){
-                    header('Location: /');
+                    // header('Location: /');
+                    redirect('');
                 }
             }
             
@@ -212,7 +216,8 @@ class LoginController{
         $token = s($_GET['token']);
         // debuguear($token);
 
-        if(!$token) header('Location: /');
+        // if(!$token) header('Location: /');
+        if(!$token) redirect('');
 
         //Encontrar al usuario con este token
         $usuario = Usuario::where('token', $token);

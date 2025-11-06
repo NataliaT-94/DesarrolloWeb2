@@ -6,6 +6,7 @@ class Router
 {
     public array $getRoutes = [];
     public array $postRoutes = [];
+    protected string $currentUrl = '/';
 
     public function get($url, $fn)
     {
@@ -20,21 +21,37 @@ class Router
     public function comprobarRutas()
     {
 
-        $url_actual = $_SERVER['PATH_INFO'] ?? '/';
-        $method = $_SERVER['REQUEST_METHOD'];
+        // $url_actual = $_SERVER['PATH_INFO'] ?? '/';
+        $url_actual = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';//elimina la parte del token de la url y detecta lapagina
+      
+        $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+        $scriptDir = rtrim($scriptDir, '/');
 
-        if ($method === 'GET') {
-            $fn = $this->getRoutes[$url_actual] ?? null;
+            // Si la url_actual comienza con ese directorio, lo removemos para obtener la ruta "lógica" de la app
+      if ($scriptDir && $scriptDir !== '/' && strpos($url_actual, $scriptDir) === 0) {
+          $url_actual = substr($url_actual, strlen($scriptDir)) ?: '/';
+      }
+
+        if ($url_actual === '') { $url_actual = '/'; }
+
+        $this->currentUrl = $url_actual; // <-- guardamos para render()
+
+        $metodo = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+        if($metodo === 'GET'){
+            $fn = $this -> getRoutes[$url_actual] ?? NULL;//asociamos a que url se refiere la funcion, si no existe asignar null
         } else {
-            $fn = $this->postRoutes[$url_actual] ?? null;
+
+            $fn = $this -> postRoutes[$url_actual] ?? NULL;
         }
 
-        if ( $fn ) {
+        if ($fn) {
             call_user_func($fn, $this);
         } else {
-            header('Location: /404');
+            http_response_code(404);
+            echo "404 - Página no encontrada.";
         }
-    }
+   }
 
     public function render($view, $datos = [])
     {
@@ -42,19 +59,30 @@ class Router
             $$key = $value; 
         }
 
+        // ROOT_DIR se define en includes/app.php
+        if (!defined('ROOT_DIR')) {
+            define('ROOT_DIR', dirname(__DIR__));
+        }
+
+        // basePath para prefijar enlaces y formularios (siempre termina con /)
+        $scriptDir = rtrim(str_replace('\\','/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/');
+        $basePath = ($scriptDir && $scriptDir !== '/') ? ($scriptDir . '/') : '/';
+
+        // assetBase para estáticos (en este caso igual a basePath)
+        $assetBase = $basePath;
+
         ob_start(); 
 
-        include_once __DIR__ . "/views/$view.php";
+        include_once ROOT_DIR . "/views/$view.php";
 
         $contenido = ob_get_clean(); // Limpia el Buffer
 
-        //Utilizar el Layout de acuerdo a la URL
-        $url_actual = $_SERVER['PATH_INFO'] ?? '/';
+        // include ROOT_DIR . "/views/layout.php";
 
-        if(str_contains($url_actual, '/admin')){//sirve para verificar si la url_actual contiene admin
-            include_once __DIR__ . '/views/admin-layout.php';
+        if (str_contains($this->currentUrl, 'admin')){//sirve para verificar si la url_actual contiene admin
+            include_once ROOT_DIR . '/views/admin-layout.php';
         } else {
-            include_once __DIR__ . '/views/layout.php';
+            include_once ROOT_DIR . '/views/layout.php';
         }
 
     }

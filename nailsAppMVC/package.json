@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "gulp": "gulp",
-    "buil": "gulp build"
+    "build": "gulp build"
   },
   "author": "Natt Techeira",
   "license": "ISC",

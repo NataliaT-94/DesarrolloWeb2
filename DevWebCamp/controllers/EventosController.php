@@ -13,14 +13,16 @@ use Classes\Paginacion;
 class EventosController {
     public static function index(Router $router){
         if(!is_admin()){
-            header('Location: /login');
+            // header('Location: /login');
+        redirect('login');
         }
         
         $pagina_actual = $_GET['page'];
         $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
 
         if(!$pagina_actual || $pagina_actual < 1){
-            header('Location: /admin/eventos?page=1');
+            // header('Location: /admin/eventos?page=1');
+        redirect('admin/eventos?page=1');
         }
 
         $por_pagina = 10;
@@ -45,7 +47,8 @@ class EventosController {
         
     public static function crear(Router $router){
         if(!is_admin()){
-            header('Location: /login');
+            // header('Location: /login');
+            redirect('login');
         }
         
         $alertas = [];
@@ -56,7 +59,8 @@ class EventosController {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if(!is_admin()){
-                header('Location: /login');
+                // header('Location: /login');
+                redirect('login');
             }
             
             $evento->sincronizar($_POST);
@@ -66,7 +70,8 @@ class EventosController {
                 $resultado = $evento->guardar();
 
                 if($resultado){
-                    header('Location: /admin/eventos');
+                    // header('Location: /admin/eventos');
+                    redirect('admin/eventos');
                 }
             }
         }
@@ -85,7 +90,8 @@ class EventosController {
         
     public static function editar(Router $router){
         if(!is_admin()){
-            header('Location: /login');
+            // header('Location: /login');
+            redirect('login');
         }
         
         $alertas = [];
@@ -94,7 +100,8 @@ class EventosController {
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
         if(!$id){
-            header('Location: /admin/eventos');
+            // header('Location: /admin/eventos');
+            redirect('admin/eventos');
         }
 
         $categorias = Categoria::all();
@@ -103,12 +110,14 @@ class EventosController {
         $evento = Evento::find($id);
 
         if(!$evento){
-            header('Location: /admin/eventos');
+            // header('Location: /admin/eventos');
+            redirect('admin/eventos');
         }
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             if(!is_admin()){
-                header('Location: /login');
+                // header('Location: /login');
+                redirect('login');
             }
             
             $evento->sincronizar($_POST);
@@ -118,7 +127,8 @@ class EventosController {
                 $resultado = $evento->guardar();
 
                 if($resultado){
-                    header('Location: /admin/eventos');
+                    // header('Location: /admin/eventos');
+                    redirect('admin/eventos');
                 }
             }
         }
@@ -137,20 +147,23 @@ class EventosController {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(!is_admin()){
-                header('Location: /login');
+                // header('Location: /login');
+                redirect('login');
             }
             
             $id = $_POST['id'];
             $evento = Evento::find($id);
 
             if(!isset($evento)){
-                header('Location: /admin/eventos');
+                // header('Location: /admin/eventos');
+                redirect('admin/eventos');
             }
 
             $resultado = $evento->eliminar();
 
             if($resultado){
-                header('Location: /admin/eventos');
+                // header('Location: /admin/eventos');
+                redirect('admin/eventos');
             }
 
             $evento->eliminar();

@@ -555,11 +555,13 @@ h3 {
   text-align: center;
   width: 100%;
   display: inline-block;
-  margin-top: 1rem;
 }
 .evento__agregar:hover {
   background-color: #cc8400;
   cursor: pointer;
+}
+.evento__agregar {
+  margin-top: 1rem;
 }
 .evento__agregar:disabled {
   opacity: 0.5;
@@ -627,14 +629,16 @@ h3 {
 .speaker {
   border: 1px solid rgb(127.050209205, 141.7782426778, 162.949790795);
   padding: 3rem;
-  background-position: center top;
-  background-size: 350px;
-  background-repeat: no-repeat;
 }
 .speaker__nombre {
   font-weight: 900;
   font-size: 2.6rem;
   margin: 2rem 0;
+}
+.speaker {
+  background-position: center top;
+  background-size: 350px;
+  background-repeat: no-repeat;
 }
 .speaker:nth-child(4n+1) {
   background-image: image-set(url("../img/bg_1.avif") 1x, url("../img/bg_1.webp") 1x, url("../img/bg_1.png") 1x);
@@ -684,11 +688,6 @@ h3 {
   color: #FFFFFF;
 }
 
-.speaker-sociales {
-  display: flex;
-  gap: 2rem;
-  margin-top: 2rem;
-}
 .speaker-sociales__enlace::before {
   color: #1a1b15;
   font-size: 3rem;
@@ -718,6 +717,11 @@ h3 {
 }
 .speaker-sociales__ocultar {
   display: none;
+}
+.speaker-sociales {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
 .mapa {
@@ -784,13 +788,15 @@ h3 {
   color: #FFFFFF;
   text-align: center;
   margin-bottom: 2rem;
-  font-size: clamp(2rem, -0.8rem + 10vw, 4rem);
 }
 @media (min-width: 1024px) {
   .boleto__logo {
     text-align: left;
     margin: 0;
   }
+}
+.boleto__logo {
+  font-size: clamp(2rem, -0.8rem + 10vw, 4rem);
 }
 .boleto__plan {
   font-size: 2rem;
@@ -819,11 +825,13 @@ h3 {
   text-align: center;
   width: 100%;
   display: inline-block;
-  width: auto;
 }
 .boleto__enlace:hover {
   background-color: rgb(1.5384615385, 168.4615384615, 1.5384615385);
   cursor: pointer;
+}
+.boleto__enlace {
+  width: auto;
 }
 .boleto--acceso {
   width: 30rem;
@@ -1006,12 +1014,14 @@ h3 {
   text-align: center;
   width: 100%;
   display: inline-block;
-  width: auto;
-  align-self: flex-start;
 }
 .formulario__submit:hover {
   background-color: #cccc00;
   cursor: pointer;
+}
+.formulario__submit {
+  width: auto;
+  align-self: flex-start;
 }
 .formulario__submit--registrar, .formulario__submit--full {
   width: 100%;
@@ -1158,12 +1168,14 @@ h3 {
   text-align: center;
   width: 100%;
   display: inline-block;
-  text-transform: uppercase;
-  margin: 2rem 0;
 }
 .header__boton:hover {
   background-color: rgb(1.5384615385, 168.4615384615, 1.5384615385);
   cursor: pointer;
+}
+.header__boton {
+  text-transform: uppercase;
+  margin: 2rem 0;
 }
 @media (min-width: 768px) {
   .header__boton {
@@ -1191,13 +1203,15 @@ h3 {
   color: #FFFFFF;
   text-align: center;
   margin-bottom: 2rem;
-  color: #FFFFFF;
 }
 @media (min-width: 1024px) {
   .barra__contenido h2 {
     text-align: left;
     margin: 0;
   }
+}
+.barra__contenido h2 {
+  color: #FFFFFF;
 }
 
 .navegacion {
@@ -1244,13 +1258,15 @@ h3 {
   color: #FFFFFF;
   text-align: center;
   margin-bottom: 2rem;
-  font-size: clamp(2rem, -0.8rem + 10vw, 4rem);
 }
 @media (min-width: 1024px) {
   .footer__logo {
     text-align: left;
     margin: 0;
   }
+}
+.footer__logo {
+  font-size: clamp(2rem, -0.8rem + 10vw, 4rem);
 }
 .footer__texto {
   line-height: 2;
@@ -1273,12 +1289,6 @@ h3 {
   font-weight: 400;
 }
 
-.menu-redes {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin: 4rem 0;
-}
 .menu-redes__enlace::before {
   color: #FFFFFF;
   font-size: 2rem;
@@ -1308,6 +1318,12 @@ h3 {
 }
 .menu-redes__ocultar {
   display: none;
+}
+.menu-redes {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 4rem 0;
 }
 @media (min-width: 768px) {
   .menu-redes {
@@ -1358,13 +1374,15 @@ h3 {
   color: #FFFFFF;
   text-align: center;
   margin-bottom: 2rem;
-  font-size: clamp(2rem, -0.8rem + 10vw, 3rem);
 }
 @media (min-width: 1024px) {
   .dashboard__logo {
     text-align: left;
     margin: 0;
   }
+}
+.dashboard__logo {
+  font-size: clamp(2rem, -0.8rem + 10vw, 3rem);
 }
 .dashboard__form {
   display: flex;
@@ -1454,12 +1472,14 @@ h3 {
   text-align: center;
   width: 100%;
   display: inline-block;
-  text-transform: uppercase;
-  font-size: 1.4rem;
 }
 .dashboard__boton:hover {
   background-color: #cc8400;
   cursor: pointer;
+}
+.dashboard__boton {
+  text-transform: uppercase;
+  font-size: 1.4rem;
 }
 @media (min-width: 768px) {
   .dashboard__boton {

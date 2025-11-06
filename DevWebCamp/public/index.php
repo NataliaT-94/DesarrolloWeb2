@@ -1,5 +1,8 @@
 <?php 
 
+// Desactivar solo los warnings de PHP (E_WARNING y E_USER_WARNING)
+error_reporting(E_ALL & ~E_WARNING & ~E_USER_WARNING);
+
 require_once __DIR__ . '/../includes/app.php';
 
 use MVC\Router;

@@ -1,23 +1,58 @@
+// Base URL inyectable desde el servidor (layout). Fallback seguro a '/'
+const BASE = (window.APP_BASE || window.APP_URL || '/').replace(/\/?$/, '/');
 
-
-obtenerTareas();
+// obtenerTareas();
 let tareas = [];
 let filtradas = [];
 
+inicializar();
 
+function inicializar() {
+  // Botón "Agregar tarea" (si existe en esta vista)
+  const nuevaTareaBtn = document.querySelector('#agregar-tarea');
+  if (nuevaTareaBtn) {
+    nuevaTareaBtn.addEventListener('click', function () {
+      mostrarFormulario();
+    });
+  }
+
+  // Filtros (si existen)
+  const filtros = document.querySelectorAll('#filtros input[type="radio"]');
+  filtros.forEach((radio) => {
+    radio.addEventListener('input', filtrarTareas);
+  });
+
+  // Solo intentamos cargar tareas si hay contenedor y hay id/url de proyecto
+  const contenedorTareas = document.querySelector('#listado-tareas');
+  const proyectoId = obtenerProyecto();
+  if (contenedorTareas && proyectoId) {
+    obtenerTareas();
+  } else if (!proyectoId) {
+    console.log('📄 No hay ID de proyecto en esta página.');
+  }
+}
 
 
 //Boton para mostrar el Modal de Agregar tarea
-const nuevaTareaBtn = document.querySelector('#agregar-tarea');
-nuevaTareaBtn.addEventListener('click', function(){
-    mostrarFormulario();
-} );
+
+// const nuevaTareaBtn = document.querySelector('#agregar-tarea');
+// if (nuevaTareaBtn) {
+//     nuevaTareaBtn.addEventListener('click', function(){
+//         mostrarFormulario();
+//     });
+// }
+
+
+// const nuevaTareaBtn = document.querySelector('#agregar-tarea');
+// nuevaTareaBtn.addEventListener('click', function(){
+//     mostrarFormulario();
+// } );
 
 //Filtros de Busqueda
-const filtros = document.querySelectorAll('#filtros input[type="radio"]');
-filtros.forEach(radio => {
-    radio.addEventListener('input', filtrarTareas);
-});
+// const filtros = document.querySelectorAll('#filtros input[type="radio"]');
+// filtros.forEach(radio => {
+//     radio.addEventListener('input', filtrarTareas);
+// });
 
 function filtrarTareas(e){
     const filtro = e.target.value;
@@ -36,13 +71,34 @@ function filtrarTareas(e){
 async function obtenerTareas(){
     try {
         const id = obtenerProyecto();
-        const url = `/api/tareas?id=${id}`;
+        if (!id) return;
+        const url = `${BASE}api/tareas?id=${encodeURIComponent(id ?? '')}`;
+
+
+        // console.log(url);
+        // console.log('BASE actual:', BASE);
+
         
         const respuesta = await fetch(url);
 
         const resultado = await respuesta.json();
         
         tareas = resultado.tareas;
+
+        // const proyectoId = obtenerProyecto();
+
+        // if (proyectoId) {
+        //     const url = `${BASE}api/tareas?id=${proyectoId}`;
+        //     console.log('URL del fetch:', url);
+
+        //     fetch(url)
+        //         .then(res => res.json())
+        //         .then(data => console.log('✅ Tareas:', data))
+        //         .catch(err => console.error('Error al cargar tareas:', err));
+                
+        // } else {
+        //     console.log('📄 No hay ID de proyecto en esta página.');
+        // }
 
         
         mostrarTareas();
@@ -83,7 +139,9 @@ function mostrarTareas(){
         const nombreTarea = document.createElement('P');
         nombreTarea.textContent = tarea.nombre;
         nombreTarea.ondblclick = function(){
-            mostrarFormulario(editar = true, {...tarea});
+            // mostrarFormulario(editar = true, {...tarea});
+            mostrarFormulario(true, { ...tarea });
+
         }
 
         const opcionesDiv = document.createElement('DIV');
@@ -145,6 +203,8 @@ function totalCompletas(){
 }
 
 function mostrarFormulario(editar = false, tarea = {}){
+    console.log('mostrar form..');
+    
     const modal = document.createElement('DIV');
     modal.classList.add('modal');
     modal.innerHTML = `
@@ -200,6 +260,7 @@ function mostrarFormulario(editar = false, tarea = {}){
     document.querySelector('.dashboard').appendChild(modal);
 }
 
+
     
     //Muestra un mensaje en la interfaz
     function mostrarAlerta(mensaje, tipo, referencia){
@@ -233,7 +294,8 @@ function mostrarFormulario(editar = false, tarea = {}){
         datos.append('proyectoId', obtenerProyecto());        
 
         try{
-            const url = 'http://localhost:3000/api/tarea';
+            // const url = 'http://localhost:3000/api/tarea';
+            const url = `${BASE}api/tarea`;
             const respuesta = await fetch(url, {
                 method: 'POST',
                 body: datos
@@ -287,7 +349,8 @@ function mostrarFormulario(editar = false, tarea = {}){
         //     console.log(valor);
         // }
         try {
-            const url = 'http://localhost:3000/api/tarea/actualizar';  
+            // const url = 'http://localhost:3000/api/tarea/actualizar';  
+            const url = `${BASE}api/tarea/actualizar`; 
             const respuesta =  await fetch(url, {
                 method: 'POST',
                 body: datos
@@ -343,7 +406,8 @@ function mostrarFormulario(editar = false, tarea = {}){
         datos.append('proyectoId',obtenerProyecto());
 
         try {
-            const url = 'http://localhost:3000/api/tarea/eliminar';  
+            // const url = 'http://localhost:3000/api/tarea/eliminar';  
+            const url = `${BASE}api/tarea/eliminar`; 
             const respuesta =  await fetch(url, {
                 method: 'POST',
                 body: datos
@@ -368,11 +432,21 @@ function mostrarFormulario(editar = false, tarea = {}){
         }
     }
 
+    // function obtenerProyecto(){
+    //     const proyectoParams = new URLSearchParams(window.location.search);
+    //     const proyecto = Object.fromEntries(proyectoParams.entries());//sirve para iterar objetos como el formdata/entries trae los datos del obje
+    //     return proyecto.id;
+        
+    // }
+
     function obtenerProyecto(){
-        const proyectoParams = new URLSearchParams(window.location.search);
-        const proyecto = Object.fromEntries(proyectoParams.entries());//sirve para iterar objetos como el formdata/entries trae los datos del obje
-        return proyecto.id;
+        const params = new URLSearchParams(window.location.search);
+        // El backend espera ?id= con el valor de url del proyecto, pero tu vista navega con ?url=
+        return params.get('id') || params.get('url') || null;
     }
+
+
+
 
 
     function limpiarTareas(){

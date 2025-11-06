@@ -32,9 +32,22 @@
 
     <?php include_once __DIR__ . '/footer-dashboard.php'; ?>
     
-    <?php $script .=' 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="build/js/bundle.js"></script>
-    ';
+    
+    <?php
+    // ' 
+    //     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    //     // <script src="build/js/bundle.js"></script>
+    // ';
 
+    // "
+    //     <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    //     <script src='{$assetBase}build/js/bundle.js?v=" . filemtime(ROOT_DIR . "/public/build/js/bundle.js") . "'></script>
+        
+    // ";
+    
+        $script = "
+         <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+         <script src='{$assetBase}build/js/bundle.js?v=" . filemtime(ROOT_DIR . "/public/build/js/bundle.js") . "'></script>
+        ";
     ?>
+

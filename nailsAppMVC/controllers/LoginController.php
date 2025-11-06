@@ -23,7 +23,7 @@ class LoginController{
                     //Verificar el Password
                     if($usuario->comprobarPasswordAndVerificado($auth->password)){
                         //Autenticar el usuario
-                        session_start();
+                        // session_start();
 
                         $_SESSION['id'] = $usuario->id;
                         $_SESSION['nombre'] = $usuario->nombre . " " . $usuario->apellido;
@@ -33,12 +33,14 @@ class LoginController{
                         //Redireccionamiento
                         if($usuario->admin === "1"){
                             $_SESSION['admin'] = $usuario->admin ?? null;
-                            header('Location: /admin');
+                            // header('admin');
+                            redirect('admin'); 
                         } else {
-                            header('Location: /cita');
+                            // header('cita');
+                            redirect('cita');
                         }
 
-
+                        return;
                     }
                 } else {
                     Usuario::setAlerta('error', 'Usuario no Registrado');
@@ -57,8 +59,12 @@ class LoginController{
         //session_start();
         
         $_SESSION = [];
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            session_destroy();
+        }
         
-        header('location: /');
+        // header('');
+        redirect('');
     }
 
     public static function olvide(Router $router){
@@ -97,7 +103,7 @@ class LoginController{
     public static function recuperar(Router $router){
         $alertas = [];
         $error = false;
-        $token = s($_GET['token']);
+        $token = s($_GET['token'] ?? '');
 
         //Buscar Usuario por su Token
         $usuario = Usuario::where('token', $token);
@@ -107,13 +113,13 @@ class LoginController{
             $error = true;
         }
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        if($_SERVER['REQUEST_METHOD'] === 'POST' && !$error){
             //Leer el nuevo password y guardarlo
             $password = new Usuario($_POST);
             $alertas = $password->validarPassword();
 
             if(empty($alertas)){
-                $usuario->password = null;
+                // $usuario->password = null;
 
                 $usuario->password = $password->password;
                 $usuario->hashPassword();
@@ -121,7 +127,9 @@ class LoginController{
 
                 $resultado = $usuario->guardar();
                 if($resultado){
-                    header('Location: /');
+                    // header('');
+                    redirect(''); // ✅ vuelve al login de tu app (no al root del dominio)
+                    return;
                 }
             
             }
@@ -166,10 +174,10 @@ class LoginController{
                     $resultado = $usuario->guardar();
 
                     if($resultado){
-                        header('Location: /mensaje');
-                    }
-
-                    
+                        // header('mensaje');
+                        redirect('mensaje'); 
+                        return;
+                    }                    
                 }
             }
         }
@@ -185,7 +193,7 @@ class LoginController{
 
     public static function confirmar(Router $router){
         $alertas = [];
-        $token = s($_GET['token']);
+        $token = s($_GET['token'] ?? '');
         $usuario = Usuario::where('token', $token);
 
         if(empty($usuario)){

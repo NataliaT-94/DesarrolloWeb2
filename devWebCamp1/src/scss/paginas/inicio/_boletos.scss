@@ -1,0 +1,161 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.boletos{
+    &__grid{
+        @include m.contenedor-sm;
+        @include m.grid(1, 5rem);
+    }
+}
+
+.boleto{
+    width: min(100% - 5rem, 65rem);
+    margin: 0 auto;
+    padding: 6rem;
+    border-radius: 2rem;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    color: v.$blanco;
+    position: relative;
+
+    &::before,
+    &::after{
+        position: absolute;
+        content: '';
+        background-color: v.$blanco;
+        width: 5rem;
+        height: 5rem;
+        top: calc(50% - 2.5rem);
+    }
+
+    &::before{
+        clip-path: circle(50% at 25% 50%);
+        left: 0;
+    }
+
+    &::after{
+        clip-path: circle(50% at 75% 50%);
+        right: 0;
+    }
+
+    &--presencial{
+        background-color: hsla(37.46478873239437, 90%, 53%, 1);
+        background-image: radial-gradient(circle at 79% 24%, hsla(88.65168539325842, 72%, 47%, 1) 0%, transparent 50%), 
+            radial-gradient(circle at 40% 38%, hsla(37.42857142857143, 91%, 54%, 1) 0%, transparent 50%), 
+            radial-gradient(circle at 34% 82%, hsla(88.6046511627907, 71%, 47%, 1) 0%, transparent 50%), 
+            radial-gradient(circle at 31% 84%, hsla(37.46478873239437, 90%, 53%, 1) 0%, transparent 50%), 
+            radial-gradient(circle at 0% 100%, hsla(88.6046511627907, 71%, 47%, 1) 0%, transparent 50%), 
+            radial-gradient(circle at 97% 95%, hsla(37.42857142857143, 91%, 54%, 1) 0%, transparent 50%), 
+            radial-gradient(circle at 10% 13%, hsla(88.65168539325842, 72%, 47%, 1) 0%, transparent 50%);
+        background-blend-mode: normal, normal, normal, normal, normal, normal, normal;
+    }
+
+    &--virtual{
+        background-color: v.$verde;
+    }
+
+    &--gratis{
+        background-color: v.$naranja;
+    }
+
+    &__logo{
+        @include m.logo;
+        @include m.texto-fluido(2rem, 4rem);
+    }
+
+    &__plan{
+        font-size: 2rem;
+        text-transform: uppercase;
+        margin: 3rem 0 0 0;
+    }
+
+    &__precio{
+        font-size: 4rem;
+        font-weight: v.$black;
+        margin: 3rem 0 0 0;
+    }
+
+    &__enlace-contenedor{
+        margin-top: 5rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__enlace{
+        @include m.boton(v.$verde, v.$blanco);
+        width: auto;
+    }
+
+    $modificador: &;
+
+    &--acceso{
+        width: 30rem;
+        height: 50rem;
+        padding: 10rem 3rem;
+        @include m.tablet{
+            width: 60rem;
+            height: 30rem;
+            padding: 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+        }
+
+        #{$modificador}__logo{
+            @include m.texto-fluido(2rem, 3rem);
+            margin: 0;
+            text-align: left;
+        }
+        
+        #{$modificador}__nombre{
+            font-size: 2.4rem;
+            text-transform: uppercase;
+            font-weight: v.$black;
+        }
+
+        #{$modificador}__codigo{
+            font-size: 4rem;
+            font-weight: v.$bold;
+            text-align: center;
+            position: absolute;
+            bottom: 7rem;
+            margin: 0;
+            left: 0;
+            width: 100%;
+            @include m.tablet{
+                rotate: 90deg;
+                transform-origin: 0 0;
+                top: 0;
+                left: calc(100% - 5rem);
+                width: 30rem;
+            }
+
+        }
+    }
+
+    &::before{
+        clip-path: circle(50% at 50% 25%);
+        left: calc(50% - 2.5rem);
+        top: 0;
+        @include m.tablet{
+            clip-path: circle(50% at 25% 50%);
+            left: 0;
+            top: calc(50% - 2.5rem);
+        }
+    }
+
+    &::after{
+        clip-path: circle(50% at 50% 75%);
+        left: calc(50% - 2.5rem);
+        top: calc(100% - 5rem);
+        @include m.tablet{
+            clip-path: circle(50% at 75% 50%);
+            left: calc(100% - 5rem);
+            top: calc(50% - 2.5rem);
+        }
+    }
+
+}

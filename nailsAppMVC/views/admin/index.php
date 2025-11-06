@@ -5,11 +5,13 @@
 ?>
 <h2>Buscar Citas</h2>
 <div class="busqueda">
-    <form class="formulario">
+    <form class="formulario" action="<?= $basePath ?>admin" method="GET">
 
         <div class="campo">
-            <label for="fecha">Fecha</label>
-            <input type="date" name="fecha" id="fechaAdmin" value="<?php echo $fecha; ?>" />
+            <label for="fechaAdmin">Fecha</label>
+            <input type="date" name="fecha" id="fechaAdmin" value="<?php echo $fecha; ?>" onchange="this.form.submit()"
+            
+            />
         </div>
 
     </form>
@@ -54,7 +56,7 @@
         ?>
                 <p class="total">Total:  <span>$ <?php echo $total; ?></span> </p>
         
-                <form action="/api/eliminar" method="POST">
+                <form action="api/eliminar" method="POST">
                     <input type="hidden" name="id" value="<?php echo $cita->id; ?>">
                     <input type="submit" class="boton-eliminar" value="Eliminar">
                 </form>
@@ -68,5 +70,10 @@
     </ul>
 </div>
 <?php
-    $script = "<script src='build/js/bundle.js'></script>";
+    // $script = "<script src='build/js/bundle.js'></script>";
+
+//   $script = "<script src='{$assetBase}build/js/bundle.js?v=" . filemtime(ROOT_DIR . "/public/build/js/bundle.js") . "'></script>";
+  $script = '';
+
+
 ?>

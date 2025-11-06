@@ -32,7 +32,7 @@ function javascript() {
     return src(paths.js)
       .pipe(sourcemaps.init())
       .pipe(concat('bundle.js'))
-      .pipe(terser())
+      .pipe(terser())//minificador de js
       .pipe(sourcemaps.write('.'))      
       .pipe(dest('./public/build/js'))
       

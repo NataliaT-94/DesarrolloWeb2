@@ -13,7 +13,7 @@ class DashboardController {
         //Obtener ultimos registros
         $registros = Registro::get(5);
         foreach($registros as $registro){
-            $registro->usuario = Usuario::find($registro->usuario_id);
+            $usuario = Usuario::find($registro->usuario_id);
         }
 
         //Calcular los ingresos
@@ -33,7 +33,8 @@ class DashboardController {
             'registros' => $registros,
             'ingresos' => $ingresos,
             'menos_disponibles' => $menos_disponibles,
-            'mas_disponibles' => $mas_disponibles
+            'mas_disponibles' => $mas_disponibles,
+            'usuario'=> $usuario
         ]);
     }
         

@@ -8,8 +8,8 @@
     
         <div class="evento__autor-info">
             <picture>
-                <source srcset="<?php echo $_ENV['HOST']; ?>/img/speakers/<?php echo $evento->ponente->imagen; ?>.webp" alt="Imagen Ponente" type="image/webp">
-                <source srcset="<?php echo $_ENV['HOST']; ?>/img/speakers/<?php echo $evento->ponente->imagen; ?>.png" alt="Imagen Ponente" type="image/png">
+                <source srcset="<?php echo $_ENV['APP_URL']; ?>img/speakers/<?php echo $evento->ponente->imagen; ?>.webp" type="image/webp">
+                <source srcset="<?php echo $_ENV['APP_URL']; ?>img/speakers/<?php echo $evento->ponente->imagen; ?>.png" type="image/png">
                 <img class="evento__imagen-autor" loading="lazy" width="200" height="300" src=" img/speakers/<?php echo $evento->ponente->imagen; ?>.png" alt="Imagen Ponente">
             </picture>
     

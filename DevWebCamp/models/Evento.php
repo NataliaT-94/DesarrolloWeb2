@@ -14,6 +14,12 @@ class Evento extends ActiveRecord {
     public $hora_id;
     public $ponente_id;
 
+    // 👇 Agregamos estas propiedades adicionales que se usan en PaginasController
+    public $categoria;
+    public $dia;
+    public $hora;
+    public $ponente;
+
     
     public function __construct($args = [])
     {
@@ -25,6 +31,12 @@ class Evento extends ActiveRecord {
         $this->dia_id = $args['dia_id'] ?? '';
         $this->hora_id = $args['hora_id'] ?? '';
         $this->ponente_id = $args['ponente_id'] ?? '';
+
+        // Inicializamos las relaciones en null
+        $this->categoria = $args['categoria'] ?? null;
+        $this->dia = $args['dia'] ?? null;
+        $this->hora = $args['hora'] ?? null;
+        $this->ponente = $args['ponente'] ?? null;
     }
 
     // Mensajes de validación para la creación de un evento

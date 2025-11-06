@@ -11,7 +11,7 @@
 
             <p class="paquete__precio">$0</p>
 
-            <form method="POST" action="/finalizar-registro/gratis">
+            <form method="POST" action="finalizar-registro/gratis">
                 <input class="paquetes__submit" type="submit" value="Inscripcion Gratis">
             </form>
         </div>
@@ -32,7 +32,7 @@
             <div class="paquete__pago">
 
                 <!-- <form action="https://www.sandbox.paypal.com/ncp/payment/9V2UAZSF3PUGL" method="post" target="_blank"> -->
-                <form method="POST" action="/finalizar-registro/pagar">
+                <form method="POST" action="finalizar-registro/pagar">
                     <input type="hidden" name="paquete_id" value="1">
                     <input class="paquetes__submit" type="submit" value="Pagar ahora" />
                     <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" style="margin-top:2rem;" />
@@ -54,7 +54,7 @@
             <p class="paquete__precio">$49</p>
 
             <!-- <form action="https://www.sandbox.paypal.com/ncp/payment/DJNK3X2WGABSN" method="POST" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;"> -->
-            <form method="POST" action="/finalizar-registro/pagar">
+            <form method="POST" action="finalizar-registro/pagar">
                 <input type="hidden" name="paquete_id" value="2">
                 <input class="paquetes__submit" type="submit" value="Pagar ahora" />
                 <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
