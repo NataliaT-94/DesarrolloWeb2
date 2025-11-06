@@ -13,6 +13,10 @@ class Registro extends ActiveRecord {
     public $usuario_id;
     public $regalo_id;
     
+    // Propiedades para relaciones (no están en la BD)
+    public $usuario;
+    public $paquete;
+    
 
 
 

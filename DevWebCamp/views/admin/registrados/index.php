@@ -15,13 +15,13 @@
                 <?php foreach($registros as $registro) {?>
                     <tr class="table__tr">
                         <td class="table__td">
-                            <?php echo $usuario->nombre . " " . $usuario->apellido; ?>
+                            <?php echo $registro->usuario->nombre . " " . $registro->usuario->apellido; ?>
                         </td>
                         <td class="table__td">
-                            <?php echo $usuario->email; ?>
+                            <?php echo $registro->usuario->email; ?>
                         </td>
                         <td class="table__td">
-                            <?php echo $paquete->nombre; ?>
+                            <?php echo $registro->paquete->nombre; ?>
                         </td>
                     </tr>
                 <?php } ?>

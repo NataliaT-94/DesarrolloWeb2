@@ -38,18 +38,17 @@ class RegistradosController {
 
         $registros = Registro::paginar($registros_por_pagina, $paginacion->offset());
         
+        // Agregar información del usuario y paquete a cada registro
         foreach($registros as $registro){
-            $usuario = Usuario::find($registro->usuario_id);
-            $paquete = Paquete::find($registro->paquete_id);
+            $registro->usuario = Usuario::find($registro->usuario_id);
+            $registro->paquete = Paquete::find($registro->paquete_id);
         }
         // debuguear($registros);
 
         $router->render('admin/registrados/index',[
             'titulo' => 'Usuarios Registrados',
             'registros' => $registros,
-            'paginacion' => $paginacion->paginacion(),
-            'paquete' => $paquete,
-            'usuario' => $usuario
+            'paginacion' => $paginacion->paginacion()
         ]);
     }
         
