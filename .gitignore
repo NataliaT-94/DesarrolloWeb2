@@ -2,3 +2,27 @@
 feria-emprendedores/build/
 node_modules/
 .env
+
+DevWebCamp/vendor/
+DevWebCamp/vendor/
+devWebCamp1/vendor/
+bienesraices_inicio/vendor/
+nailsAppMVC/vendor/
+bienesraices_inicio - bkp 2024-10-26/vendor/
+
+
+upTaskMVC/.vscode/sftp.json
+DevWebCamp/.vscode/sftp.json
+nailsAppMVC/.vscode/sftp.json
+
+upTaskMVC/includes/.env
+
+
+devWebCamp1/public/build/
+DevWebCamp/public/build/
+upTaskMVC/public/build/
+nailsAppMVC/AppSalon_PHP/public/build/
+
+
+
+nailsAppMVC\AppSalon_PHP\build\css\app.css.map
