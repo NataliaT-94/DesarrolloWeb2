@@ -32,7 +32,7 @@ class RegistroController {
         }
 
         if(isset($registro) && $registro->paquete_id === "1"){
-            redirect('finalizar-registro/conferencias');
+            redirect('/finalizar-registro/conferencias');
             return;
         }
 
@@ -128,7 +128,7 @@ class RegistroController {
             if(empty($_POST)){
                 // echo json_encode([]);
                 // header('Location: /finalizar-registro');
-                redirect('finalizar-registro');
+                redirect('/finalizar-registro');
                 return;
             }
 
@@ -153,9 +153,12 @@ class RegistroController {
 
                 if ($resultado) {
                     // Si el paquete es presencial (1), redirige a conferencias
+
+                    
                     if ($registro->paquete_id === "1") {
                         // header('Location: /finalizar-registro/conferencias');
-                        redirect('finalizar-registro/conferencias');
+                        redirect('/finalizar-registro/conferencias');
+
                         return;
                     }
 
@@ -166,7 +169,8 @@ class RegistroController {
                     }
                 } else {
                     // header('Location: /finalizar-registro');
-                    redirect('finalizar-registro');
+                    redirect('/finalizar-registro');
+                    return;
                 }
 
 
@@ -176,7 +180,7 @@ class RegistroController {
                 // ]);
 
                 // header('Location: /finalizar-registro');
-                redirect('finalizar-registro');
+                redirect('/finalizar-registro');
             }
         }
     }
@@ -202,11 +206,11 @@ class RegistroController {
             return;
         }
 
-        //Redireccionar a boleto virtual en caso de haber finalizado su registro
-        if(isset($registro->regalo_id) && $registro->paquete_id === "1"){
-            redirect('boleto?id=' . urlencode($registro->token));
-            return;
-        }
+        // //Redireccionar a boleto virtual en caso de haber finalizado su registro
+        // if(isset($registro->regalo_id) && $registro->paquete_id === "1"){
+        //     redirect('boleto?id=' . urlencode($registro->token));
+        //     return;
+        // }
 
         $eventos = Evento::ordenar('hora_id', 'ASC');
 

@@ -9,7 +9,7 @@
             <?php foreach($registros as $registro) { ?>
                 <div class="bloque__contenido">
                     <p class="bloque__texto">
-                        <?php echo $usuario->nombre . " " . $usuario->apellido; ?>
+                        <?php echo $registro->usuario->nombre . " " . $registro->usuario->apellido; ?>
                     </p>
                 </div>
                 

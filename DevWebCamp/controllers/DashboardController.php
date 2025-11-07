@@ -12,9 +12,10 @@ class DashboardController {
 
         //Obtener ultimos registros
         $registros = Registro::get(5);
-        foreach($registros as $registro){
-            $usuario = Usuario::find($registro->usuario_id);
-        }
+    foreach($registros as $registro){
+        $registro->usuario = Usuario::find($registro->usuario_id);
+    }
+
 
         //Calcular los ingresos
         $virtuales = Registro::total('paquete_id', 2);

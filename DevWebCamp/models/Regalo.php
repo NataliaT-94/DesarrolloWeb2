@@ -8,6 +8,7 @@ class Regalo extends ActiveRecord {
 
     public $id;
     public $nombre;
+    public $total;
 
 
 
