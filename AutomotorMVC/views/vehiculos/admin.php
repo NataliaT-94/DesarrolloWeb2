@@ -9,8 +9,8 @@
         <?php }?>
 
 
-    <a href="/vehiculos/crear" class="boton boton-verde">Nuevo Vehiculo</a>
-    <a href="/vendedores/crear" class="boton boton-amarillo">Nuevo(a) Vendedor</a>
+    <a href="vehiculos/crear" class="boton boton-verde">Nuevo Vehiculo</a>
+    <a href="vendedores/crear" class="boton boton-amarillo">Nuevo(a) Vendedor</a>
 
     <h2>Vehiculos</h2>
     <table class="vehiculos">
@@ -37,7 +37,7 @@
                         <input type="hidden" name="tipo" value="vehiculo">
                         <input type="submit" class="boton-rojo-block" value="Eliminar">
                     </form>
-                    <a href="/vehiculos/actualizar?id=<?php echo $vehiculo->id; ?>" class="boton-amarillo-block">Actualizar</a>
+                    <a href="vehiculos/actualizar?id=<?php echo $vehiculo->id; ?>" class="boton-amarillo-block">Actualizar</a>
 
                 </td>
             </tr>
@@ -63,13 +63,13 @@
                     <td><?php echo $vendedor->nombre . " " . $vendedor->apellido; ?></td>
                     <td><?php echo $vendedor->telefono; ?></td>
                     <td>
-                        <form method="POST" class="w-100" action="/vendedores/eliminar">
+                        <form method="POST" class="w-100" action="vendedores/eliminar">
                             <input type="hidden" name="id" value="<?php echo $vendedor -> id; ?>"><!--//sirve paa eviar la info del id que se elimino -->
                             <input type="hidden" name="tipo" value="vendedor">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
 
-                        <a href="/vendedores/actualizar?id=<?php echo $vendedor -> id; ?>" class="boton-amarillo-block">Actualizar</a>
+                        <a href="vendedores/actualizar?id=<?php echo $vendedor -> id; ?>" class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

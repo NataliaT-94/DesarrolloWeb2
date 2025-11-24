@@ -11,7 +11,7 @@
             </div>
 
             <div class="texto-entrada">
-                <a href="/entrada">
+                <a href="entrada">
                     <h4>Vehiculo deportivo</h4>
                     <p>Escritorio el: <span>01/10/2024</span> por: <span>Admin</span></p>
 
@@ -30,7 +30,7 @@
             </div>
 
             <div class="texto-entrada">
-                <a href="/entrada">
+                <a href="entrada">
                     <h4>Guia para la mantencion del  vehiculo</h4>
                     <p>Escritorio el: <span>01/10/2024</span> por: <span>Admin</span></p>
 
@@ -48,7 +48,7 @@
             </div>
 
             <div class="texto-entrada">
-                <a href="/entrada">
+                <a href="entrada">
                     <h4>Los mejores accesorios para tu vehiculo</h4>
                     <p>Escritorio el: <span>01/10/2024</span> por: <span>Admin</span></p>
 
@@ -67,7 +67,7 @@
             </div>
 
             <div class="texto-entrada">
-                <a href="/entrada">
+                <a href="entrada">
                     <h4>Primer service</h4>
                     <p>Escritorio el: <span>01/10/2024</span> por: <span>Admin</span></p>
 

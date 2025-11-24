@@ -67,16 +67,16 @@ class PaginasController{
             $mail = new PHPMailer();
 
             //Configurar SMTP
-            $mail -> isSMTP();
-            $mail -> Host = 'sandbox.smtp.mailtrap.io';
-            $mail -> SMTPAuth = true;
-            $mail -> Port = 2525;
-            $mail -> Username = '035b486eecc490';
-            $mail -> Password = '91e94a2d08d858';
+            $mail->isSMTP();
+            $mail->Host = $_ENV['EMAIL_HOST'];
+            $mail->SMTPAuth = true;
+            $mail->Port = $_ENV['EMAIL_PORT'];
+            $mail->Username = $_ENV['EMAIL_USER'];
+            $mail->Password = $_ENV['EMAIL_PASS'];
 
             //Configurar el contenido del email
             $mail -> setFrom('admin@automotormvc.com'); //quien envia el email
-            $mail -> addAddress('admin@automotormvc.com', 'automotormvc.com'); //quien recibe el email
+            $mail -> addAddress('admin@automotormvc.com', 'prueba.com'); //quien recibe el email
             $mail -> Subject = 'Tienes un Nuevo Mensaje'; //Es el mensaje que llega cuando tenemos un nuevo email
 
             //Habilitar HTML

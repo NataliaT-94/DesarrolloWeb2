@@ -5,7 +5,7 @@
 include_once __DIR__ . "/../templates/alertas.php";
 ?>
 
-<form class="formulario" method="POST" action="/crear-cuenta">
+<form class="formulario" method="POST" action="crear-cuenta">
     <fieldset>
         <legend>Tus Datos</legend>
         <div class="campo">
@@ -34,6 +34,6 @@ include_once __DIR__ . "/../templates/alertas.php";
 </form>
 
 <div class="acciones">
-    <a href="/login">¿Ya tienes una cuenta? Inicia Sesion</a>
-    <a href="/olvide">¿Olvidaste tu Contraseña?</a>
+    <a href="login">¿Ya tienes una cuenta? Inicia Sesion</a>
+    <a href="olvide">¿Olvidaste tu Contraseña?</a>
 </div>

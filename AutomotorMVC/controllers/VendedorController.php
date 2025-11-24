@@ -35,7 +35,7 @@ class VendedorController{
                 $resultado = $vendedor->guardar();
             
             if($resultado) {
-                header('location: /vendedores');
+                redirect('vendedores');
             }
         }
     }
@@ -67,7 +67,7 @@ class VendedorController{
                 $resultado = $vendedor -> guardar();
 
                 if($resultado) {
-                    header('location: /admin');
+                    redirect('admin');
                 }
             }
         }
@@ -91,7 +91,7 @@ class VendedorController{
                 if(validarTipoContenido($tipo)){
                     $vendedor = Vendedor::find($id);
                     $vendedor -> eliminar();
-                    header('location: /admin');
+                    redirect('admin');
                 }
             }
 

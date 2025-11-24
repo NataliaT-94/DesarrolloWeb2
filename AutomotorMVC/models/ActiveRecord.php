@@ -4,6 +4,7 @@ namespace Model;
 use mysqli;
 use Dotenv\Dotenv;
 
+
 class ActiveRecord {
 
     // BASE DE DATOS
@@ -14,32 +15,16 @@ class ActiveRecord {
     // ALERTAS
     protected static $alertas = [];
 
-    // -----------------------------
-    // Cargar conexión desde .env
-    // -----------------------------
-    public static function initDB() {
-        if (!self::$db) {
 
-
-            // Crear la conexión
-            self::$db = new mysqli(
-                $_ENV['BD_HOST'],
-                $_ENV['BD_USER'],
-                $_ENV['BD_PASS'],
-                $_ENV['BD_NAME']
-            );
-
-            if (self::$db->connect_error) {
-                die("Error de conexión a la BD: " . self::$db->connect_error);
-            }
-        }
+    public static function initDB($database) {
+        self::$db = $database;
     }
 
-    // -----------------------------
     // Alertas
     // -----------------------------
+
     public static function setAlerta($tipo, $mensaje) {
-        self::$alertas[$tipo][] = $mensaje;
+        static::$alertas[$tipo][] = $mensaje;
     }
 
     public static function getAlertas() {
@@ -59,26 +44,26 @@ class ActiveRecord {
     }
 
     public static function all() {
-        self::initDB();
+        // self::initDB();
         $query = "SELECT * FROM " . static::$tabla;
         return self::consultarSQL($query);
     }
 
     public static function find($id) {
-        self::initDB();
+        // self::initDB();
         $query = "SELECT * FROM " . static::$tabla . " WHERE id = " . intval($id);
         $resultado = self::consultarSQL($query);
         return array_shift($resultado);
     }
 
     public static function get($cantidad) {
-        self::initDB();
+        // self::initDB();
         $query = "SELECT * FROM " . static::$tabla . " LIMIT " . intval($cantidad);
         return self::consultarSQL($query);
     }
 
     public static function where($columna, $valor) {
-        self::initDB();
+        // self::initDB();
         $columna = self::$db->real_escape_string($columna);
         $valor = self::$db->real_escape_string($valor);
         $query = "SELECT * FROM " . static::$tabla . " WHERE {$columna} = '{$valor}'";
@@ -87,7 +72,7 @@ class ActiveRecord {
     }
 
     public function crear() {
-        self::initDB();
+        // self::initDB();
         $atributos = $this->sanitizarAtributos();
         $query = "INSERT INTO " . static::$tabla . " (" . join(', ', array_keys($atributos)) . ") 
                   VALUES ('" . join("', '", array_values($atributos)) . "')";
@@ -95,7 +80,7 @@ class ActiveRecord {
     }
 
     public function actualizar() {
-        self::initDB();
+        // self::initDB();
         $atributos = $this->sanitizarAtributos();
         $valores = [];
         foreach ($atributos as $key => $value) {
@@ -107,7 +92,7 @@ class ActiveRecord {
     }
 
     public function eliminar() {
-        self::initDB();
+        // self::initDB();
         $query = "DELETE FROM " . static::$tabla . " WHERE id = '" . self::$db->escape_string($this->id) . "' LIMIT 1";
         $resultado = self::$db->query($query) ?: die("Error en DELETE: " . self::$db->error);
 
@@ -121,7 +106,7 @@ class ActiveRecord {
     // Consultas seguras
     // -----------------------------
     public static function consultarSQL($query) {
-        self::initDB();
+        // self::initDB();
         $resultado = self::$db->query($query);
 
         if (!$resultado) {
@@ -154,17 +139,17 @@ class ActiveRecord {
         $atributos = [];
         foreach (static::$columnasDB as $columna) {
             if ($columna === 'id') continue;
-            $atributos[$columna] = $this->$columna;
+            $atributos[$columna] = $this->$columna ?? null;
         }
         return $atributos;
     }
 
     public function sanitizarAtributos() {
-        self::initDB();
+        // self::initDB();
         $atributos = $this->atributos();
         $sanitizado = [];
         foreach ($atributos as $key => $value) {
-            $sanitizado[$key] = self::$db->escape_string($value);
+            $sanitizado[$key] = self::$db->escape_string($value ?? '');
         }
         return $sanitizado;
     }
@@ -180,17 +165,37 @@ class ActiveRecord {
     // -----------------------------
     // Manejo de imágenes
     // -----------------------------
+    // public function setImagen($imagen) {
+    //     if (!is_null($this->id)) {
+    //         $this->borrarImagen();
+    //     }
+    //     if ($imagen) {
+    //         $this->imagen = $imagen;
+    //     }
+    // }
+
     public function setImagen($imagen) {
-        if (!is_null($this->id)) {
+        if (!empty($this->id)) {
             $this->borrarImagen();
         }
+
         if ($imagen) {
             $this->imagen = $imagen;
         }
     }
 
+//     public function borrarImagen() {
+//         if (defined('CARPETA_IMAGENES') && file_exists(CARPETA_IMAGENES . $this->imagen)) {
+//             unlink(CARPETA_IMAGENES . $this->imagen);
+//         }
+//     }
+
+
     public function borrarImagen() {
-        if (defined('CARPETA_IMAGENES') && file_exists(CARPETA_IMAGENES . $this->imagen)) {
+        if (!empty($this->imagen) &&
+            defined('CARPETA_IMAGENES') &&
+            file_exists(CARPETA_IMAGENES . $this->imagen)) {
+
             unlink(CARPETA_IMAGENES . $this->imagen);
         }
     }

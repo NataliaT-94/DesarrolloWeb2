@@ -12,6 +12,5 @@ function conectarDB() : mysqli {
     return $db;
 }
 
-?>
 
 

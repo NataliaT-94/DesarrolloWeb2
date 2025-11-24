@@ -22,22 +22,21 @@ class LoginController{
                 if($usuario){
                     //Verificar el Password
                     if($usuario->comprobarPasswordAndVerificado($auth->password)){
-                        //Autenticar el usuario
-                        session_start();
-
                         $_SESSION['id'] = $usuario->id;
                         $_SESSION['nombre'] = $usuario->nombre . " " . $usuario->apellido;
                         $_SESSION['email'] = $usuario->email;
                         $_SESSION['login'] = true;
 
-                        //Redireccionamiento
                         if($usuario->admin === "1"){
                             $_SESSION['admin'] = $usuario->admin ?? null;
-                            header('Location: /admin');
+                            redirect('admin');
                         } else {
-                            header('Location: /');
+                            redirect('');
                         }
+                        return;
                     }
+                
+                  
                 } else {
                     Usuario::setAlerta('error', 'Usuario no Registrado');
                 }
@@ -56,7 +55,7 @@ class LoginController{
         
         $_SESSION = [];
         
-        header('location: /login');
+        redirect('login');
     }
 
     public static function olvide(Router $router){
@@ -119,7 +118,7 @@ class LoginController{
 
                 $resultado = $usuario->guardar();
                 if($resultado){
-                    header('Location: /');
+                    redirect('');
                 }
             
             }
@@ -164,10 +163,9 @@ class LoginController{
                     $resultado = $usuario->guardar();
 
                     if($resultado){
-                        header('Location: /mensaje');
-                    }
-
-                    
+                        redirect('mensaje');
+                        return;
+                    }                    
                 }
             }
         }

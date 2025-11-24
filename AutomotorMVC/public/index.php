@@ -1,6 +1,16 @@
 <?php
+
+// Desactivar solo los warnings de PHP (E_WARNING y E_USER_WARNING)
+// error_reporting(E_ALL & ~E_WARNING & ~E_USER_WARNING);
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../includes/app.php';
+
 
 use MVC\Router;
 use Controllers\AutomotorController;
@@ -58,6 +68,10 @@ $router->get('/mensaje', [LoginController::class, 'mensaje']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router -> comprobarRutas();
+
+
+// Volcar el buffer al final
+// ob_end_flush();  
 
 
 ?>

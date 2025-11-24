@@ -1,4 +1,8 @@
 <?php
+// Iniciamos sesión al comienzo (previene errores de headers)
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 define('TEMPLATES_URL', __DIR__. '/templates');//__DIR__ permite completar la ruta para poder acceder a templates, hay que entrar a la carpeta por eso lleva /
 define('FUNCIONES_URL', __DIR__ . '/includes/funciones.php');
@@ -8,15 +12,13 @@ define('CARPETA_IMAGENES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes/');
  
 function incluirTemplate(string $nombre, bool $inicio = false ){
     //include "includes/templates/${nombre}.php";
-    include TEMPLATES_URL . "/${nombre}.php";
+    include TEMPLATES_URL . "/{$nombre}.php";
 }
 
-function debuguear($variable){
-    
+function debuguear($variable){    
     echo "<pre>";
     var_dump($variable);
     echo "</pre>";
-
     exit;
 }
 
@@ -60,8 +62,23 @@ function validarORedireccionar(string $url){
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
     if(!$id){
-        header("Location: ${url}");
+        header("Location: {$url}");
     }
 
     return $id;
+}
+
+function app_base(): string {
+    $scriptDir = str_replace('\\','/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+    $scriptDir = rtrim($scriptDir, '/');
+    return ($scriptDir && $scriptDir !== '/') ? ($scriptDir . '/') : '/';
+}
+
+function url_to(string $path = ''): string { 
+    return app_base() . ltrim($path, '/'); 
+}
+
+function redirect(string $path = ''): void { 
+    header('Location: ' . url_to($path)); 
+    exit; 
 }

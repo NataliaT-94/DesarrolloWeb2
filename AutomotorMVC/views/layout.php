@@ -16,33 +16,39 @@ if(!isset($inicio)){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/build/css/app.css">
-    
     <title>Automotor</title>
+
+    <base href="<?= $basePath ?>">
+    <script>window.APP_BASE = "<?= $basePath ?>";</script>
+    
+    
+    <link rel="stylesheet" href="build/css/app.css">
+
+    <meta name="app-base" content="<?php echo $assetBase; ?>">
 </head>
 <body>
     <header class="header <?php echo $inicio ? 'inicio' : ''; ?>">
         <div class="contenedor contenido-header">
             <div class="barra">
-                <a href="/">
-                    <img src="./build/img/logo-novo-fiat.svg" alt="logotipo de automotor">
+                <a href="">
+                    <img src="build/img/logo-novo-fiat.svg" alt="logotipo de automotor">
                 </a>
 
                 <div class="mobile-menu">
-                    <img src="./build/img/barras.svg" alt="icono menu responsive">
+                    <img src="build/img/barras.svg" alt="icono menu responsive">
                 </div>
 
                 <div class="derecha">
-                    <img class="dark-mode-boton" src="./build/img/dark-mode.svg">
+                    <img class="dark-mode-boton" src="build/img/dark-mode.svg">
                     <nav class="navegacion">
-                        <a href="/nosotros">Nosotros</a>
-                        <a href="/vehiculos">Anuncios</a>
-                        <a href="/blog">Blog</a>
-                        <a href="/contacto">Contacto</a>
+                        <a href="nosotros">Nosotros</a>
+                        <a href="vehiculos">Anuncios</a>
+                        <a href="blog">Blog</a>
+                        <a href="contacto">Contacto</a>
                         <?php if($auth){?>
-                            <a href="/logout">Cerrar Sesion</a>
+                            <a href="logout">Cerrar Sesion</a>
                         <?php } else { ?>
-                            <a href="/login">Iniciar Sesion</a>
+                            <a href="login">Iniciar Sesion</a>
                         <?php } ?>
                     </nav>
                 </div>
@@ -58,15 +64,15 @@ if(!isset($inicio)){
     <footer class="footer seccion">
         <div class="contenedor contenedor-footer">
             <nav class="navegacion">
-                <a href="/nosotros">Nosotros</a>
-                <a href="/vehiculos">Anuncios</a>
-                <a href="/blog">Blog</a>
-                <a href="/contacto">Contacto</a>
+                <a href="nosotros">Nosotros</a>
+                <a href="vehiculos">Anuncios</a>
+                <a href="blog">Blog</a>
+                <a href="contacto">Contacto</a>
             </nav>
         </div>
         <p class="copyright">Todos los derechos Reservados <?php echo date('Y'); ?> &copy;</p>
     </footer>
 
-    <script src="/build/js/bundle.js"></script>
+    <script src="build/js/bundle.js"></script>
 </body>
-</html>Z
+</html>

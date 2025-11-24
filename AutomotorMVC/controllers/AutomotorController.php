@@ -90,7 +90,7 @@ class AutomotorController{
                 $resultado = $vehiculo->guardar();
     
                 if ($resultado) {
-                    header('location: /admin');
+                    redirect('admin');
                     exit;
                 }
             }
@@ -181,7 +181,7 @@ class AutomotorController{
                 $resultado = $vehiculo->guardar();
     
                 if ($resultado) {
-                    header('location: /admin');
+                    redirect('admin');
                     exit;
                 }
             }
@@ -211,7 +211,7 @@ class AutomotorController{
 
                 // Redireccionar
                 if($resultado) {
-                    header('location: /admin');
+                    redirect('admin');
                 }
             }
         }

@@ -58,3 +58,31 @@ composer require phpmailer/phpmailer
 # mailtrap
 se utiliza como servidor para el envio de emails
 
+-----------------------
+
+# Pasar de localhost al servidor
+
+1)- Remover el vendor y el composer.lock
+
+Remove-Item -Recurse -Force vendor
+
+Remove-Item composer.lock
+
+2)- Instalar composer
+
+composer install
+
+3)- Confirmar instalacion
+
+Get-ChildItem vendor/vlucas/phpdotenv/src/Repository
+
+Debe mostrar archivos como :
+RepositoryBuilder.php
+AdapterRepository.php
+RepositoryInterface.php
+
+
+
+
+
+

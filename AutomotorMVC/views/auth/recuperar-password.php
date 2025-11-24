@@ -22,6 +22,6 @@ include_once __DIR__ . "/../templates/alertas.php";
 </form>
 
 <div class="acciones">
-    <a href="/">¿Ya tienes Cuenta? Inicia Sesion</a>
-    <a href="/crear-cuenta">¿Aun no tienes Cuenta? Crear Cuenta</a>
+    <a href="">¿Ya tienes Cuenta? Inicia Sesion</a>
+    <a href="crear-cuenta">¿Aun no tienes Cuenta? Crear Cuenta</a>
 </div>

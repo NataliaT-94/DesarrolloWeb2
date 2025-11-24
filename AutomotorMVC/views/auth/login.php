@@ -6,7 +6,7 @@
         ?>
 
 
-        <form method="POST" class="formulario" action="/login">
+        <form method="POST" class="formulario" action="login">
             <fieldset>
                 <legend>Email y Password</legend>
 
@@ -20,7 +20,7 @@
             <input type="submit" value="Iniciar Sesion" class="boton boton-verde">
         </form>
         <div class="acciones">
-            <a href="/crear-cuenta">¿Aun no tienes una cuanta? Crear una</a>
-            <a href="/olvide">¿Olvidaste tu Contraseña?</a>
+            <a href="crear-cuenta">¿Aun no tienes una cuanta? Crear una</a>
+            <a href="olvide">¿Olvidaste tu Contraseña?</a>
         </div>
     </main>

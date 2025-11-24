@@ -1,7 +1,7 @@
 <main class="contenedor seccion">
     <h1>Crear</h1>
 
-    <a href="/admin" class="boton boton-verde">Volver</a>
+    <a href="admin" class="boton boton-verde">Volver</a>
 
     <?php
         include_once __DIR__ . "/../templates/alertas.php";

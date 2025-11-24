@@ -13,14 +13,14 @@
     ?>
 
     <div class="alinear-derecha">
-        <a href="/vehiculos" class="boton-verde">ver Todas</a>
+        <a href="vehiculos" class="boton-verde">ver Todas</a>
     </div>
 </secction>
 
 <section class="imagen-contacto">
     <h2>Encuentra la casa de tus sueños</h2>
     <p>Llena el formulario de contacto y un asesor se podra en contacto contigo a la brevedad</p>
-    <a href="/contacto" class="boton-amarillo">Contactanos</a>
+    <a href="contacto" class="boton-amarillo">Contactanos</a>
 </section>
 
 <div class="contenedor seccion seccion-inferior">

@@ -24,7 +24,7 @@
                         </li>
                     </ul>
 
-                    <a href="/vehiculo?id=<?php echo $vehiculo->id; ?>" class="boton-amarillo-block">
+                    <a href="vehiculo?id=<?php echo $vehiculo->id; ?>" class="boton-amarillo-block">
                         Ver Vehiculo
                     </a>
                 </div><!----  .contenido-anuncio  ---->
