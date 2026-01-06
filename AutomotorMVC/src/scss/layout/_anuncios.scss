@@ -6,17 +6,41 @@
 @include m.tablet{
     .contenedor-anuncios{
         @include m.grid(3, 2rem);
+        align-items: stretch;
     }
 }
 
 .anuncio{
     background-color: color.adjust(v.$gris, $lightness: 5%);
     border: 1px solid color.adjust(v.$gris, $lightness: -10%);
-    
     margin-bottom: 2rem;
+
+    display: flex;              // ✅ CLAVE
+    flex-direction: column;
+    height: 100%;
+
+    > img {
+    width: 100%;
+    height: 22rem;
+    object-fit: cover;
+    }
 
     .contenido-anuncio{
         padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        p:first-of-type {
+            display: box;
+            line-clamp: 4;      // ✅ máximo 4 líneas
+            box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.6;
+            max-height: calc(1.6em * 4);
+            margin-bottom: 1.5rem;
+        }
     }
 
     h3, p{

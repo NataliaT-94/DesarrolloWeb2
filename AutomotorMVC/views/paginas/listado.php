@@ -1,7 +1,7 @@
 <div class="contenedor-anuncios">
     <?php foreach($vehiculos as $vehiculo): ?>
             <div class="anuncio">
-                <img loading="lazy" src="/imagenes/<?php echo $vehiculo->imagen; ?>" alt="anuncio">
+                <img loading="lazy" src="./img/<?php echo $vehiculo->imagen; ?>" alt="anuncio">
 
 
                 <div class="contenido-anuncio">

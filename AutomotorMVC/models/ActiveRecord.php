@@ -173,16 +173,13 @@ class ActiveRecord {
     //         $this->imagen = $imagen;
     //     }
     // }
-
     public function setImagen($imagen) {
-        if (!empty($this->id)) {
-            $this->borrarImagen();
-        }
-
         if ($imagen) {
             $this->imagen = $imagen;
         }
     }
+
+
 
 //     public function borrarImagen() {
 //         if (defined('CARPETA_IMAGENES') && file_exists(CARPETA_IMAGENES . $this->imagen)) {

@@ -35,7 +35,7 @@ class VendedorController{
                 $resultado = $vendedor->guardar();
             
             if($resultado) {
-                redirect('vendedores');
+                redirect('admin');
             }
         }
     }

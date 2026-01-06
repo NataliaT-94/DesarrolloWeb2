@@ -27,7 +27,8 @@ class Vehiculo extends ActiveRecord{
         $this->modelo = $args['modelo'] ?? '';
         $this->puertas = $args['puertas'] ?? '';
         $this->motor = $args['motor'] ?? '';
-        $this->creado = date('Y/m/d');
+        $this->creado = $args['creado'] ?? date('Y/m/d');
+
         $this->vendedorId = $args['vendedorId'] ?? '';
     }
 

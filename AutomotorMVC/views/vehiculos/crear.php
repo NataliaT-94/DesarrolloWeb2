@@ -9,7 +9,7 @@
 
 
     
-    <form class="formulario" action="/vehiculos/crear" method="POST" enctype="multipart/form-data">
+    <form class="formulario" action="vehiculos/crear" method="POST" enctype="multipart/form-data">
         <?php include __DIR__ . '/formulario.php'; ?>
 
         <input type="submit" value="Crear Vehiculo" class="boton boton-verde">

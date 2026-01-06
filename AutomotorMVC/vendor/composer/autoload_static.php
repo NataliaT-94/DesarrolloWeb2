@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitafbcfa968d49e65091f89169a175763c
+class ComposerStaticInit27c240e943af7d46b293c7fc3be5c94c
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -28,6 +28,11 @@ class ComposerStaticInitafbcfa968d49e65091f89169a175763c
         array (
             'Model\\' => 6,
             'MVC\\' => 4,
+        ),
+        'I' => 
+        array (
+            'Intervention\\Image\\' => 19,
+            'Intervention\\Gif\\' => 17,
         ),
         'G' => 
         array (
@@ -73,6 +78,14 @@ class ComposerStaticInitafbcfa968d49e65091f89169a175763c
         array (
             0 => __DIR__ . '/../..' . '/',
         ),
+        'Intervention\\Image\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/image/src',
+        ),
+        'Intervention\\Gif\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/gif/src',
+        ),
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
@@ -103,9 +116,9 @@ class ComposerStaticInitafbcfa968d49e65091f89169a175763c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitafbcfa968d49e65091f89169a175763c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitafbcfa968d49e65091f89169a175763c::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitafbcfa968d49e65091f89169a175763c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit27c240e943af7d46b293c7fc3be5c94c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit27c240e943af7d46b293c7fc3be5c94c::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit27c240e943af7d46b293c7fc3be5c94c::$classMap;
 
         }, null, ClassLoader::class);
     }

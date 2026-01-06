@@ -4,35 +4,71 @@ document.addEventListener('DOMContentLoaded', function(){
 
     eventListeners();
     darkMode();
+    previewImagenVehiculo();
 
 });
 
-function darkMode(){
-    const prefiereDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+// function darkMode(){
+//     const prefiereDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
 
-    //console.log(prefiereDarkMode.matches);para saber la preferencia del usuario modoOscuro o CLaro
+//     //console.log(prefiereDarkMode.matches);para saber la preferencia del usuario modoOscuro o CLaro
     
-    if(prefiereDarkMode.matches){
-        document.body.classList.add('dark-mode');
+//     if(prefiereDarkMode.matches){
+//         document.body.classList.add('dark-mode');
+//     } else {
+//         document.body.classList.remove('dark-mode');
+//     }
+
+//     prefiereDarkMode.addEventListener('change', function(){//preferencia automatica
+//         if(prefiereDarkMode.matches){
+//             document.body.classList.add('dark-mode');
+//         } else {
+//             document.body.classList.remove('dark-mode');
+//         }
+//     });
+
+//     const botonDarkMode = document.querySelector('.dark-mode-boton');
+
+//     botonDarkMode.addEventListener('click', function(){
+//         document.body.classList.toggle('dark-mode');//agrega la clase dark-mode al body cuando hace click en la luna
+//     });
+
+// }
+
+function darkMode() {
+    const botonDarkMode = document.querySelector('.dark-mode-boton');
+    const body = document.body;
+
+    // 1. Leer tema guardado
+    const themeGuardado = localStorage.getItem('theme');
+
+    if (themeGuardado === 'dark') {
+        body.classList.add('dark-mode');
+    } else if (themeGuardado === 'light') {
+        body.classList.remove('dark-mode');
     } else {
-        document.body.classList.remove('dark-mode');
+        // 2. Si no hay tema guardado, usar preferencia del sistema
+        const prefiereDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+        if (prefiereDarkMode.matches) {
+            body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
     }
 
-    prefiereDarkMode.addEventListener('change', function(){//preferencia automatica
-        if(prefiereDarkMode.matches){
-            document.body.classList.add('dark-mode');
+    // 3. Botón para cambiar tema
+    botonDarkMode.addEventListener('click', function () {
+        body.classList.toggle('dark-mode');
+
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
         } else {
-            document.body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
         }
     });
-
-    const botonDarkMode = document.querySelector('.dark-mode-boton');
-
-    botonDarkMode.addEventListener('click', function(){
-        document.body.classList.toggle('dark-mode');//agrega la clase dark-mode al body cuando hace click en la luna
-    });
-
 }
+
 
 function eventListeners(){
     const mobileMenu = document.querySelector('.mobile-menu');
@@ -83,4 +119,30 @@ function seleccionarMetodo(e) {
         `;
     }
 
+}
+
+function previewImagenVehiculo() {
+    const inputImagen = document.querySelector('#imagen');
+    const preview = document.querySelector('#preview-imagen');
+
+    if (!inputImagen || !preview) return;
+
+    inputImagen.addEventListener('change', function () {
+        const file = this.files[0];
+        if (!file) return;
+
+        // Validar que sea imagen
+        if (!file.type.startsWith('image/')) {
+            alert('El archivo debe ser una imagen');
+            inputImagen.value = '';
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result;
+        };
+
+        reader.readAsDataURL(file);
+    });
 }

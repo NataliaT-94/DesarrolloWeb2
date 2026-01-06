@@ -18,7 +18,7 @@
 </secction>
 
 <section class="imagen-contacto">
-    <h2>Encuentra la casa de tus sueños</h2>
+    <h2>Encuentra el vehiculo de tus sueños</h2>
     <p>Llena el formulario de contacto y un asesor se podra en contacto contigo a la brevedad</p>
     <a href="contacto" class="boton-amarillo">Contactanos</a>
 </section>
@@ -30,14 +30,14 @@
         <article class="entrada-blog">
             <div class="imagen">
                 <picture>
-                    <source srcset="build/img/blog1.webp" type="image/webp">
-                    <source srcset="build/img/blog1.jpg" type="image/jpeg">
-                    <img loading="lazy" src="build/img/blog1.jpg" alt="Texto Entrada Blog">
+                    <source srcset="build/img/imagen3.webp" type="image/webp">
+                    <source srcset="build/img/imagen3.jpg" type="image/jpeg">
+                    <img loading="lazy" src="build/img/imagen3.jpg" alt="Texto Entrada Blog">
                 </picture>
             </div>
 
             <div class="texto-entrada">
-                <a href="entrada.html">
+                <a href="entrada">
                     <h4>Guia para la mantencion del  vehiculo</h4>
                     <p class="informacion-meta">Escritorio el: <span>01/10/2024</span> por: <span>Admin</span></p>
 
@@ -49,14 +49,14 @@
         <article class="entrada-blog">
             <div class="imagen">
                 <picture>
-                    <source srcset="build/img/blog2.webp" type="image/webp">
-                    <source srcset="build/img/blog2.jpg" type="image/jpeg">
-                    <img loading="lazy" src="build/img/blog2.jpg" alt="Texto Entrada Blog">
+                    <source srcset="build/img/imagen2.webp" type="image/webp">
+                    <source srcset="build/img/imagen2.jpg" type="image/jpeg">
+                    <img loading="lazy" src="build/img/imagen2.jpg" alt="Texto Entrada Blog">
                 </picture>
             </div>
 
             <div class="texto-entrada">
-                <a href="entrada.php">
+                <a href="entrada">
                     <h4>Vehiculo deportivo</h4>
                     <p class="informacion-meta">Escritorio el: <span>01/10/2024</span> por: <span>Admin</span></p>
 

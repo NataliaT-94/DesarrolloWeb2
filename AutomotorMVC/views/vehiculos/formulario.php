@@ -9,9 +9,17 @@
                 
     <label for="imagen">Imagen:</label>
     <input type="file" id="imagen" accept="image/jpeg, image/png" name="vehiculo[imagen]">
-        <?php if($vehiculo->imagen): ?>
-            <img src="/imagenes/<?php $vehiculo->imagen ?>" class="imagen-small">
-        <?php endif; ?>
+
+    <?php if($vehiculo->imagen): ?>
+        <picture class="imagen-small">
+            <img 
+                id="preview-imagen"
+                src="./img/<?php echo $vehiculo->imagen; ?>" 
+                alt="Imagen del Vehículo"
+            >
+        </picture>
+    <?php endif; ?>
+
                 
     <label for="descripcion">Descripcion:</label>
     <textarea id="descripcion" name="vehiculo[descripcion]"><?php echo s($vehiculo->descripcion); ?></textarea>
@@ -35,14 +43,15 @@
 
     <label for="vendedor">Vendedor</label>
     <select name="vehiculo[vendedorId]" id="vendedor">
-    <option selected value="">-- Seleccione --</option>
+        <option selected value="">-- Seleccione --</option>
         <?php foreach($vendedores as $vendedor): ?>
             <option 
-                <?php echo $vehiculo->vendedorId === $vendedor->id ? 'selected' : ''; ?> 
-                value="<?php echo s($vendedor->id) ?>"><?php echo s($vendedor->nombre) . " " . s($vendedor->apellido); ?>
+                <?php echo $vehiculo->vendedorId === $vendedor->id ? 'selected' : ''; ?>
+                value="<?php echo s($vendedor->id); ?>"
+            >
+                <?php echo s($vendedor->nombre) . " " . s($vendedor->apellido); ?>
             </option>
         <?php endforeach; ?>
     </select>
 
 </fieldset>
-            

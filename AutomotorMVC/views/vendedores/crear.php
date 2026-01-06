@@ -12,6 +12,8 @@
         <!-- POST: maneja internamente en el archivo, se comunica con el name: titulo // envia datos de forma segura -->
         <?php include 'formulario.php';  ?>
         <input type="submit" value="Registrar Vendedor(a)" class="boton boton-verde">
+        
     </form>
+    
 
 </main>

@@ -1,9 +1,17 @@
 <?php
+
 namespace Controllers;
+
+
+// var_dump("autoload?", class_exists('Intervention\\Image\\ImageManager'));
+
 use MVC\Router;
 use Model\Vehiculo;
 use Model\Vendedor;
 
+
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 
 
@@ -24,74 +32,56 @@ class AutomotorController{
         ] );
     }
     public static function crear(Router $router) {
+        $alertas = Vehiculo::getAlertas();
         $vehiculo = new Vehiculo;
         $vendedores = Vendedor::all();
-        $alertas = Vehiculo::getAlertas();
     
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $vehiculo = new Vehiculo($_POST['vehiculo']);
-    
+
             /** Subida de Archivos */
             // Generar un nombre único
-            $nombreImagen = md5(uniqid(rand(), true));
-    
-            // Validar la imagen
+            $nombreImagen = md5(uniqid(rand(), true)) . '.jpg';
+
+            // Procesar imagen con Intervention Image v3
             if (!empty($_FILES['vehiculo']['tmp_name']['imagen'])) {
-                // Crear imagen desde archivo subido
-                $imagen_original = @imagecreatefromstring(file_get_contents($_FILES['vehiculo']['tmp_name']['imagen']));
-    
-                if ($imagen_original !== false) {
-                    // Obtener tamaño original
-                    $ancho_original = imagesx($imagen_original);
-                    $alto_original = imagesy($imagen_original);
-    
-                    // Definir nuevo tamaño (800x600)
-                    $nuevo_ancho = 800;
-                    $nuevo_alto = 600;
-    
-                    // Crear lienzo en blanco
-                    $imagen_redimensionada = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
-    
-                    // Redimensionar la imagen
-                    imagecopyresampled(
-                        $imagen_redimensionada,
-                        $imagen_original,
-                        0, 0, 0, 0,
-                        $nuevo_ancho, $nuevo_alto,
-                        $ancho_original, $alto_original
-                    );
-    
-                    // Asignar el nombre de la imagen al objeto Vehiculo
-                    $vehiculo->setImagen($nombreImagen);
-                }
+
+                // $manager = new ImageManager(['driver' => 'gd']);
+                $manager = new ImageManager(new Driver());
+
+                // Cargar y recortar la imagen
+                $image = $manager
+                    ->read($_FILES['vehiculo']['tmp_name']['imagen'])
+                    ->cover(800, 600); // equivalente moderno de fit()
+
+                $vehiculo->setImagen($nombreImagen);
             }
     
-            // Validar
+        // Validación
             $alertas = $vehiculo->validar();
-    
-            if (empty($alertas) && isset($imagen_redimensionada)) {
-                // Crear carpeta si no existe
-                $carpetaImagenes = '../public/img/automotor';
-                if (!is_dir($carpetaImagenes)) {
-                    mkdir($carpetaImagenes, 0755, true);
+
+            if (empty($alertas)) {
+
+                if (!is_dir(CARPETA_IMAGENES)) {
+                    mkdir(CARPETA_IMAGENES, 0755, true);
                 }
-    
-                // Guardar la imagen en formato JPEG
-                imagejpeg($imagen_redimensionada, $carpetaImagenes . $nombreImagen . '.jpg', 80);
-    
-                // Guardar la imagen en formato WEBP
-                imagewebp($imagen_redimensionada, $carpetaImagenes . $nombreImagen . '.webp', 80);
-    
-                // Liberar memoria
-                imagedestroy($imagen_original);
-                imagedestroy($imagen_redimensionada);
-    
-                // Guardar en la base de datos
+
+                // Guardar la imagen en el servidor
+                if (isset($image)) {
+                    // $image->toFile(CARPETA_IMAGENES . $nombreImagen);
+                    move_uploaded_file(
+                        $_FILES['vehiculo']['tmp_name']['imagen'],
+                        CARPETA_IMAGENES . $nombreImagen
+                    );
+
+                    // var_dump(CARPETA_IMAGENES . $nombreImagen);
+                }
+
+                // Guardar en BD
                 $resultado = $vehiculo->guardar();
-    
+
                 if ($resultado) {
                     redirect('admin');
-                    exit;
                 }
             }
         }
@@ -104,95 +94,64 @@ class AutomotorController{
     }
     
     
-    public static function actualizar(Router $router){
+    public static function actualizar(Router $router) {
+
         $id = validarORedireccionar('/admin');
         $vehiculo = Vehiculo::find($id);
         $vendedores = Vendedor::all();
         $alertas = Vehiculo::getAlertas();
 
-        //Metodo POST para actualizar
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {//nos trae informacion detallada del servidor
-            // Opcional: Mostrar los datos recibidos para depuración
-      
-              //Asignar los atributos
-              $args = $_POST['vehiculo'];
-           
-              $vehiculo -> sincronizar($args);
-      
-              //Validacion
-              $alertas = $vehiculo -> validar();
-      
-                /** Subida de Archivos */
-            // Generar un nombre único
-            $nombreImagen = md5(uniqid(rand(), true));
-    
-            // Validar la imagen
-            if (!empty($_FILES['vehiculo']['tmp_name']['imagen'])) {
-                // Crear imagen desde archivo subido
-                $imagen_original = @imagecreatefromstring(file_get_contents($_FILES['vehiculo']['tmp_name']['imagen']));
-    
-                if ($imagen_original !== false) {
-                    // Obtener tamaño original
-                    $ancho_original = imagesx($imagen_original);
-                    $alto_original = imagesy($imagen_original);
-    
-                    // Definir nuevo tamaño (800x600)
-                    $nuevo_ancho = 800;
-                    $nuevo_alto = 600;
-    
-                    // Crear lienzo en blanco
-                    $imagen_redimensionada = imagecreatetruecolor($nuevo_ancho, $nuevo_alto);
-    
-                    // Redimensionar la imagen
-                    imagecopyresampled(
-                        $imagen_redimensionada,
-                        $imagen_original,
-                        0, 0, 0, 0,
-                        $nuevo_ancho, $nuevo_alto,
-                        $ancho_original, $alto_original
-                    );
-    
-                    // Asignar el nombre de la imagen al objeto Vehiculo
-                    $vehiculo->setImagen($nombreImagen);
-                }
-            }
-    
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            // Sincronizar datos
+            $args = $_POST['vehiculo'];
+            $vehiculo->sincronizar($args);
+
             // Validar
             $alertas = $vehiculo->validar();
-    
-            if (empty($alertas) && isset($imagen_redimensionada)) {
+
+            // ✅ Hay nueva imagen?
+            if (!empty($_FILES['vehiculo']['tmp_name']['imagen'])) {
+
+                // Generar nombre nuevo
+                $nombreImagen = md5(uniqid(rand(), true)) . '.jpg';
+
                 // Crear carpeta si no existe
-                $carpetaImagenes = '../public/img/automotor';
-                if (!is_dir($carpetaImagenes)) {
-                    mkdir($carpetaImagenes, 0755, true);
+                if (!is_dir(CARPETA_IMAGENES)) {
+                    mkdir(CARPETA_IMAGENES, 0755, true);
                 }
-    
-                // Guardar la imagen en formato JPEG
-                imagejpeg($imagen_redimensionada, $carpetaImagenes . $nombreImagen . '.jpg', 80);
-    
-                // Guardar la imagen en formato WEBP
-                imagewebp($imagen_redimensionada, $carpetaImagenes . $nombreImagen . '.webp', 80);
-    
-                // Liberar memoria
-                imagedestroy($imagen_original);
-                imagedestroy($imagen_redimensionada);
-    
-                // Guardar en la base de datos
+
+                // ✅ Eliminar imagen anterior
+                if ($vehiculo->imagen && file_exists(CARPETA_IMAGENES . $vehiculo->imagen)) {
+                    unlink(CARPETA_IMAGENES . $vehiculo->imagen);
+                }
+
+                // ✅ Mover imagen nueva
+                move_uploaded_file(
+                    $_FILES['vehiculo']['tmp_name']['imagen'],
+                    CARPETA_IMAGENES . $nombreImagen
+                );
+
+                // ✅ Asignar nueva imagen
+                $vehiculo->setImagen($nombreImagen);
+            }
+
+            // Guardar cambios
+            if (empty($alertas)) {
                 $resultado = $vehiculo->guardar();
-    
                 if ($resultado) {
                     redirect('admin');
-                    exit;
                 }
             }
-          }
+        }
 
-        $router -> render('/vehiculos/actualizar', [
+        $router->render('/vehiculos/actualizar', [
             'vehiculo' => $vehiculo,
             'vendedores' => $vendedores,
             'alertas' => $alertas
         ]);
     }
+
 
     public static function eliminar(Router $router) {
 
@@ -217,4 +176,3 @@ class AutomotorController{
         }
     }
 }
-?> 

@@ -1,7 +1,7 @@
 <main class="contenedor seccion contenido-centrado">
     <h1><?php echo $vehiculo->titulo; ?></h1>
 
-    <img loading="lazy" src=/imagenes/<?php echo $vehiculo->imagen; ?>" alt="Imagen de la vehiculo">
+    <img loading="lazy" src="./img/<?php echo $vehiculo->imagen; ?>" alt="Imagen de la vehiculo">
 
     <div class="resumen-vehiculo">
         <p class="precio">$<?php echo $vehiculo->precio; ?></p>

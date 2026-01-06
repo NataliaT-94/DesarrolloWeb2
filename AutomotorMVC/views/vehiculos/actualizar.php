@@ -7,7 +7,7 @@
             include_once __DIR__ . "/../templates/alertas.php";
         ?>
     
-    <form class="formulario" action="vehiculos/crear" method="POST" enctype="multipart/form-data">
+    <form class="formulario" action="vehiculos/actualizar?id=<?php echo $_GET['id']; ?>" method="POST" enctype="multipart/form-data">
         <?php include __DIR__ . '/formulario.php'; ?>
 
         <input type="submit" value="Actualizar Vehiculo" class="boton boton-verde">
