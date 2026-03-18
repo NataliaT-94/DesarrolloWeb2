@@ -13,7 +13,7 @@ class RegistradosController {
         
         if(!is_admin()){
             // header('Location: /login');
-            redirect('login');
+            redirect('registrados?page=1');
         }
 
         

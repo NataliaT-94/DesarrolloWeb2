@@ -16,7 +16,7 @@ si - enter
 
 --------------------
 # instalar nuevamente npm
-terminal: nom i - enter
+terminal: npm i - enter
 ---------------------
 
 

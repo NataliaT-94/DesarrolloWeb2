@@ -2,7 +2,12 @@
 
 function conectarDB() : mysqli {
     // Intenta establecer la conexión con la base de datos
-    $db = new mysqli($_ENV['BD_HOST'], $_ENV['BD_USER'], $_ENV['BD_PASS'], $_ENV['BD_NAME']);
+    $db = new mysqli(
+        $_ENV['BD_HOST'], 
+        $_ENV['BD_USER'], 
+        $_ENV['BD_PASS'], 
+        $_ENV['BD_NAME']
+    );
 
     // Verifica si la conexión fue exitosa
     if(!$db){
